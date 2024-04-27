@@ -1,5 +1,7 @@
 namespace EncyclopediaGalactica.BusinessLogic.Entities;
-
+/// <summary>
+///
+/// </summary>
 public class Relation
 {
     public long Id { get; set; }
