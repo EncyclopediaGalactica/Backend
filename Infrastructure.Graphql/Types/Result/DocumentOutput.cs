@@ -27,11 +27,5 @@ public class DocumentOutput : ObjectType<DocumentResult>
             .Field(f => f.Uri)
             .Description("The source url of the document")
             .Type<StringType>();
-
-        descriptor
-            .Field(f => f.StructureNodes)
-            .Description("The root Structure Node of the Document")
-            .Type<StructureNodeOutput>()
-            .ResolveWith<StructureNodeFieldResolvers>(r => r.GetNodeAsync(default, default, default));
     }
 }

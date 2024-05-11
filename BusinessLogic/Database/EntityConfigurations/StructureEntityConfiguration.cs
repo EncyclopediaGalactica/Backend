@@ -4,9 +4,9 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class StructureEntityConfiguration : IEntityTypeConfiguration<StructureNode>
+public class StructureEntityConfiguration : IEntityTypeConfiguration<DocumentStructureNode>
 {
-    public void Configure(EntityTypeBuilder<StructureNode> builder)
+    public void Configure(EntityTypeBuilder<DocumentStructureNode> builder)
     {
         builder.ToTable("structure_node");
         builder.HasKey(p => p.Id);

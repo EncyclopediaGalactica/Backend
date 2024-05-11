@@ -1,9 +1,9 @@
 namespace EncyclopediaGalactica.BusinessLogic.Entities;
 
 /// <summary>
-///     Document entity
+///     The Document entity
 ///     <p>
-///         Document entity represents a document and the root of a tree including many objects describing a document in
+///         The Document entity represents a document and the root of a tree including many objects describing a document in
 ///         the system.
 ///     </p>
 ///     <p>
@@ -34,6 +34,4 @@ public class Document
     ///     Gets or sets the Uri value
     /// </summary>
     public Uri? Uri { get; set; }
-
-    public StructureNode? StructureNode { get; set; }
 }

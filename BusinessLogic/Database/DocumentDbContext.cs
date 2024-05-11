@@ -15,7 +15,7 @@ public class DocumentDbContext : DbContext
     }
 
     public DbSet<Document> Documents => Set<Document>();
-    public DbSet<StructureNode> StructureNodes => Set<StructureNode>();
+    public DbSet<DocumentStructureNode> StructureNodes => Set<DocumentStructureNode>();
     public DbSet<Relation> Relations => Set<Relation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

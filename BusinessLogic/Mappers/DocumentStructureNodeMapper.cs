@@ -4,12 +4,12 @@ using Contracts;
 using Entities;
 
 /// <inheritdoc />
-public partial class StructureNodeMapper : IStructureNodeMapper
+public partial class DocumentStructureNodeMapper : IDocumentStructureNodeMapper
 {
     /// <inheritdoc />
-    public StructureNode MapStructureNodeInputToStructureNode(StructureNodeInput structureNodeInput)
+    public DocumentStructureNode MapStructureNodeInputToStructureNode(DocumentStructureNodeInput structureNodeInput)
     {
-        return new StructureNode
+        return new DocumentStructureNode
         {
             Id = structureNodeInput.Id,
             DocumentId = structureNodeInput.DocumentId,
@@ -18,9 +18,9 @@ public partial class StructureNodeMapper : IStructureNodeMapper
     }
 
     /// <inheritdoc />
-    public StructureNodeResult MapStructureNodeToStructureNodeResult(StructureNode s)
+    public DocumentStructureNodeInput MapStructureNodeToStructureNodeResult(DocumentStructureNode s)
     {
-        return new StructureNodeResult()
+        return new DocumentStructureNodeInput()
         {
             Id = s.Id,
             DocumentId = s.DocumentId,

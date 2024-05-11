@@ -12,14 +12,14 @@ using Microsoft.Extensions.Logging;
 using Validators;
 
 public class AddStructureNodeTreeCommand(
-    IStructureNodeMapper mapper,
+    IDocumentStructureNodeMapper mapper,
     DbContextOptions<DocumentDbContext> dbContextOptions,
-    IValidator<StructureNodeInput> validator,
+    IValidator<DocumentStructureNodeInput> validator,
     ILogger<AddStructureNodeTreeCommand> logger) : IAddStructureNodeTreeCommand
 {
     public async Task AddTreeAsync(
         long documentId,
-        StructureNodeInput structureNodeInput,
+        DocumentStructureNodeInput structureNodeInput,
         CancellationToken cancellationToken = default)
     {
         try
@@ -43,38 +43,38 @@ public class AddStructureNodeTreeCommand(
 
     private async Task AddNewRootNodeBusinessLogicAsync(
         long documentId,
-        StructureNodeInput structureNodeInput,
+        DocumentStructureNodeInput structureNodeInput,
         CancellationToken cancellationToken = default)
     {
         OverWriteRootNode(structureNodeInput);
         OverwriteStructureNodesDocumentIdValue(structureNodeInput, documentId);
         await ValidateProvidedInput(documentId, structureNodeInput, cancellationToken).ConfigureAwait(false);
-        StructureNode structureNode = mapper.MapStructureNodeInputToStructureNode(structureNodeInput);
-        await AddTreeAsyncDatabaseOperation(structureNode, cancellationToken).ConfigureAwait(false);
+        DocumentStructureNode documentStructureNode = mapper.MapStructureNodeInputToStructureNode(structureNodeInput);
+        await AddTreeAsyncDatabaseOperation(documentStructureNode, cancellationToken).ConfigureAwait(false);
     }
 
     private async Task AddTreeAsyncDatabaseOperation(
-        StructureNode structureNode,
+        DocumentStructureNode documentStructureNode,
         CancellationToken cancellationToken = default)
     {
         await using DocumentDbContext ctx = new DocumentDbContext(dbContextOptions);
-        await ctx.StructureNodes.AddAsync(structureNode, cancellationToken).ConfigureAwait(false);
+        await ctx.StructureNodes.AddAsync(documentStructureNode, cancellationToken).ConfigureAwait(false);
         await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    private void OverWriteRootNode(StructureNodeInput input)
+    private void OverWriteRootNode(DocumentStructureNodeInput input)
     {
         input.IsRootNode = 1;
     }
 
-    private void OverwriteStructureNodesDocumentIdValue(StructureNodeInput structureNodeInput, long documentId)
+    private void OverwriteStructureNodesDocumentIdValue(DocumentStructureNodeInput structureNodeInput, long documentId)
     {
         structureNodeInput.DocumentId = documentId;
     }
 
     private async Task ValidateProvidedInput(
         long documentId,
-        StructureNodeInput structureNodeInput,
+        DocumentStructureNodeInput structureNodeInput,
         CancellationToken cancellationToken = default)
     {
         const long notAllowedValue = 0;
