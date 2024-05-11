@@ -28,5 +28,5 @@ public interface IAddNewStructureNodeCommand
     /// <exception cref="UnknownErrorCommandException">
     ///     When the execution stops with an unknown error.
     /// </exception>
-    Task AddNewAsync(StructureNodeInput structureNodeInput, CancellationToken cancellationToken = default);
+    Task AddNewAsync(DocumentStructureNodeInput structureNodeInput, CancellationToken cancellationToken = default);
 }

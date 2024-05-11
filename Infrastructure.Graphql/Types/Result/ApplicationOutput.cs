@@ -1,12 +1,11 @@
+using EncyclopediaGalactica.BusinessLogic.Contracts;
+using HotChocolate.Types;
+
 namespace EncyclopediaGalactica.Infrastructure.Graphql.Types.Result;
 
-using BusinessLogic.Contracts;
-using HotChocolate.Types;
-using Resolvers.FieldResolvers;
-
-public class DocumentOutput : ObjectType<DocumentResult>
+public class ApplicationOutput : ObjectType<ApplicationResult>
 {
-    protected override void Configure(IObjectTypeDescriptor<DocumentResult> descriptor)
+    protected override void Configure(IObjectTypeDescriptor<ApplicationResult> descriptor)
     {
         descriptor
             .Field(f => f.Id)
@@ -21,11 +20,6 @@ public class DocumentOutput : ObjectType<DocumentResult>
         descriptor
             .Field(f => f.Description)
             .Description("Description of the entity")
-            .Type<StringType>();
-
-        descriptor
-            .Field(f => f.Uri)
-            .Description("The source url of the document")
-            .Type<StringType>();
+            .Type<NonNullType<StringType>>();
     }
 }

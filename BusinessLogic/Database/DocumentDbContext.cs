@@ -15,8 +15,9 @@ public class DocumentDbContext : DbContext
     }
 
     public DbSet<Document> Documents => Set<Document>();
-    public DbSet<StructureNode> StructureNodes => Set<StructureNode>();
+    public DbSet<DocumentStructureNode> DocumentStructureNodes => Set<DocumentStructureNode>();
     public DbSet<Relation> Relations => Set<Relation>();
+    public DbSet<Application> Applications => Set<Application>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -24,7 +25,8 @@ public class DocumentDbContext : DbContext
             throw new ArgumentNullException(nameof(modelBuilder));
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentEntityConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(StructureEntityConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentStructureNodeEntityConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RelationEntityConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationEntityConfiguration).Assembly);
     }
 }

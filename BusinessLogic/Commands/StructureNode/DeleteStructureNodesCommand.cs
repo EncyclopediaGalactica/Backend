@@ -31,7 +31,7 @@ public class DeleteStructureNodesCommand(
         CancellationToken cancellationToken = default)
     {
         await using DocumentDbContext ctx = new DocumentDbContext(dbContextOptions);
-        List<StructureNode> toBeDeleted = await ctx.StructureNodes.Where(f => f.DocumentId == documentId)
+        List<DocumentStructureNode> toBeDeleted = await ctx.DocumentStructureNodes.Where(f => f.DocumentId == documentId)
             .ToListAsync(cancellationToken).ConfigureAwait(false);
         toBeDeleted.ForEach(i => { ctx.Entry(i).State = EntityState.Deleted; });
         await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

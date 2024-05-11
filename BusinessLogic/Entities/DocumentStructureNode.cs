@@ -13,7 +13,7 @@ namespace EncyclopediaGalactica.BusinessLogic.Entities;
 ///         </p>
 ///     </remarks>
 /// </summary>
-public class StructureNode
+public class DocumentStructureNode
 {
     /// <summary>
     ///     Gets or sets the Id value.

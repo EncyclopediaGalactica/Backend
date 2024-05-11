@@ -35,7 +35,7 @@ public interface IGetStructureNodeTreeCommand
     /// <exception cref="UnknownErrorCommandException">
     ///     Any further exception happen in the scenario.
     /// </exception>
-    Task<StructureNodeResult> GetRootNodeByDocumentIdAsync(
+    Task<DocumentStructureNodeInput> GetRootNodeByDocumentIdAsync(
         long documentId,
         CancellationToken cancellationToken = default);
 }

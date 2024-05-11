@@ -11,11 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Validators;
 
 public class AddNewStructureNodeCommand(
-    IStructureNodeMapper structureNodeMapper,
+    IDocumentStructureNodeMapper documentStructureNodeMapper,
     DbContextOptions<DocumentDbContext> dbContextOptions,
-    IValidator<StructureNodeInput> validator) : IAddNewStructureNodeCommand
+    IValidator<DocumentStructureNodeInput> validator) : IAddNewStructureNodeCommand
 {
-    public async Task AddNewAsync(StructureNodeInput structureNodeInput, CancellationToken cancellationToken = default)
+    public async Task AddNewAsync(DocumentStructureNodeInput structureNodeInput, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -38,23 +38,23 @@ public class AddNewStructureNodeCommand(
     }
 
     private async Task AddNewBusinessLogicAsync(
-        StructureNodeInput structureNodeInput,
+        DocumentStructureNodeInput structureNodeInput,
         CancellationToken cancellationToken = default)
     {
         ValidateProvidedInput(structureNodeInput);
-        StructureNode structureNode = structureNodeMapper.MapStructureNodeInputToStructureNode(structureNodeInput);
-        await AddDatabaseOperationAsync(structureNode, cancellationToken).ConfigureAwait(false);
+        DocumentStructureNode documentStructureNode = documentStructureNodeMapper.MapStructureNodeInputToStructureNode(structureNodeInput);
+        await AddDatabaseOperationAsync(documentStructureNode, cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task<StructureNode> AddDatabaseOperationAsync(StructureNode structureNode,
+    private async Task<DocumentStructureNode> AddDatabaseOperationAsync(DocumentStructureNode documentStructureNode,
         CancellationToken cancellationToken = default)
     {
         await using DocumentDbContext ctx = new DocumentDbContext(dbContextOptions);
-        await ctx.StructureNodes.AddAsync(structureNode, cancellationToken).ConfigureAwait(false);
-        return structureNode;
+        await ctx.DocumentStructureNodes.AddAsync(documentStructureNode, cancellationToken).ConfigureAwait(false);
+        return documentStructureNode;
     }
 
-    private void ValidateProvidedInput(StructureNodeInput structureNodeInput)
+    private void ValidateProvidedInput(DocumentStructureNodeInput structureNodeInput)
     {
         if (structureNodeInput is null)
         {

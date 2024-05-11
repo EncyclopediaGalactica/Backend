@@ -36,10 +36,10 @@ builder.Services
     .AddScoped<IGetStructureNodeTreeCommand, GetStructureNodeTreeCommand>()
     // validators
     .AddScoped<IValidator<DocumentInput>, DocumentInputValidator>()
-    .AddScoped<IValidator<StructureNodeInput>, StructureNodeInputValidator>()
+    .AddScoped<IValidator<DocumentStructureNodeInput>, DocumentStructureNodeInputValidator>()
     // mappers
     .AddScoped<IDocumentMapper, DocumentMapper>()
-    .AddScoped<IStructureNodeMapper, StructureNodeMapper>()
+    .AddScoped<IDocumentStructureNodeMapper, DocumentStructureNodeMapper>()
     // seeder
     .AddScoped<IDocumentDataSeeder, DocumentDataSeeder>()
     ;

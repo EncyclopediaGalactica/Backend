@@ -3,9 +3,9 @@ namespace EncyclopediaGalactica.BusinessLogic.Validators;
 using Contracts;
 using FluentValidation;
 
-public class StructureNodeInputValidator : AbstractValidator<StructureNodeInput>
+public class DocumentStructureNodeInputValidator : AbstractValidator<DocumentStructureNodeInput>
 {
-    public StructureNodeInputValidator()
+    public DocumentStructureNodeInputValidator()
     {
         RuleSet(Operations.Add, () =>
         {

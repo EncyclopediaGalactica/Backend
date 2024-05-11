@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 public class GetStructureNodeTreeCommand(
-    IStructureNodeMapper mapper,
+    IDocumentStructureNodeMapper mapper,
     DbContextOptions<DocumentDbContext> dbContextOptions,
     ILogger<IGetStructureNodeTreeCommand> logger) : IGetStructureNodeTreeCommand
 {
-    public async Task<StructureNodeResult> GetRootNodeByDocumentIdAsync(
+    public async Task<DocumentStructureNodeInput> GetRootNodeByDocumentIdAsync(
         long documentId,
         CancellationToken cancellationToken = default)
     {
@@ -37,22 +37,22 @@ public class GetStructureNodeTreeCommand(
         }
     }
 
-    private async Task<StructureNodeResult> GetNodeBusinessLogicAsync(
+    private async Task<DocumentStructureNodeInput> GetNodeBusinessLogicAsync(
         long documentId,
         CancellationToken cancellationToken = default)
     {
         ValidateInput(documentId);
-        StructureNode structureNode = await GetNodeTreeAsyncDatabaseOperation(documentId, cancellationToken)
+        DocumentStructureNode documentStructureNode = await GetNodeTreeAsyncDatabaseOperation(documentId, cancellationToken)
             .ConfigureAwait(false);
-        return mapper.MapStructureNodeToStructureNodeResult(structureNode);
+        return mapper.MapStructureNodeToStructureNodeResult(documentStructureNode);
     }
 
-    private async Task<StructureNode> GetNodeTreeAsyncDatabaseOperation(
+    private async Task<DocumentStructureNode> GetNodeTreeAsyncDatabaseOperation(
         long documentId,
         CancellationToken cancellationToken = default)
     {
         await using DocumentDbContext ctx = new DocumentDbContext(dbContextOptions);
-        return await ctx.StructureNodes
+        return await ctx.DocumentStructureNodes
             .FirstAsync(f => f.DocumentId == documentId && f.IsRootNode == 1, cancellationToken);
     }
 

@@ -32,6 +32,6 @@ public interface IAddStructureNodeTreeCommand
     /// </exception>
     Task AddTreeAsync(
         long documentId,
-        StructureNodeInput structureNodeInput,
+        DocumentStructureNodeInput structureNodeInput,
         CancellationToken cancellationToken = default);
 }

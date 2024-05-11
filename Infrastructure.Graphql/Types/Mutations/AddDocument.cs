@@ -14,7 +14,7 @@ public class AddDocument : ObjectTypeExtension<Mutation>
             .Field("addDocument")
             .Type<NonNullType<DocumentOutput>>()
             .Description($"Creates a {nameof(Document)} entity in the system. " +
-                         $"If the input contains {nameof(StructureNode)}s those also will be recorded.")
+                         $"If the input contains {nameof(DocumentStructureNode)}s those also will be recorded.")
             .Argument("newDocument", arg => arg.Type<NonNullType<DocumentInputType>>())
             .ResolveWith<DocumentMutationResolvers>(documentResolvers =>
                 documentResolvers.AddAsync(default, default, default));

@@ -29,11 +29,11 @@ public class AddDocumentSaga(
             long documentId = await addDocumentCommand.AddAsync(context.Payload, cancellationToken)
                 .ConfigureAwait(false);
 
-            CheckIfPayloadHasRootNodeAndAdd(context.Payload);
+            // CheckIfPayloadHasRootNodeAndAdd(context.Payload);
 
-            await addStructureNodeTreeCommand
-                .AddTreeAsync(documentId, context.Payload.RootStructureNode, cancellationToken)
-                .ConfigureAwait(false);
+            // await addStructureNodeTreeCommand
+                // .AddTreeAsync(documentId, context.Payload.RootStructureNode, cancellationToken)
+                // .ConfigureAwait(false);
 
             DocumentResult result = await getDocumentByIdCommand.GetByIdAsync(documentId, cancellationToken)
                 .ConfigureAwait(false);
@@ -44,10 +44,5 @@ public class AddDocumentSaga(
             string m = $"Error happened while executing {nameof(AddDocumentSaga)}.";
             throw new SagaException(m, e);
         }
-    }
-
-    private void CheckIfPayloadHasRootNodeAndAdd(DocumentInput input)
-    {
-        input.RootStructureNode ??= new StructureNodeInput();
     }
 }
