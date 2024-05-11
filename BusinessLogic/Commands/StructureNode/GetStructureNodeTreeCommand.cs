@@ -52,7 +52,7 @@ public class GetStructureNodeTreeCommand(
         CancellationToken cancellationToken = default)
     {
         await using DocumentDbContext ctx = new DocumentDbContext(dbContextOptions);
-        return await ctx.StructureNodes
+        return await ctx.DocumentStructureNodes
             .FirstAsync(f => f.DocumentId == documentId && f.IsRootNode == 1, cancellationToken);
     }
 

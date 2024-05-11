@@ -50,7 +50,7 @@ public class AddNewStructureNodeCommand(
         CancellationToken cancellationToken = default)
     {
         await using DocumentDbContext ctx = new DocumentDbContext(dbContextOptions);
-        await ctx.StructureNodes.AddAsync(documentStructureNode, cancellationToken).ConfigureAwait(false);
+        await ctx.DocumentStructureNodes.AddAsync(documentStructureNode, cancellationToken).ConfigureAwait(false);
         return documentStructureNode;
     }
 
