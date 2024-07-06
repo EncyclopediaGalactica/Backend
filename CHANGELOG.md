@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.2.0...0.3.0) (2024-07-06)
+
+
+### Features
+
+* total refactor [#3](https://github.com/EncyclopediaGalactica/Backend/issues/3) ([537a1fb](https://github.com/EncyclopediaGalactica/Backend/commit/537a1fbdbce086d94f5e349197e7bebc422228ab))
+
 # [0.2.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.1.0...0.2.0) (2024-05-11)
 
 
