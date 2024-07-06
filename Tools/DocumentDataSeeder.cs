@@ -1,9 +1,13 @@
-namespace EncyclopediaGalactica.Tools;
+#region
 
-using BusinessLogic.Contracts;
-using BusinessLogic.Sagas.Document;
-using BusinessLogic.Sagas.Interfaces;
+using DocumentDomain.Contracts;
+using EncyclopediaGalactica.BusinessLogic.Sagas.Document;
+using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
 using Microsoft.Extensions.Logging;
+
+#endregion
+
+namespace EncyclopediaGalactica.Tools;
 
 public class DocumentDataSeeder(
     IHaveInputAndResultSaga<DocumentResult, AddDocumentSagaContext> addDocumentSaga,

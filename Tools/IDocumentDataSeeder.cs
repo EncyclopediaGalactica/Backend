@@ -1,6 +1,10 @@
-﻿namespace EncyclopediaGalactica.Tools;
+﻿#region
 
-using BusinessLogic.Contracts;
+using DocumentDomain.Contracts;
+
+#endregion
+
+namespace EncyclopediaGalactica.Tools;
 
 public interface IDocumentDataSeeder
 {

@@ -1,0 +1,46 @@
+#region
+
+using DocumentDomain.Contracts;
+using EncyclopediaGalactica.BusinessLogic.Commands.Document;
+using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using Microsoft.Extensions.Logging;
+
+#endregion
+
+namespace EncyclopediaGalactica.BusinessLogic.Sagas.Document;
+
+/// <summary>
+///     Get Document Saga.
+///     <remarks>
+///         Orchestrates commands to produce the list of <see cref="DocumentResult" /> objects representing
+///         the list of <see cref="Document" /> entities in the system.
+///     </remarks>
+/// </summary>
+public class GetDocumentsSaga(
+    IGetAllDocumentsCommand getAllDocumentsCommand,
+    ILogger<GetDocumentsSaga> logger)
+    : IHaveInputAndResultSaga<List<DocumentResult>, GetDocumentsSagaContext>
+{
+    /// <summary>
+    ///     Returns list of <see cref="DocumentResult" />.
+    /// </summary>
+    /// <param name="context">The context</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken" />.</param>
+    /// <returns>
+    ///     Returns <see cref="Task{TResult}" /> representing result of the asynchronous operation.
+    /// </returns>
+    public async Task<List<DocumentResult>> ExecuteAsync(
+        GetDocumentsSagaContext context,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            return await getAllDocumentsCommand.GetAllAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            string m = $"Error happened during execution of {nameof(GetDocumentsSaga)}.";
+            throw new SagaException(m, e);
+        }
+    }
+}

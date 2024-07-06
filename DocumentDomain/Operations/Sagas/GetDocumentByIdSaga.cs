@@ -1,0 +1,29 @@
+#region
+
+using DocumentDomain.Contracts;
+using EncyclopediaGalactica.BusinessLogic.Commands.Document;
+using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using Microsoft.Extensions.Logging;
+
+#endregion
+
+namespace EncyclopediaGalactica.BusinessLogic.Sagas.Document;
+
+public class GetDocumentByIdSaga(
+    IGetDocumentByIdCommand getDocumentByIdCommand,
+    ILogger<GetDocumentsSaga> logger) : IHaveInputAndResultSaga<DocumentResult, GetDocumentByIdContext>
+{
+    public async Task<DocumentResult> ExecuteAsync(GetDocumentByIdContext context,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            return await getDocumentByIdCommand.GetByIdAsync(context.Payload, cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            string m = $"Error happened during execution of {nameof(GetDocumentByIdSaga)}";
+            throw new SagaException(m, e);
+        }
+    }
+}
