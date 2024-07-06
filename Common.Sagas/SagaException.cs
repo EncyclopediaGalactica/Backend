@@ -1,6 +1,6 @@
-namespace EncyclopediaGalactica.BusinessLogic.Sagas;
-
 using System.Runtime.Serialization;
+
+namespace Common.Sagas;
 
 public class SagaException : Exception
 {

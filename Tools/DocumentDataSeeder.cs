@@ -1,8 +1,8 @@
 #region
 
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Document;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using DocumentDomain.Operations.Sagas;
 using Microsoft.Extensions.Logging;
 
 #endregion

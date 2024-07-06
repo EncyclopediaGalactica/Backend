@@ -5,7 +5,7 @@ using DocumentDomain.Contracts;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.StructureNode;
+namespace DocumentDomain.Operations.Commands;
 
 /// <summary>
 ///     Get root <see cref="StructureNode" /> by <see cref="Document.Id" /> scenario.

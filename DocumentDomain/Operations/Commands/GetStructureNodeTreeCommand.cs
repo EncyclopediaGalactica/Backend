@@ -3,15 +3,15 @@
 using Common.Commands;
 using Common.Commands.Exceptions;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Entities;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.StructureNode;
+namespace DocumentDomain.Operations.Commands;
 
 public class GetStructureNodeTreeCommand(
     IDocumentStructureNodeMapper mapper,

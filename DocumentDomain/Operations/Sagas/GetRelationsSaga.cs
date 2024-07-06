@@ -1,12 +1,12 @@
 #region
 
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Commands.Relation;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using DocumentDomain.Operations.Commands;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Relation;
+namespace DocumentDomain.Operations.Sagas;
 
 public class GetRelationsSaga(
     IGetRelationsCommand getRelationsCommand) : IHaveInputAndResultSaga<List<RelationResult>, GetRelationSagaContext>

@@ -2,16 +2,16 @@
 
 using Common.Commands;
 using Common.Commands.Exceptions;
-using Common.Validators;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Document;
+namespace DocumentDomain.Operations.Commands;
 
 public class UpdateDocumentCommand(
     IDocumentMapper documentMapper,
@@ -61,16 +61,16 @@ public class UpdateDocumentCommand(
         CancellationToken cancellationToken = default)
     {
         await ValidateUpdateAsyncInput(modifiedInput).ConfigureAwait(false);
-        Entities.Document mappedDocument = documentInputMapper.MapDocumentInputToDocument(modifiedInput);
+        Document mappedDocument = documentInputMapper.MapDocumentInputToDocument(modifiedInput);
         await UpdateAsyncDatabaseOperation(mappedDocument, cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task UpdateAsyncDatabaseOperation(Entities.Document documentInput,
+    private async Task UpdateAsyncDatabaseOperation(Document documentInput,
         CancellationToken cancellationToken = default)
     {
         await using (DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions))
         {
-            Entities.Document toBeModified = await ctx.Documents
+            Document toBeModified = await ctx.Documents
                 .FirstAsync(f => f.Id == documentInput.Id, cancellationToken)
                 .ConfigureAwait(false);
             Modify(toBeModified, documentInput);
@@ -80,7 +80,7 @@ public class UpdateDocumentCommand(
         }
     }
 
-    private void Modify(Entities.Document toBeModified, Entities.Document documentInput)
+    private void Modify(Document toBeModified, Document documentInput)
     {
         toBeModified.Name = documentInput.Name;
         toBeModified.Description = documentInput.Description;
@@ -97,7 +97,7 @@ public class UpdateDocumentCommand(
 
         await documentInputValidator.ValidateAsync(modifiedInput, o =>
         {
-            o.IncludeRuleSets(Operations.Delete);
+            o.IncludeRuleSets(Common.Validators.Operations.Delete);
             o.ThrowOnFailures();
         });
     }

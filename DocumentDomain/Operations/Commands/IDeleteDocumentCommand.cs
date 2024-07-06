@@ -1,15 +1,16 @@
 #region
 
 using Common.Commands.Exceptions;
+using DocumentDomain.Entity;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Document;
+namespace DocumentDomain.Operations.Commands;
 
 public interface IDeleteDocumentCommand
 {
     /// <summary>
-    ///     Deletes the designated <see cref="Entities.Document" /> entity.
+    ///     Deletes the designated <see cref="Document" /> entity.
     /// </summary>
     /// <param name="documentId">The unique identifier of the <see cref="Document" /> entity to be deleted.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken" />.</param>

@@ -1,11 +1,11 @@
 #region
 
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Entities;
+using DocumentDomain.Entity;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Mappers;
+namespace DocumentDomain.Infrastructure.Mappers;
 
 /// <inheritdoc />
 public class DocumentStructureNodeMapper : IDocumentStructureNodeMapper

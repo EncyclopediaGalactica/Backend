@@ -1,7 +1,7 @@
-using EncyclopediaGalactica.Backend.ApplicationDomain.Contracts;
+using DocumentDomain.Contracts;
 using FluentValidation;
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Validators;
+namespace DocumentDomain.Infrastructure.Validators;
 
 public class ApplicationInputValidator : AbstractValidator<ApplicationInput>
 {

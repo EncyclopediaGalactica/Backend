@@ -1,4 +1,4 @@
-namespace EncyclopediaGalactica.BusinessLogic.Entities;
+namespace DocumentDomain.Entity;
 
 /// <summary>
 ///     Structure entity

@@ -1,8 +1,8 @@
-using EncyclopediaGalactica.Backend.ApplicationDomain.Entities;
+using DocumentDomain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
+namespace DocumentDomain.Infrastructure.Database;
 
 public class ApplicationEntityConfiguration : IEntityTypeConfiguration<Application>
 {

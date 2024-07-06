@@ -4,7 +4,7 @@ using DocumentDomain.Contracts;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
+namespace DocumentDomain.Operations.Commands;
 
 public interface IEditRelationCommand
 {

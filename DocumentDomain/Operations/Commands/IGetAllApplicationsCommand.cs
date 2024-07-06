@@ -1,6 +1,6 @@
-using EncyclopediaGalactica.Backend.ApplicationDomain.Contracts;
+using DocumentDomain.Contracts;
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands;
 
 public interface IGetAllApplicationsCommand
 {

@@ -1,4 +1,4 @@
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Entities;
+namespace DocumentDomain.Entity;
 
 public class Application
 {

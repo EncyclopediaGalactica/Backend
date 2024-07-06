@@ -1,16 +1,16 @@
 #region
 
-using Common.Validators;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
+namespace DocumentDomain.Operations.Commands;
 
 public class EditRelationCommand(
     IRelationMapper relationMapper,
@@ -36,14 +36,14 @@ public class EditRelationCommand(
         CancellationToken cancellationToken)
     {
         await ValidateInput(relationInput, cancellationToken).ConfigureAwait(false);
-        Entities.Relation inputRelation = relationMapper.MapRelationInputToRelation(relationInput);
+        Relation inputRelation = relationMapper.MapRelationInputToRelation(relationInput);
         await EditDatabaseOperationAsync(inputRelation, cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task EditDatabaseOperationAsync(Entities.Relation inputRelation, CancellationToken cancellationToken)
+    private async Task EditDatabaseOperationAsync(Relation inputRelation, CancellationToken cancellationToken)
     {
         await using DocumentDomainDbContext ctx = new(dbContextOptions);
-        Entities.Relation toBeModified = await ctx.Relations
+        Relation toBeModified = await ctx.Relations
             .FirstAsync(p => p.Id == inputRelation.Id, cancellationToken)
             .ConfigureAwait(false);
         UpdateModifiedValues(toBeModified, inputRelation);
@@ -51,7 +51,7 @@ public class EditRelationCommand(
         await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    private void UpdateModifiedValues(Entities.Relation toBeModified, Entities.Relation inputRelation)
+    private void UpdateModifiedValues(Relation toBeModified, Relation inputRelation)
     {
         toBeModified.LeftId = inputRelation.LeftId;
         toBeModified.RightId = inputRelation.RightId;
@@ -61,7 +61,7 @@ public class EditRelationCommand(
     {
         await validator.ValidateAsync(relationInput, o =>
         {
-            o.IncludeRuleSets(Operations.Update);
+            o.IncludeRuleSets(Common.Validators.Operations.Update);
             o.ThrowOnFailures();
         }, cancellationToken).ConfigureAwait(false);
     }

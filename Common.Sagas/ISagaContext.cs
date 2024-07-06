@@ -1,4 +1,4 @@
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+namespace Common.Sagas;
 
 public interface ISagaContext
 {

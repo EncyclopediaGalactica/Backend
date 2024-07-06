@@ -1,4 +1,4 @@
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+namespace Common.Sagas;
 
 /// <summary>
 ///     Saga is responsible for orchestration of commands in order to achieve a goal.

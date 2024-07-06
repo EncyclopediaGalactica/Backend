@@ -1,13 +1,13 @@
 #region
 
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Commands.Document;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using DocumentDomain.Operations.Commands;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Document;
+namespace DocumentDomain.Operations.Sagas;
 
 /// <summary>
 ///     Update A Document Saga.

@@ -1,7 +1,7 @@
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Entities;
+using DocumentDomain.Entity;
 
-namespace EncyclopediaGalactica.BusinessLogic.Mappers;
+namespace DocumentDomain.Infrastructure.Mappers;
 
 /// <inheritdoc />
 public class DocumentMapper : IDocumentMapper

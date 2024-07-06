@@ -1,11 +1,11 @@
 #region
 
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Relation;
+namespace DocumentDomain.Operations.Sagas;
 
 public class NewRelationSagaContext : ISagaContextWithPayload<RelationInput>
 {

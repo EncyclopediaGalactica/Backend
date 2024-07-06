@@ -1,4 +1,4 @@
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Contracts;
+namespace DocumentDomain.Contracts;
 
 public class ApplicationInput
 {

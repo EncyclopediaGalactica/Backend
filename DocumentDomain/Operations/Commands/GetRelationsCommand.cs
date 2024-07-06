@@ -1,14 +1,15 @@
 #region
 
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
+namespace DocumentDomain.Operations.Commands;
 
 public class GetRelationsCommand(
     IRelationMapper mapper,
@@ -30,11 +31,11 @@ public class GetRelationsCommand(
 
     private async Task<List<RelationResult>> GetAllAsyncBusinessLogic(CancellationToken cancellationToken)
     {
-        List<Entities.Relation> result = await GetAllAsyncDatabaseOperation(cancellationToken).ConfigureAwait(false);
+        List<Relation> result = await GetAllAsyncDatabaseOperation(cancellationToken).ConfigureAwait(false);
         return mapper.MapRelationsToRelationResults(result);
     }
 
-    private async Task<List<Entities.Relation>> GetAllAsyncDatabaseOperation(CancellationToken cancellationToken)
+    private async Task<List<Relation>> GetAllAsyncDatabaseOperation(CancellationToken cancellationToken)
     {
         await using DocumentDomainDbContext ctx = new(dbContextOptions);
         return await ctx.Relations.ToListAsync(cancellationToken).ConfigureAwait(false);

@@ -1,4 +1,4 @@
-namespace DocumentStructureNodeDomain.Contracts;
+namespace DocumentDomain.Contracts;
 
 public class DocumentStructureNodeResult
 {

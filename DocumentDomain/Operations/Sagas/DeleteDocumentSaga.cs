@@ -1,9 +1,8 @@
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Document;
-
-using Commands.Document;
-using Commands.StructureNode;
-using Interfaces;
+using Common.Sagas;
+using DocumentDomain.Operations.Commands;
 using Microsoft.Extensions.Logging;
+
+namespace DocumentDomain.Operations.Sagas;
 
 public class DeleteDocumentSaga(
     IDeleteDocumentCommand deleteDocumentCommand,

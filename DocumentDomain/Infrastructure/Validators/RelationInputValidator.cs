@@ -1,12 +1,11 @@
 #region
 
-using Common.Validators;
 using DocumentDomain.Contracts;
 using FluentValidation;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Validators;
+namespace DocumentDomain.Infrastructure.Validators;
 
 public class RelationInputValidator : AbstractValidator<RelationInput>
 {
@@ -20,7 +19,7 @@ public class RelationInputValidator : AbstractValidator<RelationInput>
 
         When(p => p is not null, () =>
         {
-            RuleSet(Operations.Add, () =>
+            RuleSet(Common.Validators.Operations.Add, () =>
             {
                 RuleFor(p => p.Id).Equal(0)
                     .WithMessage($"{nameof(RelationInput)}.{nameof(RelationInput.Id)} must be zero");

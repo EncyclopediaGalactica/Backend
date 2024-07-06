@@ -1,14 +1,13 @@
-using Common.Validators;
 using DocumentDomain.Contracts;
 using FluentValidation;
 
-namespace EncyclopediaGalactica.BusinessLogic.Validators;
+namespace DocumentDomain.Infrastructure.Validators;
 
 public class DocumentInputValidator : AbstractValidator<DocumentInput>
 {
     public DocumentInputValidator()
     {
-        RuleSet(Operations.Add, () =>
+        RuleSet(Common.Validators.Operations.Add, () =>
         {
             RuleFor(p => p.Id).Equal(0);
             RuleFor(p => p.Name).NotNull().NotEmpty();
@@ -19,7 +18,7 @@ public class DocumentInputValidator : AbstractValidator<DocumentInput>
                 () => { RuleFor(p => p.Description.Trim()).NotEmpty(); });
         });
 
-        RuleSet(Operations.Update, () =>
+        RuleSet(Common.Validators.Operations.Update, () =>
         {
             RuleFor(p => p.Id).GreaterThanOrEqualTo(1);
             RuleFor(p => p.Name).NotNull().NotEmpty();

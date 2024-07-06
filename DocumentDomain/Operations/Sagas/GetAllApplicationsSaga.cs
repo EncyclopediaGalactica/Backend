@@ -1,10 +1,9 @@
-using EncyclopediaGalactica.Backend.ApplicationDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Operations.Commands;
-using EncyclopediaGalactica.BusinessLogic.Sagas;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using Common.Sagas;
+using DocumentDomain.Contracts;
+using DocumentDomain.Operations.Commands;
 using Microsoft.Extensions.Logging;
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Operations.Sagas;
+namespace DocumentDomain.Operations.Sagas;
 
 public class GetAllApplicationsSaga(
     IGetAllApplicationsCommand getAllApplicationsCommand,

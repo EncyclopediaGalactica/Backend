@@ -1,11 +1,11 @@
 #region
 
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Document;
+namespace DocumentDomain.Operations.Sagas;
 
 public class UpdateDocumentSagaContext : ISagaContextWithPayload<DocumentInput>
 {

@@ -1,4 +1,4 @@
-namespace EncyclopediaGalactica.BusinessLogic.Commands.StructureNode;
+namespace DocumentDomain.Operations.Commands;
 
 public interface IDeleteStructureNodesCommand
 {

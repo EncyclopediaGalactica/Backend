@@ -1,17 +1,17 @@
 #region
 
-using Common.Validators;
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
-using EncyclopediaGalactica.BusinessLogic.Sagas;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
+namespace DocumentDomain.Operations.Commands;
 
 public class AddNewRelationCommand(
     IValidator<RelationInput> validator,
@@ -35,11 +35,11 @@ public class AddNewRelationCommand(
     private async Task<long> AddNewBusinessLogicAsync(RelationInput payload, CancellationToken cancellationToken)
     {
         await ValidateInput(payload, cancellationToken).ConfigureAwait(false);
-        Entities.Relation relation = mapper.MapRelationInputToRelation(payload);
+        Relation relation = mapper.MapRelationInputToRelation(payload);
         return await AddNewDatabaseOperationAsync(relation, cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task<long> AddNewDatabaseOperationAsync(Entities.Relation relation,
+    private async Task<long> AddNewDatabaseOperationAsync(Relation relation,
         CancellationToken cancellationToken = default)
     {
         await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
@@ -52,7 +52,7 @@ public class AddNewRelationCommand(
     {
         await validator.ValidateAsync(payload, o =>
         {
-            o.IncludeRuleSets(Operations.Add);
+            o.IncludeRuleSets(Common.Validators.Operations.Add);
             o.ThrowOnFailures();
         }, cancellationToken).ConfigureAwait(false);
     }

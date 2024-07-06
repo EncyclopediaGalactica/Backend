@@ -1,8 +1,8 @@
-namespace EncyclopediaGalactica.BusinessLogic.Database.EntityConfigurations;
-
-using Entities;
+using DocumentDomain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace DocumentDomain.Infrastructure.Database;
 
 public class DocumentEntityConfiguration : IEntityTypeConfiguration<Document>
 {

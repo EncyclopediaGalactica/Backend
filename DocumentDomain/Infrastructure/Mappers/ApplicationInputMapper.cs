@@ -1,7 +1,7 @@
-using EncyclopediaGalactica.Backend.ApplicationDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Entities;
+using DocumentDomain.Contracts;
+using DocumentDomain.Entity;
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Mappers;
+namespace DocumentDomain.Infrastructure.Mappers;
 
 public class ApplicationInputMapper : IApplicationInputMapper
 {

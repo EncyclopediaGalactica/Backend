@@ -1,15 +1,15 @@
 #region
 
-using EncyclopediaGalactica.Backend.ApplicationDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Entities;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Mappers;
+using DocumentDomain.Contracts;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands;
 
 public class AddApplicationCommand(
     IApplicationMapper applicationMapper,

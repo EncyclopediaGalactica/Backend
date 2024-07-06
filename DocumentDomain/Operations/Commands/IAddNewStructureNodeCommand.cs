@@ -5,7 +5,7 @@ using DocumentDomain.Contracts;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.StructureNode;
+namespace DocumentDomain.Operations.Commands;
 
 /// <summary>
 ///     Add a New Structure Node to the system.

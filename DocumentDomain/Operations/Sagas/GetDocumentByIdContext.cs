@@ -1,6 +1,6 @@
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Document;
+using Common.Sagas;
 
-using Interfaces;
+namespace DocumentDomain.Operations.Sagas;
 
 public class GetDocumentByIdContext : ISagaContextWithPayload<long>
 {

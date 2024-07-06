@@ -2,12 +2,13 @@
 
 using Common.Commands;
 using Common.Commands.Exceptions;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Document;
+namespace DocumentDomain.Operations.Commands;
 
 public class DeleteDocumentCommand(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IDeleteDocumentCommand
@@ -48,7 +49,7 @@ public class DeleteDocumentCommand(
     private async Task DeleteAsyncDatabaseOperation(long documentId, CancellationToken cancellationToken = default)
     {
         await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
-        Entities.Document toBeDeleted = await ctx.Documents.FirstAsync(f => f.Id == documentId, cancellationToken);
+        Document toBeDeleted = await ctx.Documents.FirstAsync(f => f.Id == documentId, cancellationToken);
         ctx.Documents.Entry(toBeDeleted).State = EntityState.Deleted;
         await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }

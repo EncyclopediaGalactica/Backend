@@ -1,13 +1,11 @@
 #region
 
-using EncyclopediaGalactica.Backend.ApplicationDomain.Entities;
-using EncyclopediaGalactica.BusinessLogic.Database.EntityConfigurations;
-using EncyclopediaGalactica.BusinessLogic.Entities;
+using DocumentDomain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
+namespace DocumentDomain.Infrastructure.Database;
 
 public class DocumentDomainDbContext : DbContext
 {

@@ -1,16 +1,17 @@
 #region
 
 using Common.Commands.Exceptions;
+using Common.Sagas;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
-using EncyclopediaGalactica.BusinessLogic.Sagas;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
+namespace DocumentDomain.Operations.Commands;
 
 public class GetRelationByIdCommand(
     IRelationMapper mapper,
@@ -33,12 +34,12 @@ public class GetRelationByIdCommand(
     private async Task<RelationResult> GetIdByBusinessLogicAsync(long relationId, CancellationToken cancellationToken)
     {
         ValidateInput(relationId);
-        Entities.Relation result =
+        Relation result =
             await GetByIdAsyncDatabaseOperation(relationId, cancellationToken).ConfigureAwait(false);
         return mapper.MapRelationToRelationResult(result);
     }
 
-    private async Task<Entities.Relation> GetByIdAsyncDatabaseOperation(long relationId,
+    private async Task<Relation> GetByIdAsyncDatabaseOperation(long relationId,
         CancellationToken cancellationToken)
     {
         await using DocumentDomainDbContext ctx = new(dbContextOptions);

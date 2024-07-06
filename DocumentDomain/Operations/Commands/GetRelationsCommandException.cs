@@ -1,6 +1,6 @@
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
-
 using System.Runtime.Serialization;
+
+namespace DocumentDomain.Operations.Commands;
 
 public class GetRelationsCommandException : Exception
 {

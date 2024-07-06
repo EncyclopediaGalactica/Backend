@@ -1,18 +1,17 @@
 #region
 
-using Common.Validators;
 using DocumentDomain.Contracts;
 using FluentValidation;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Validators;
+namespace DocumentDomain.Infrastructure.Validators;
 
 public class DocumentStructureNodeInputValidator : AbstractValidator<DocumentStructureNodeInput>
 {
     public DocumentStructureNodeInputValidator()
     {
-        RuleSet(Operations.Add, () =>
+        RuleSet(Common.Validators.Operations.Add, () =>
         {
             RuleFor(p => p.Id)
                 .Equal(0)

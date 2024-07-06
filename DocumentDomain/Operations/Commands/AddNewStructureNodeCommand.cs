@@ -2,17 +2,16 @@
 
 using Common.Commands;
 using Common.Commands.Exceptions;
-using Common.Validators;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Entities;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.StructureNode;
+namespace DocumentDomain.Operations.Commands;
 
 public class AddNewStructureNodeCommand(
     IDocumentStructureNodeMapper documentStructureNodeMapper,
@@ -70,7 +69,7 @@ public class AddNewStructureNodeCommand(
 
         validator.ValidateAsync(structureNodeInput, o =>
         {
-            o.IncludeRuleSets(Operations.Add);
+            o.IncludeRuleSets(Common.Validators.Operations.Add);
             o.ThrowOnFailures();
         });
     }

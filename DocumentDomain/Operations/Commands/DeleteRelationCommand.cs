@@ -1,13 +1,14 @@
 #region
 
 using Common.Commands.Exceptions;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Relation;
+namespace DocumentDomain.Operations.Commands;
 
 public class DeleteRelationCommand(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions,
@@ -35,7 +36,7 @@ public class DeleteRelationCommand(
     private async Task DatabaseOperationAsync(long relationId, CancellationToken cancellationToken)
     {
         await using DocumentDomainDbContext ctx = new(dbContextOptions);
-        Entities.Relation toBeDeleted = await ctx.Relations.FirstAsync(f => f.Id == relationId, cancellationToken)
+        Relation toBeDeleted = await ctx.Relations.FirstAsync(f => f.Id == relationId, cancellationToken)
             .ConfigureAwait(false);
         ctx.Entry(toBeDeleted).State = EntityState.Deleted;
         await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

@@ -3,13 +3,14 @@
 using Common.Commands;
 using Common.Commands.Exceptions;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Document;
+namespace DocumentDomain.Operations.Commands;
 
 public class GetAllDocumentsCommand(
     IDocumentMapper documentMapper,
@@ -37,12 +38,12 @@ public class GetAllDocumentsCommand(
 
     private async Task<List<DocumentResult>> GetAllBusinessLogicAsync(CancellationToken cancellationToken = default)
     {
-        List<Entities.Document> result =
+        List<Document> result =
             await GetAllDocumentsAsyncDatabaseOperation(cancellationToken).ConfigureAwait(false);
         return documentMapper.MapDocumentsToDocumentResults(result);
     }
 
-    private async Task<List<Entities.Document>> GetAllDocumentsAsyncDatabaseOperation(
+    private async Task<List<Document>> GetAllDocumentsAsyncDatabaseOperation(
         CancellationToken cancellationToken = default)
     {
         await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);

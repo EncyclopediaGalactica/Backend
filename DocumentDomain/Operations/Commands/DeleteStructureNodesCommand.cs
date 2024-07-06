@@ -1,14 +1,14 @@
 #region
 
 using Common.Commands.Exceptions;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Entities;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.StructureNode;
+namespace DocumentDomain.Operations.Commands;
 
 public class DeleteStructureNodesCommand(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions,

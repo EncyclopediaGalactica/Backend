@@ -2,17 +2,17 @@
 
 using Common.Commands;
 using Common.Commands.Exceptions;
-using Common.Validators;
 using DocumentDomain.Contracts;
-using EncyclopediaGalactica.Backend.ApplicationDomain.Infrastructure.Database;
-using EncyclopediaGalactica.BusinessLogic.Mappers;
+using DocumentDomain.Entity;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.Mappers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Document;
+namespace DocumentDomain.Operations.Commands;
 
 public class AddDocumentCommand(
     IDocumentMapper documentMapper,
@@ -55,21 +55,21 @@ public class AddDocumentCommand(
         CancellationToken cancellationToken)
     {
         await ValidationDocumentInputForAdding(input);
-        Entities.Document document = documentInputMapper.MapDocumentInputToDocument(input);
+        Document document = documentInputMapper.MapDocumentInputToDocument(input);
 
-        Entities.Document result = await AddAsyncDatabaseOperation(document, cancellationToken).ConfigureAwait(false);
+        Document result = await AddAsyncDatabaseOperation(document, cancellationToken).ConfigureAwait(false);
         return result.Id;
     }
 
-    private async Task<Entities.Document> AddAsyncDatabaseOperation(
-        Entities.Document document,
+    private async Task<Document> AddAsyncDatabaseOperation(
+        Document document,
         CancellationToken cancellationToken = default)
     {
         await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
         await ctx.Documents.AddAsync(document, cancellationToken).ConfigureAwait(false);
         await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
-        logger.LogDebug("Newly created {EntityName} id value: {IdValue}", nameof(Entities.Document), document.Id);
+        logger.LogDebug("Newly created {EntityName} id value: {IdValue}", nameof(Document), document.Id);
 
         return document;
     }
@@ -80,7 +80,7 @@ public class AddDocumentCommand(
 
         await documentInputValidator.ValidateAsync(input, options =>
         {
-            options.IncludeRuleSets(Operations.Add);
+            options.IncludeRuleSets(Common.Validators.Operations.Add);
             options.ThrowOnFailures();
         });
     }

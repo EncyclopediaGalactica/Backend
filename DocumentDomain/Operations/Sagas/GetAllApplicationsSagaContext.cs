@@ -1,6 +1,6 @@
-using EncyclopediaGalactica.BusinessLogic.Sagas.Interfaces;
+using Common.Sagas;
 
-namespace EncyclopediaGalactica.Backend.ApplicationDomain.Operations.Sagas;
+namespace DocumentDomain.Operations.Sagas;
 
 public class GetAllApplicationsSagaContext : ISagaContext
 {

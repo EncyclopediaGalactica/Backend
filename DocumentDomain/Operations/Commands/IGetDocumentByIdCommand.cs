@@ -5,7 +5,7 @@ using DocumentDomain.Contracts;
 
 #endregion
 
-namespace EncyclopediaGalactica.BusinessLogic.Commands.Document;
+namespace DocumentDomain.Operations.Commands;
 
 public interface IGetDocumentByIdCommand
 {

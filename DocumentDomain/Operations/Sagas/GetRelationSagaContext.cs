@@ -1,6 +1,6 @@
-namespace EncyclopediaGalactica.BusinessLogic.Sagas.Relation;
+using Common.Sagas;
 
-using Interfaces;
+namespace DocumentDomain.Operations.Sagas;
 
 public class GetRelationSagaContext : ISagaContext
 {
