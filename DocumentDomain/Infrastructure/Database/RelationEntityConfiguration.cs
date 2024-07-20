@@ -1,8 +1,8 @@
-using DocumentDomain.Entity;
+namespace DocumentDomain.Infrastructure.Database;
+
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace DocumentDomain.Infrastructure.Database;
 
 public class RelationEntityConfiguration : IEntityTypeConfiguration<Relation>
 {

@@ -1,17 +1,17 @@
 #region
 
-using Common.Commands;
-using Common.Commands.Exceptions;
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using DocumentDomain.Infrastructure.Mappers;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands;
+using Common.Commands.Exceptions;
+using Contracts;
+using Entity;
+using Infrastructure.Database;
+using Infrastructure.Mappers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 public class GetStructureNodeTreeCommand(
     IDocumentStructureNodeMapper mapper,

@@ -1,13 +1,13 @@
 #region
 
-using Common.Sagas;
-using DocumentDomain.Contracts;
-using DocumentDomain.Operations.Commands;
-using Microsoft.Extensions.Logging;
-
 #endregion
 
 namespace DocumentDomain.Operations.Sagas;
+
+using Commands;
+using Common.Sagas;
+using Contracts;
+using Microsoft.Extensions.Logging;
 
 public class EditRelationSaga(
     IEditRelationCommand editRelationCommand,

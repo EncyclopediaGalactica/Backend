@@ -1,11 +1,7 @@
-#region
-
-using DocumentDomain.Entity;
-using Microsoft.EntityFrameworkCore;
-
-#endregion
-
 namespace DocumentDomain.Infrastructure.Database;
+
+using Entity;
+using Microsoft.EntityFrameworkCore;
 
 public class DocumentDomainDbContext : DbContext
 {

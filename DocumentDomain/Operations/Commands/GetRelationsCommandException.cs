@@ -1,6 +1,6 @@
-using System.Runtime.Serialization;
-
 namespace DocumentDomain.Operations.Commands;
+
+using System.Runtime.Serialization;
 
 public class GetRelationsCommandException : Exception
 {

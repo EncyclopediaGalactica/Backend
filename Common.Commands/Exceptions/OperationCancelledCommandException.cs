@@ -1,6 +1,6 @@
-using System.Runtime.Serialization;
-
 namespace Common.Commands.Exceptions;
+
+using System.Runtime.Serialization;
 
 public class OperationCancelledCommandException : Exception
 {

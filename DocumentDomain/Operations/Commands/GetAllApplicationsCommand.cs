@@ -1,14 +1,14 @@
 #region
 
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using DocumentDomain.Infrastructure.Mappers;
-using Microsoft.EntityFrameworkCore;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Contracts;
+using Entity;
+using Infrastructure.Database;
+using Infrastructure.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 public class GetAllApplicationsCommand(
     IApplicationMapper applicationMapper,

@@ -3,7 +3,8 @@ namespace DocumentDomain.Entity;
 /// <summary>
 ///     The Document entity
 ///     <p>
-///         The Document entity represents a document and the root of a tree including many objects describing a document in
+///         The Document entity represents a document and the root of a tree including many objects describing a document
+///         in
 ///         the system.
 ///     </p>
 ///     <p>

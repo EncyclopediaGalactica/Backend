@@ -1,6 +1,6 @@
-using DocumentDomain.Contracts;
-
 namespace DocumentDomain.Operations.Commands;
+
+using Contracts;
 
 public interface IAddApplicationCommand
 {

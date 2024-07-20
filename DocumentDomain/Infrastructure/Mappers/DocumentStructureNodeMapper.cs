@@ -1,11 +1,11 @@
 #region
 
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-
 #endregion
 
 namespace DocumentDomain.Infrastructure.Mappers;
+
+using Contracts;
+using Entity;
 
 /// <inheritdoc />
 public class DocumentStructureNodeMapper : IDocumentStructureNodeMapper

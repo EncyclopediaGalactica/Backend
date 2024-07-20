@@ -1,17 +1,18 @@
 #region
 
-using Common.Commands;
-using Common.Commands.Exceptions;
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using DocumentDomain.Infrastructure.Mappers;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands;
+using Common.Commands.Exceptions;
+using Common.Validators;
+using Contracts;
+using Entity;
+using FluentValidation;
+using Infrastructure.Database;
+using Infrastructure.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 public class UpdateDocumentCommand(
     IDocumentMapper documentMapper,
@@ -97,7 +98,7 @@ public class UpdateDocumentCommand(
 
         await documentInputValidator.ValidateAsync(modifiedInput, o =>
         {
-            o.IncludeRuleSets(Common.Validators.Operations.Delete);
+            o.IncludeRuleSets(Operations.Delete);
             o.ThrowOnFailures();
         });
     }

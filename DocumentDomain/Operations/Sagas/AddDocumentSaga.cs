@@ -1,13 +1,13 @@
 #region
 
-using Common.Sagas;
-using DocumentDomain.Contracts;
-using DocumentDomain.Operations.Commands;
-using Microsoft.Extensions.Logging;
-
 #endregion
 
 namespace DocumentDomain.Operations.Sagas;
+
+using Commands;
+using Common.Sagas;
+using Contracts;
+using Microsoft.Extensions.Logging;
 
 /// <inheritdoc />
 public class AddDocumentSaga(
@@ -31,12 +31,6 @@ public class AddDocumentSaga(
         {
             long documentId = await addDocumentCommand.AddAsync(context.Payload, cancellationToken)
                 .ConfigureAwait(false);
-
-            // CheckIfPayloadHasRootNodeAndAdd(context.Payload);
-
-            // await addStructureNodeTreeCommand
-            // .AddTreeAsync(documentId, context.Payload.RootStructureNode, cancellationToken)
-            // .ConfigureAwait(false);
 
             DocumentResult result = await getDocumentByIdCommand.GetByIdAsync(documentId, cancellationToken)
                 .ConfigureAwait(false);

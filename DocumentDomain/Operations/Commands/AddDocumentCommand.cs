@@ -1,18 +1,14 @@
-#region
+namespace DocumentDomain.Operations.Commands;
 
 using Common.Commands;
 using Common.Commands.Exceptions;
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using DocumentDomain.Infrastructure.Mappers;
+using Contracts;
+using Entity;
 using FluentValidation;
+using Infrastructure.Database;
+using Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
-#endregion
-
-namespace DocumentDomain.Operations.Commands;
 
 public class AddDocumentCommand(
     IDocumentMapper documentMapper,
@@ -78,10 +74,6 @@ public class AddDocumentCommand(
     {
         ArgumentNullException.ThrowIfNull(input);
 
-        await documentInputValidator.ValidateAsync(input, options =>
-        {
-            options.IncludeRuleSets(Common.Validators.Operations.Add);
-            options.ThrowOnFailures();
-        });
+        await documentInputValidator.ValidateAsync(input, options => { options.ThrowOnFailures(); });
     }
 }

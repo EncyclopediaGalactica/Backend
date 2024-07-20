@@ -1,7 +1,7 @@
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-
 namespace DocumentDomain.Infrastructure.Mappers;
+
+using Contracts;
+using Entity;
 
 /// <summary>
 ///     The IDocumentMapper interface

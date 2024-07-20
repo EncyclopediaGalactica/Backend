@@ -1,11 +1,11 @@
 #region
 
-using Common.Sagas;
-using DocumentDomain.Contracts;
-
 #endregion
 
 namespace DocumentDomain.Operations.Sagas;
+
+using Common.Sagas;
+using Contracts;
 
 public class AddDocumentSagaContext : ISagaContextWithPayload<DocumentInput>
 {
