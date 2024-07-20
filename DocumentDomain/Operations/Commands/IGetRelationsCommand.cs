@@ -1,10 +1,10 @@
 #region
 
-using DocumentDomain.Contracts;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Contracts;
 
 public interface IGetRelationsCommand
 {

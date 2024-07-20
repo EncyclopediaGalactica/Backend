@@ -1,7 +1,6 @@
 namespace DocumentDomain.Entity;
 
 /// <summary>
-///
 /// </summary>
 public class Relation
 {

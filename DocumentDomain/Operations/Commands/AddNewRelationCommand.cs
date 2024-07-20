@@ -1,17 +1,18 @@
 #region
 
-using Common.Sagas;
-using DocumentDomain.Contracts;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using DocumentDomain.Infrastructure.Mappers;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Sagas;
+using Common.Validators;
+using Contracts;
+using Entity;
+using FluentValidation;
+using Infrastructure.Database;
+using Infrastructure.Mappers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 public class AddNewRelationCommand(
     IValidator<RelationInput> validator,
@@ -52,7 +53,7 @@ public class AddNewRelationCommand(
     {
         await validator.ValidateAsync(payload, o =>
         {
-            o.IncludeRuleSets(Common.Validators.Operations.Add);
+            o.IncludeRuleSets(Operations.Add);
             o.ThrowOnFailures();
         }, cancellationToken).ConfigureAwait(false);
     }

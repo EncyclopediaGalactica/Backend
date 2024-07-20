@@ -1,6 +1,6 @@
-using System.Runtime.Serialization;
-
 namespace Common.Sagas;
+
+using System.Runtime.Serialization;
 
 public class SagaException : Exception
 {

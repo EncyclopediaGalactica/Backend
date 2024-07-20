@@ -1,14 +1,14 @@
 #region
 
-using Common.Commands.Exceptions;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands.Exceptions;
+using Entity;
+using Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 public class DeleteRelationCommand(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions,

@@ -1,10 +1,10 @@
 #region
 
-using System.Runtime.Serialization;
-
 #endregion
 
 namespace Common.Commands.Exceptions;
+
+using System.Runtime.Serialization;
 
 public class NoSuchItemCommandException : Exception
 {

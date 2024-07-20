@@ -1,8 +1,8 @@
-using Common.Sagas;
-using DocumentDomain.Operations.Commands;
-using Microsoft.Extensions.Logging;
-
 namespace DocumentDomain.Operations.Sagas;
+
+using Commands;
+using Common.Sagas;
+using Microsoft.Extensions.Logging;
 
 public class DeleteDocumentSaga(
     IDeleteDocumentCommand deleteDocumentCommand,

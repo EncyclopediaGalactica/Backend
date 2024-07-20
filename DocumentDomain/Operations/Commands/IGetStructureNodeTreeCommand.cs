@@ -1,11 +1,11 @@
 #region
 
-using Common.Commands.Exceptions;
-using DocumentDomain.Contracts;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands.Exceptions;
+using Contracts;
 
 /// <summary>
 ///     Get root <see cref="StructureNode" /> by <see cref="Document.Id" /> scenario.

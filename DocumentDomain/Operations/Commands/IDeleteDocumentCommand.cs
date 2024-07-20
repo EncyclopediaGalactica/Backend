@@ -1,11 +1,11 @@
 #region
 
-using Common.Commands.Exceptions;
-using DocumentDomain.Entity;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands.Exceptions;
+using Entity;
 
 public interface IDeleteDocumentCommand
 {

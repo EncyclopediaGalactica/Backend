@@ -1,11 +1,12 @@
 #region
 
-using DocumentDomain.Contracts;
-using FluentValidation;
-
 #endregion
 
 namespace DocumentDomain.Infrastructure.Validators;
+
+using Common.Validators;
+using Contracts;
+using FluentValidation;
 
 public class RelationInputValidator : AbstractValidator<RelationInput>
 {
@@ -19,7 +20,7 @@ public class RelationInputValidator : AbstractValidator<RelationInput>
 
         When(p => p is not null, () =>
         {
-            RuleSet(Common.Validators.Operations.Add, () =>
+            RuleSet(Operations.Add, () =>
             {
                 RuleFor(p => p.Id).Equal(0)
                     .WithMessage($"{nameof(RelationInput)}.{nameof(RelationInput.Id)} must be zero");

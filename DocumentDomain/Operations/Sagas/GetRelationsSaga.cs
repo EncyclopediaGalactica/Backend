@@ -1,12 +1,12 @@
 #region
 
-using Common.Sagas;
-using DocumentDomain.Contracts;
-using DocumentDomain.Operations.Commands;
-
 #endregion
 
 namespace DocumentDomain.Operations.Sagas;
+
+using Commands;
+using Common.Sagas;
+using Contracts;
 
 public class GetRelationsSaga(
     IGetRelationsCommand getRelationsCommand) : IHaveInputAndResultSaga<List<RelationResult>, GetRelationSagaContext>

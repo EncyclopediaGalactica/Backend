@@ -1,6 +1,6 @@
-using Common.Sagas;
-
 namespace DocumentDomain.Operations.Sagas;
+
+using Common.Sagas;
 
 public class DeleteDocumentSagaContext : ISagaContextWithPayload<Int64>
 {

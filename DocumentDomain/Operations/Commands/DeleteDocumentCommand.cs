@@ -1,14 +1,14 @@
 #region
 
-using Common.Commands;
-using Common.Commands.Exceptions;
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands;
+using Common.Commands.Exceptions;
+using Entity;
+using Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 public class DeleteDocumentCommand(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IDeleteDocumentCommand

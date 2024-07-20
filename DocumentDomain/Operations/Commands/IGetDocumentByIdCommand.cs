@@ -1,11 +1,11 @@
 #region
 
-using Common.Commands.Exceptions;
-using DocumentDomain.Contracts;
-
 #endregion
 
 namespace DocumentDomain.Operations.Commands;
+
+using Common.Commands.Exceptions;
+using Contracts;
 
 public interface IGetDocumentByIdCommand
 {
