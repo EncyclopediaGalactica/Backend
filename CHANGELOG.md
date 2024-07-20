@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/EncyclopediaGalactica/Backend/compare/0.3.0...0.3.1) (2024-07-20)
+
+
+### Bug Fixes
+
+* adding the minimal testing infrastructure [#4](https://github.com/EncyclopediaGalactica/Backend/issues/4) ([366ece7](https://github.com/EncyclopediaGalactica/Backend/commit/366ece7a99ba41a313ee48b149f3da65824fe560))
+
 # [0.3.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.2.0...0.3.0) (2024-07-06)
 
 
