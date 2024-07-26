@@ -4,7 +4,7 @@ using Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class ApplicationEntityConfiguration : IEntityTypeConfiguration<Application>
+public class ApplicationConfiguration : IEntityTypeConfiguration<Application>
 {
     public void Configure(EntityTypeBuilder<Application> builder)
     {

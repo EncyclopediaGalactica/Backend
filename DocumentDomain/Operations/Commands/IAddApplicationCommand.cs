@@ -1,8 +1,8 @@
 namespace DocumentDomain.Operations.Commands;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 
 public interface IAddApplicationCommand
 {
-    Task<ApplicationContract> AddAsync(ApplicationInput application, CancellationToken cancellationToken = default);
+    Task<ApplicationResult> AddAsync(ApplicationInput application, CancellationToken cancellationToken = default);
 }

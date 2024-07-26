@@ -4,7 +4,7 @@ using Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class RelationEntityConfiguration : IEntityTypeConfiguration<Relation>
+public class RelationConfiguration : IEntityTypeConfiguration<Relation>
 {
     public void Configure(EntityTypeBuilder<Relation> builder)
     {

@@ -2,15 +2,15 @@ namespace DocumentDomain.Operations.Sagas;
 
 using Commands;
 using Common.Sagas;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Microsoft.Extensions.Logging;
 
 public class GetAllApplicationsSaga(
     IGetAllApplicationsCommand getAllApplicationsCommand,
     ILogger<GetAllApplicationsSaga> logger)
-    : IHaveInputAndResultSaga<List<ApplicationContract>, GetAllApplicationsSagaContext>
+    : IHaveInputAndResultSaga<List<ApplicationResult>, GetAllApplicationsSagaContext>
 {
-    public async Task<List<ApplicationContract>> ExecuteAsync(
+    public async Task<List<ApplicationResult>> ExecuteAsync(
         GetAllApplicationsSagaContext context,
         CancellationToken cancellationToken = default)
     {

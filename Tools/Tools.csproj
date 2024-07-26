@@ -12,4 +12,8 @@
         <ProjectReference Include="..\DocumentDomain\DocumentDomain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="EncyclopediaGalactica.BusinessLogic.Contracts" Version="2.5.0"/>
+    </ItemGroup>
+
 </Project>

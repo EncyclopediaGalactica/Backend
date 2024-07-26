@@ -5,7 +5,7 @@
 namespace DocumentDomain.Operations.Commands;
 
 using Common.Validators;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 using FluentValidation;
 using Infrastructure.Database;

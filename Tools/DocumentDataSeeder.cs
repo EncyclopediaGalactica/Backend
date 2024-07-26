@@ -1,11 +1,7 @@
-#region
-
-#endregion
-
 namespace EncyclopediaGalactica.Tools;
 
+using BusinessLogic.Contracts;
 using Common.Sagas;
-using DocumentDomain.Contracts;
 using DocumentDomain.Operations.Sagas;
 using Microsoft.Extensions.Logging;
 

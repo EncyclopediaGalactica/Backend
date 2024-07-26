@@ -1,11 +1,11 @@
 namespace DocumentDomain.Infrastructure.Mappers;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 
 public interface IApplicationMapper
 {
-    List<ApplicationContract> ToApplicationResults(List<Application> applications);
+    List<ApplicationResult> ToApplicationResults(List<Application> applications);
 
-    ApplicationContract ToApplicationResult(Application application);
+    ApplicationResult ToApplicationResult(Application application);
 }

@@ -1,22 +1,22 @@
 namespace DocumentDomain.Infrastructure.Mappers;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 
 public class ApplicationMapper : IApplicationMapper
 {
-    public List<ApplicationContract> ToApplicationResults(List<Application> applications)
+    public List<ApplicationResult> ToApplicationResults(List<Application> applications)
     {
-        var result = new List<ApplicationContract>();
+        var result = new List<ApplicationResult>();
 
         if (applications.Any()) result.AddRange(applications.Select(ToApplicationResult));
 
         return result;
     }
 
-    public ApplicationContract ToApplicationResult(Application application)
+    public ApplicationResult ToApplicationResult(Application application)
     {
-        return new ApplicationContract
+        return new ApplicationResult
         {
             Id = application.Id,
             Name = application.Name,

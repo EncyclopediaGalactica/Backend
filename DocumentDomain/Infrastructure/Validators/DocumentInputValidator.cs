@@ -1,7 +1,7 @@
 namespace DocumentDomain.Infrastructure.Validators;
 
 using Common.Validators;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;
 
 public class DocumentInputValidator : AbstractValidator<DocumentInput>

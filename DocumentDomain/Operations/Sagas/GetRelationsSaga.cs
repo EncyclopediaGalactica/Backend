@@ -1,12 +1,8 @@
-#region
-
-#endregion
-
 namespace DocumentDomain.Operations.Sagas;
 
 using Commands;
 using Common.Sagas;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 
 public class GetRelationsSaga(
     IGetRelationsCommand getRelationsCommand) : IHaveInputAndResultSaga<List<RelationResult>, GetRelationSagaContext>

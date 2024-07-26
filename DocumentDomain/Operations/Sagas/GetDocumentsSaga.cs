@@ -1,12 +1,8 @@
-#region
-
-#endregion
-
 namespace DocumentDomain.Operations.Sagas;
 
 using Commands;
 using Common.Sagas;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Microsoft.Extensions.Logging;
 
 /// <summary>
