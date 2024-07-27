@@ -1,11 +1,12 @@
 namespace DocumentDomain.Operations.Commands;
 
+using Common.Commands.Exceptions;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
-using Entity;
 using FluentValidation;
 using Infrastructure.Database;
 using Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 public class UpdateDocumentTypeCommand(
     IValidator<DocumentTypeInput> validator,
@@ -13,7 +14,7 @@ public class UpdateDocumentTypeCommand(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IUpdateDocumentTypeCommand
 {
     public async Task<DocumentTypeResult> ExecuteAsync(
-        DocumentTypeInput input,
+        DocumentTypeInput? input,
         CancellationToken cancellationToken = default)
     {
         try
@@ -27,22 +28,50 @@ public class UpdateDocumentTypeCommand(
         }
     }
 
-    private async Task<DocumentTypeResult> ExecuteCommandAsync(DocumentTypeInput input,
+    private async Task<DocumentTypeResult> ExecuteCommandAsync(DocumentTypeInput? input,
         CancellationToken cancellationToken)
     {
         ValidateInput(input);
-        DocumentType modification = mapper.FromDocumentTypeInput(input);
-        DocumentType modified = await ExecuteDatabaseOperationAsync(modification, cancellationToken).ConfigureAwait(false);
+        Entity.DocumentType modification = mapper.FromDocumentTypeInput(input!);
+        Entity.DocumentType modified = await ExecuteDatabaseOperationAsync(modification, cancellationToken)
+            .ConfigureAwait(false);
         return mapper.ToDocumentTypeResult(modified);
     }
 
-    private void ValidateInput(DocumentTypeInput input)
+    private async Task<Entity.DocumentType> ExecuteDatabaseOperationAsync(
+        Entity.DocumentType modification,
+        CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await using DocumentDomainDbContext ctx = new(dbContextOptions);
+        await using IDbContextTransaction tr = await ctx.Database.BeginTransactionAsync(cancellationToken)
+            .ConfigureAwait(false);
+        Entity.DocumentType? toBeModified = await ctx.DocumentTypes.FirstOrDefaultAsync(
+            p => p.Id == modification.Id, cancellationToken).ConfigureAwait(false);
+
+        if (toBeModified is null)
+        {
+            await tr.RollbackAsync(cancellationToken).ConfigureAwait(false);
+            string msg = string.Format($"No {nameof(DocumentType)} entity with id: {modification.Id}.");
+            throw new NoSuchItemCommandException(msg);
+        }
+
+        toBeModified.Name = modification.Name;
+        toBeModified.Description = modification.Description;
+
+        ctx.Entry(toBeModified).State = EntityState.Modified;
+        await ctx.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        await tr.CommitAsync(cancellationToken).ConfigureAwait(false);
+        return toBeModified;
+    }
+
+    private void ValidateInput(DocumentTypeInput? input)
+    {
+        ArgumentNullException.ThrowIfNull(input);
+        validator.ValidateAndThrowAsync(input);
     }
 }
 
 public interface IUpdateDocumentTypeCommand
 {
-    Task<DocumentTypeResult> ExecuteAsync(DocumentTypeInput input, CancellationToken cancellationToken = default);
+    Task<DocumentTypeResult> ExecuteAsync(DocumentTypeInput? input, CancellationToken cancellationToken = default);
 }

@@ -2,7 +2,7 @@ namespace DocumentDomain.Infrastructure.Controllers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Operations.Sagas;
+using Operations.Scenarios;
 
 [ApiController]
 [Route("api/document")]

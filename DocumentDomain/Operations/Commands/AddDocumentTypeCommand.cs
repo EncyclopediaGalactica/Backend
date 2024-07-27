@@ -30,12 +30,13 @@ public class AddDocumentTypeCommand(
     private async Task<DocumentTypeResult> ExecuteAsync(DocumentTypeInput? input, CancellationToken cancellationToken)
     {
         ValidateInput(input);
-        DocumentType toBeRecorded = documentTypeMapper.FromDocumentTypeInput(input);
-        DocumentType result = await ExecuteDatabaseOperation(toBeRecorded, cancellationToken).ConfigureAwait(false);
+        Entity.DocumentType toBeRecorded = documentTypeMapper.FromDocumentTypeInput(input);
+        Entity.DocumentType result =
+            await ExecuteDatabaseOperation(toBeRecorded, cancellationToken).ConfigureAwait(false);
         return documentTypeMapper.ToDocumentTypeResult(result);
     }
 
-    private async Task<DocumentType> ExecuteDatabaseOperation(DocumentType toBeRecorded,
+    private async Task<Entity.DocumentType> ExecuteDatabaseOperation(Entity.DocumentType toBeRecorded,
         CancellationToken cancellationToken)
     {
         await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
@@ -46,18 +47,22 @@ public class AddDocumentTypeCommand(
 
     private void ValidateInput(DocumentTypeInput? input)
     {
-        if (input is null)
-        {
-            throw new ArgumentNullException("Input is null");
-        }
+        ArgumentNullException.ThrowIfNull(input);
 
         validator.ValidateAndThrow(input);
     }
 }
 
+/// <summary>
+///     Add Document Type Command interface.
+///     <remarks>
+///         It provides a single method to execute the command adding a new <see cref="DocumentType" /> entity to the
+///         system.
+///     </remarks>
+/// </summary>
 public interface IAddDocumentTypeCommand
 {
     Task<DocumentTypeResult> ExecuteCommandAsync(
-        DocumentTypeInput input,
+        DocumentTypeInput? input,
         CancellationToken cancellationToken = default);
 }

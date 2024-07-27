@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Commands", "Common.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{503C54DA-19C2-4A0F-AF5F-85C2C370D919}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentDomain.Spec", "DocumentDomain.Spec\DocumentDomain.Spec.csproj", "{9C20D542-7BA5-4889-94D9-8FEA02130884}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{503C54DA-19C2-4A0F-AF5F-85C2C370D919}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{503C54DA-19C2-4A0F-AF5F-85C2C370D919}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{503C54DA-19C2-4A0F-AF5F-85C2C370D919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C20D542-7BA5-4889-94D9-8FEA02130884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C20D542-7BA5-4889-94D9-8FEA02130884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C20D542-7BA5-4889-94D9-8FEA02130884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C20D542-7BA5-4889-94D9-8FEA02130884}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

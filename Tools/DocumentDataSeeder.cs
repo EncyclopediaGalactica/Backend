@@ -2,7 +2,7 @@ namespace EncyclopediaGalactica.Tools;
 
 using BusinessLogic.Contracts;
 using Common.Sagas;
-using DocumentDomain.Operations.Sagas;
+using DocumentDomain.Operations.Scenarios;
 using Microsoft.Extensions.Logging;
 
 public class DocumentDataSeeder(

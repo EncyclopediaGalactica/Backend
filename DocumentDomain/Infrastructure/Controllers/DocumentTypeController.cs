@@ -2,22 +2,22 @@ namespace DocumentDomain.Infrastructure.Controllers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Operations.Sagas;
+using Operations.Scenarios.DocumentType;
 
 [ApiController]
 [Route("api/document")]
 public class DocumentTypeController(
-    GetDocumentTypesSaga getDocumentTypesSaga,
-    AddDocumentTypeSaga addDocumentTypeSaga,
-    UpdateDocumentTypeSaga updateDocumentTypeSaga
+    GetDocumentTypesScenario getDocumentTypesScenario,
+    AddDocumentTypeScenario addDocumentTypeScenario,
+    UpdateDocumentTypeScenario updateDocumentTypeScenario
 )
 {
     [HttpGet]
     [Route("documentType")]
     public async Task<IActionResult> GetDocumentTypesAsync(CancellationToken cancellationToken = default)
     {
-        GetDocumentTypesSagaContext ctx = new GetDocumentTypesSagaContext();
-        List<DocumentTypeResult> result = await getDocumentTypesSaga.ExecuteAsync(
+        GetDocumentTypesScenarioContext ctx = new GetDocumentTypesScenarioContext();
+        List<DocumentTypeResult> result = await getDocumentTypesScenario.ExecuteAsync(
             ctx,
             cancellationToken).ConfigureAwait(false);
         return new OkObjectResult(result);
@@ -30,11 +30,11 @@ public class DocumentTypeController(
         DocumentTypeInput input,
         CancellationToken cancellationToken = default)
     {
-        AddDocumentTypeSagaContext ctx = new AddDocumentTypeSagaContext
+        AddDocumentTypeScenarioContext ctx = new AddDocumentTypeScenarioContext
         {
             Payload = input
         };
-        DocumentTypeResult result = await addDocumentTypeSaga.ExecuteAsync(ctx, cancellationToken);
+        DocumentTypeResult result = await addDocumentTypeScenario.ExecuteAsync(ctx, cancellationToken);
         return new OkObjectResult(result);
     }
 
@@ -46,11 +46,11 @@ public class DocumentTypeController(
         long documentTypeId,
         CancellationToken cancellationToken = default)
     {
-        UpdateDocumentTypeSagaContext ctx = new UpdateDocumentTypeSagaContext
+        UpdateDocumentTypeScenarioContext ctx = new UpdateDocumentTypeScenarioContext
         {
             Payload = input
         };
-        DocumentTypeResult result = await updateDocumentTypeSaga.ExecuteAsync(
+        DocumentTypeResult result = await updateDocumentTypeScenario.ExecuteAsync(
             ctx,
             cancellationToken).ConfigureAwait(false);
         return new OkObjectResult(result);

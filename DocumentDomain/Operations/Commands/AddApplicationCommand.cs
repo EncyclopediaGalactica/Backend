@@ -1,7 +1,3 @@
-#region
-
-#endregion
-
 namespace DocumentDomain.Operations.Commands;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
@@ -49,7 +45,7 @@ public class AddApplicationCommand(
         Application application,
         CancellationToken cancellationToken)
     {
-        await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
+        await using DocumentDomainDbContext ctx = new(dbContextOptions);
         await ctx.Applications.AddAsync(application, cancellationToken).ConfigureAwait(false);
         return application;
     }
