@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.3.1...0.4.0) (2024-08-04)
+
+
+### Features
+
+* Document Type endpoint [#5](https://github.com/EncyclopediaGalactica/Backend/issues/5) ([c33902b](https://github.com/EncyclopediaGalactica/Backend/commit/c33902b6ca9ae50105811645c646a5e0fc14cfd6))
+
 ## [0.3.1](https://github.com/EncyclopediaGalactica/Backend/compare/0.3.0...0.3.1) (2024-07-20)
 
 
