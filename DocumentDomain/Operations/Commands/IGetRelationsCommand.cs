@@ -1,10 +1,6 @@
-#region
-
-#endregion
-
 namespace DocumentDomain.Operations.Commands;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 
 public interface IGetRelationsCommand
 {

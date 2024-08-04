@@ -18,12 +18,14 @@ public class DocumentDomainDbContext : DbContext
     public DbSet<Relation> Relations => Set<Relation>();
     public DbSet<Application> Applications => Set<Application>();
 
+    public DbSet<DocumentType> DocumentTypes => Set<DocumentType>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentEntityConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentStructureNodeEntityConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(RelationEntityConfiguration).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationEntityConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentStructureNodeConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(RelationConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentTypeConfiguration).Assembly);
     }
 }

@@ -1,8 +1,8 @@
 namespace DocumentDomain.Operations.Commands;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 
 public interface IGetAllApplicationsCommand
 {
-    Task<List<ApplicationContract>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<List<ApplicationResult>> GetAllAsync(CancellationToken cancellationToken = default);
 }

@@ -1,6 +1,6 @@
 namespace DocumentDomain.Infrastructure.Mappers;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 
 /// <inheritdoc />

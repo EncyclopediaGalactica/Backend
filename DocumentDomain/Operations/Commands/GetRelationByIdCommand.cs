@@ -6,7 +6,7 @@ namespace DocumentDomain.Operations.Commands;
 
 using Common.Commands.Exceptions;
 using Common.Sagas;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 using Infrastructure.Database;
 using Infrastructure.Mappers;

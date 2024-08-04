@@ -1,10 +1,6 @@
-#region
-
-#endregion
-
 namespace DocumentDomain.Operations.Commands;
 
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 using Infrastructure.Database;
 using Infrastructure.Mappers;
@@ -17,7 +13,7 @@ public class AddApplicationCommand(
     ILogger<AddApplicationCommand> logger,
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IAddApplicationCommand
 {
-    public async Task<ApplicationContract> AddAsync(
+    public async Task<ApplicationResult> AddAsync(
         ApplicationInput applicationInput,
         CancellationToken cancellationToken = default)
     {
@@ -36,7 +32,7 @@ public class AddApplicationCommand(
         }
     }
 
-    private async Task<ApplicationContract> ExecuteCommandAsync(
+    private async Task<ApplicationResult> ExecuteCommandAsync(
         ApplicationInput applicationInput,
         CancellationToken cancellationToken)
     {
@@ -49,7 +45,7 @@ public class AddApplicationCommand(
         Application application,
         CancellationToken cancellationToken)
     {
-        await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
+        await using DocumentDomainDbContext ctx = new(dbContextOptions);
         await ctx.Applications.AddAsync(application, cancellationToken).ConfigureAwait(false);
         return application;
     }

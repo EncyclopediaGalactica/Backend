@@ -1,11 +1,7 @@
-#region
-
-#endregion
-
 namespace DocumentDomain.Operations.Commands;
 
 using Common.Commands.Exceptions;
-using Contracts;
+using EncyclopediaGalactica.BusinessLogic.Contracts;
 
 /// <summary>
 ///     Add Structure Node Tree Scenario.
