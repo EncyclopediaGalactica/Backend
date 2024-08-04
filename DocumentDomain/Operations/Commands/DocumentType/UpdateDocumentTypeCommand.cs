@@ -7,7 +7,19 @@ using Infrastructure.Database;
 using Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Scenarios.DocumentType;
 
+/// <summary>
+///     Update the designated <see cref="DocumentType" /> entity in the database.
+///     <remarks>
+///         This command provides a single method Api to execute safely the update operation in the database.
+///     </remarks>
+/// </summary>
+/// <param name="validator">The <see cref="UpdateDocumentTypeScenarioInputValidator" />.</param>
+/// <param name="mapper">Mapper</param>
+/// <param name="dbContextOptions">
+///     <see cref="DbContextOptions{TContext}" />
+/// </param>
 public class UpdateDocumentTypeCommand(
     IValidator<DocumentTypeInput> validator,
     IDocumentTypeMapper mapper,

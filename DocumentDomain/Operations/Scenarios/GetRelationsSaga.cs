@@ -3,11 +3,12 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 
 public class GetRelationsSaga(
     IGetRelationsCommand getRelationsCommand) : IHaveInputAndResultSaga<List<RelationResult>, GetRelationSagaContext>
 {
-    public async Task<List<RelationResult>> ExecuteAsync(GetRelationSagaContext context,
+    public async Task<Option<List<RelationResult>>> ExecuteAsync(GetRelationSagaContext context,
         CancellationToken cancellationToken = default)
     {
         try

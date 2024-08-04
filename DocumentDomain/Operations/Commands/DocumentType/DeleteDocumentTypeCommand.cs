@@ -9,6 +9,16 @@ using Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Scenarios.DocumentType;
 
+/// <summary>
+///     Delete the designated <see cref="DocumentType" /> from the database command.
+/// </summary>
+/// <remarks>
+///     The command provides a single method Api to safely delete the designated <see cref="DocumentType" /> entity from
+///     the database.
+/// </remarks>
+/// <param name="documentTypeMapper"><see cref="IDocumentTypeMapper" /> implementation.</param>
+/// <param name="validator"><see cref="DeleteDocumentTypeScenarioInputValidator" /> validator.</param>
+/// <param name="dbContextOptions"><see cref="DbContextOptions{TContext}" />.</param>
 public class DeleteDocumentTypeCommand(
     IDocumentTypeMapper documentTypeMapper,
     DeleteDocumentTypeScenarioInputValidator validator,

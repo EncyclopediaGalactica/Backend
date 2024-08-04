@@ -1,6 +1,8 @@
 namespace Common.Commands;
 
+using LanguageExt;
+
 public interface IHaveInputAndResultCommand<TInput, TOutput>
 {
-    Task<TOutput> ExecuteAsync(TInput? input, CancellationToken cancellationToken = default);
+    Task<Option<TOutput>> ExecuteAsync(TInput? input, CancellationToken cancellationToken = default);
 }

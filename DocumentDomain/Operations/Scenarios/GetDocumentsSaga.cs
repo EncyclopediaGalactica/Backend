@@ -3,6 +3,7 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 /// <summary>
@@ -25,7 +26,7 @@ public class GetDocumentsSaga(
     /// <returns>
     ///     Returns <see cref="Task{TResult}" /> representing result of the asynchronous operation.
     /// </returns>
-    public async Task<List<DocumentResult>> ExecuteAsync(
+    public async Task<Option<List<DocumentResult>>> ExecuteAsync(
         GetDocumentsSagaContext context,
         CancellationToken cancellationToken = default)
     {

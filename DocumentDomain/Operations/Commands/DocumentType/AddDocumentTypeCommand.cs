@@ -1,24 +1,38 @@
 namespace DocumentDomain.Operations.Commands;
 
+using Common.Commands;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 using FluentValidation;
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+using LanguageExt;
 using Microsoft.EntityFrameworkCore;
+using Scenarios.DocumentType;
 
+/// <summary>
+///     Add Document Type Command interface.
+///     <remarks>
+///         It provides a single method to execute the command adding a new <see cref="DocumentType" /> entity to the
+///         system.
+///     </remarks>
+/// </summary>
+/// <param name="validator"><see cref="AddDocumentTypeScenarioInputValidator" /> instance.</param>
+/// <param name="documentTypeMapper"><see cref="IDocumentTypeMapper" /> implementation.</param>
+/// <param name="dbContextOptions"><see cref="DbContextOptions{TContext}" />.</param>
 public class AddDocumentTypeCommand(
-    IValidator<DocumentTypeInput> validator,
+    AddDocumentTypeScenarioInputValidator validator,
     IDocumentTypeMapper documentTypeMapper,
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IAddDocumentTypeCommand
 {
-    public async Task<DocumentTypeResult> ExecuteCommandAsync(
+    /// <inheritdoc />
+    public async Task<Option<DocumentTypeResult>> ExecuteAsync(
         DocumentTypeInput? input,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            return await ExecuteAsync(input, cancellationToken).ConfigureAwait(false);
+            return await ExecuteOperationAsync(input, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception e)
         {
@@ -27,7 +41,10 @@ public class AddDocumentTypeCommand(
         }
     }
 
-    private async Task<DocumentTypeResult> ExecuteAsync(DocumentTypeInput? input, CancellationToken cancellationToken)
+    private async Task<Option<DocumentTypeResult>> ExecuteOperationAsync(
+        DocumentTypeInput? input,
+        CancellationToken
+            cancellationToken)
     {
         ValidateInput(input);
         Entity.DocumentType toBeRecorded = documentTypeMapper.FromDocumentTypeInput(input);
@@ -53,16 +70,6 @@ public class AddDocumentTypeCommand(
     }
 }
 
-/// <summary>
-///     Add Document Type Command interface.
-///     <remarks>
-///         It provides a single method to execute the command adding a new <see cref="DocumentType" /> entity to the
-///         system.
-///     </remarks>
-/// </summary>
-public interface IAddDocumentTypeCommand
+public interface IAddDocumentTypeCommand : IHaveInputAndResultCommand<DocumentTypeInput, DocumentTypeResult>
 {
-    Task<DocumentTypeResult> ExecuteCommandAsync(
-        DocumentTypeInput? input,
-        CancellationToken cancellationToken = default);
 }

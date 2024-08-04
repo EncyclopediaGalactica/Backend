@@ -19,7 +19,7 @@ public class AddDocumentScenarioShould : ScenarioBaseTest
         {
             Payload = input
         };
-        DocumentResult result = await AddDocumentSaga.ExecuteAsync(ctx);
+        DocumentResult result = await AddDocumentSaga.ExecuteAsync(ctx).IfNoneAsync(new DocumentResult());
 
         result.Should().NotBeNull();
         result.Id.Should().BeGreaterThanOrEqualTo(1);

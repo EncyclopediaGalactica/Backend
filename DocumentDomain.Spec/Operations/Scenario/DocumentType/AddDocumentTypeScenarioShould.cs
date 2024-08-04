@@ -4,6 +4,7 @@ using Data;
 using DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentAssertions;
+using LanguageExt;
 
 public class AddDocumentTypeScenarioShould : ScenarioBaseTest
 {
@@ -24,11 +25,13 @@ public class AddDocumentTypeScenarioShould : ScenarioBaseTest
     [ClassData(typeof(AddDocumentTypeScenarioInputValidData))]
     public async Task Create_WhenInputIsValid(DocumentTypeInput input)
     {
-        DocumentTypeResult result = await AddDocumentTypeScenario.ExecuteAsync(
+        Option<DocumentTypeResult> result = await AddDocumentTypeScenario.ExecuteAsync(
             new AddDocumentTypeScenarioContext { Payload = input });
 
-        result.Id.Should().BeGreaterThanOrEqualTo(1);
-        result.Name.Should().Be(input.Name);
-        result.Description.Should().Be(input.Description);
+        result.IsSome.Should().BeTrue();
+
+        result.IfNone(new DocumentTypeResult()).Id.Should().BeGreaterThanOrEqualTo(1);
+        result.IfNone(new DocumentTypeResult()).Name.Should().Be(input.Name);
+        result.IfNone(new DocumentTypeResult()).Description.Should().Be(input.Description);
     }
 }

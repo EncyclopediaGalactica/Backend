@@ -3,6 +3,7 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 public class NewRelationSaga(
@@ -10,7 +11,7 @@ public class NewRelationSaga(
     IGetRelationByIdCommand getRelationByIdCommand,
     ILogger<NewRelationSaga> logger) : IHaveInputAndResultSaga<RelationResult, NewRelationSagaContext>
 {
-    public async Task<RelationResult> ExecuteAsync(NewRelationSagaContext context,
+    public async Task<Option<RelationResult>> ExecuteAsync(NewRelationSagaContext context,
         CancellationToken cancellationToken = default)
     {
         try

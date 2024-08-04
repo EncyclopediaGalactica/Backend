@@ -3,6 +3,7 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 /// <summary>
@@ -26,7 +27,7 @@ public class UpdateDocumentSaga(
     /// <param name="context">The provided input.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken" />.</param>
     /// <returns>Result of the saga.</returns>
-    public async Task<DocumentResult> ExecuteAsync(UpdateDocumentSagaContext context,
+    public async Task<Option<DocumentResult>> ExecuteAsync(UpdateDocumentSagaContext context,
         CancellationToken cancellationToken = default)
     {
         try

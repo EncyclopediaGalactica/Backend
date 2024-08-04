@@ -3,12 +3,23 @@ namespace DocumentDomain.Operations.Scenarios.DocumentType;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 
+/// <summary>
+///     Adding a <see cref="DocumentType" /> entity to the system.
+/// </summary>
+/// <remarks>
+///     This scenario includes all the necessary steps and procedures to add safely a new <see cref="DocumentType" />
+///     entity to the system.
+/// </remarks>
+/// <param name="addDocumentTypeCommand">
+///     <see cref="IAddDocumentTypeCommand" /> implementation.
+/// </param>
 public class AddDocumentTypeScenario(
     IAddDocumentTypeCommand addDocumentTypeCommand
 ) : IHaveInputAndResultSaga<DocumentTypeResult, AddDocumentTypeScenarioContext>
 {
-    public async Task<DocumentTypeResult> ExecuteAsync(
+    public async Task<Option<DocumentTypeResult>> ExecuteAsync(
         AddDocumentTypeScenarioContext context,
         CancellationToken cancellationToken = default)
     {
@@ -23,9 +34,9 @@ public class AddDocumentTypeScenario(
         }
     }
 
-    private async Task<DocumentTypeResult> ExecuteOperationAsync(DocumentTypeInput? payload,
+    private async Task<Option<DocumentTypeResult>> ExecuteOperationAsync(DocumentTypeInput? payload,
         CancellationToken cancellationToken)
     {
-        return await addDocumentTypeCommand.ExecuteCommandAsync(payload, cancellationToken).ConfigureAwait(false);
+        return await addDocumentTypeCommand.ExecuteAsync(payload, cancellationToken).ConfigureAwait(false);
     }
 }

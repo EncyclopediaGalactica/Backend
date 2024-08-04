@@ -4,13 +4,14 @@ using Commands;
 using Common.Commands.Exceptions;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 public class GetRelationByIdSaga(
     IGetRelationByIdCommand getRelationByIdCommand,
     ILogger<GetRelationByIdSaga> logger) : IHaveInputAndResultSaga<RelationResult, GetRelationByIdSagaContext>
 {
-    public async Task<RelationResult> ExecuteAsync(GetRelationByIdSagaContext context,
+    public async Task<Option<RelationResult>> ExecuteAsync(GetRelationByIdSagaContext context,
         CancellationToken cancellationToken = default)
     {
         try

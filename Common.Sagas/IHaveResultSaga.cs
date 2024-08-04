@@ -1,5 +1,7 @@
 namespace Common.Sagas;
 
+using LanguageExt;
+
 /// <summary>
 ///     Saga is responsible for orchestration of commands in order to achieve a goal.
 /// </summary>
@@ -15,6 +17,5 @@ public interface IHaveResultSaga<TReturnType> : ISaga
     /// <returns>
     ///     <see cref="TReturnType" />
     /// </returns>
-    Task<TReturnType> ExecuteAsync(ISagaContext context,
-        CancellationToken cancellationToken = default);
+    Task<Option<TReturnType>> ExecuteAsync(ISagaContext context, CancellationToken cancellationToken = default);
 }

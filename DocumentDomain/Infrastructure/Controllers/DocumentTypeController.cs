@@ -1,6 +1,7 @@
 namespace DocumentDomain.Infrastructure.Controllers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 using Operations.Scenarios.DocumentType;
 
@@ -17,10 +18,15 @@ public class DocumentTypeController(
     public async Task<IActionResult> GetDocumentTypesAsync(CancellationToken cancellationToken = default)
     {
         GetDocumentTypesScenarioContext ctx = new GetDocumentTypesScenarioContext();
-        List<DocumentTypeResult> result = await getDocumentTypesScenario.ExecuteAsync(
+        Option<List<DocumentTypeResult>> result = await getDocumentTypesScenario.ExecuteAsync(
             ctx,
             cancellationToken).ConfigureAwait(false);
-        return new OkObjectResult(result);
+        if (result.IsSome)
+        {
+            return new OkObjectResult(result);
+        }
+
+        return new BadRequestResult();
     }
 
     [HttpPost]
@@ -34,8 +40,15 @@ public class DocumentTypeController(
         {
             Payload = input
         };
-        DocumentTypeResult result = await addDocumentTypeScenario.ExecuteAsync(ctx, cancellationToken);
-        return new OkObjectResult(result);
+        Option<DocumentTypeResult> result = await addDocumentTypeScenario.ExecuteAsync(ctx, cancellationToken)
+            .ConfigureAwait(false);
+
+        if (result.IsNone)
+        {
+            return new BadRequestResult();
+        }
+
+        return new OkObjectResult(result.IfNone(new DocumentTypeResult()));
     }
 
     [HttpPut]
@@ -50,9 +63,15 @@ public class DocumentTypeController(
         {
             Payload = input
         };
-        DocumentTypeResult result = await updateDocumentTypeScenario.ExecuteAsync(
+        Option<DocumentTypeResult> result = await updateDocumentTypeScenario.ExecuteAsync(
             ctx,
             cancellationToken).ConfigureAwait(false);
-        return new OkObjectResult(result);
+
+        if (result.IsNone)
+        {
+            return new NotFoundResult();
+        }
+
+        return new OkObjectResult(result.IfNone(new DocumentTypeResult()));
     }
 }

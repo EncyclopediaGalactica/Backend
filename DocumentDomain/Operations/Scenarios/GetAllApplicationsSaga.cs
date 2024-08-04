@@ -3,6 +3,7 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 public class GetAllApplicationsSaga(
@@ -10,7 +11,7 @@ public class GetAllApplicationsSaga(
     ILogger<GetAllApplicationsSaga> logger)
     : IHaveInputAndResultSaga<List<ApplicationResult>, GetAllApplicationsSagaContext>
 {
-    public async Task<List<ApplicationResult>> ExecuteAsync(
+    public async Task<Option<List<ApplicationResult>>> ExecuteAsync(
         GetAllApplicationsSagaContext context,
         CancellationToken cancellationToken = default)
     {

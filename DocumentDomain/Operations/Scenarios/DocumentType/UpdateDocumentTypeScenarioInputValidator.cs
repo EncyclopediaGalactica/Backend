@@ -3,6 +3,9 @@ namespace DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;
 
+/// <summary>
+///     The input validator for <see cref="UpdateDocumentTypeScenario" />.
+/// </summary>
 public class UpdateDocumentTypeScenarioInputValidator : AbstractValidator<DocumentTypeInput>
 {
     public UpdateDocumentTypeScenarioInputValidator()

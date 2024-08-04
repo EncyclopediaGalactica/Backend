@@ -5,13 +5,23 @@ using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 
+/// <summary>
+///     Get the designated <see cref="DocumentType" /> by Id command.
+/// </summary>
+/// <remarks>
+///     This command provides a single method Api to retrieve safely the desired <see cref="DocumentType" /> entity.
+/// </remarks>
+/// <param name="documentTypeMapper"><see cref="IDocumentTypeMapper" /> implementation.</param>
+/// <param name="dbContextOptions"><see cref="DbContextOptions{TContext}" />.</param>
 public class GetDocumentTypeByIdCommand(
     IDocumentTypeMapper documentTypeMapper,
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IGetDocumentTypeByIdCommand
 {
-    public async Task<DocumentTypeResult> ExecuteAsync(long input, CancellationToken cancellationToken = default)
+    public async Task<Option<DocumentTypeResult>> ExecuteAsync(long input,
+        CancellationToken cancellationToken = default)
     {
         try
         {
@@ -19,8 +29,7 @@ public class GetDocumentTypeByIdCommand(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            return Option<DocumentTypeResult>.None;
         }
     }
 
@@ -39,7 +48,7 @@ public class GetDocumentTypeByIdCommand(
 
     private void ValidateInput(long id)
     {
-        if (id > 0)
+        if (id <= 0)
         {
             string msg = $"{nameof(DocumentTypeInput)} Id value cannot be be smaller than 1.";
             throw new ValidationException(msg);

@@ -4,6 +4,7 @@ using Data;
 using DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentAssertions;
+using LanguageExt;
 
 public class DeleteDocumentTypeScenarioShould : ScenarioBaseTest
 {
@@ -24,14 +25,16 @@ public class DeleteDocumentTypeScenarioShould : ScenarioBaseTest
     {
         DocumentTypeInput tbd = new DocumentTypeInput { Name = "tbd name", Description = "tbd desc" };
         DocumentTypeResult res = await AddDocumentTypeScenario.ExecuteAsync(
-            new AddDocumentTypeScenarioContext { Payload = tbd });
+                new AddDocumentTypeScenarioContext { Payload = tbd })
+            .IfNoneAsync(new DocumentTypeResult());
 
         DocumentTypeInput delete = new DocumentTypeInput { Id = res.Id };
         await DeleteDocumentTypeScenario.ExecuteAsync(
             new DeleteDocumentTypeScenarioContext { Payload = delete });
 
-        List<DocumentTypeResult> result = await GetDocumentTypesScenario.ExecuteAsync(
+        Option<List<DocumentTypeResult>> result = await GetDocumentTypesScenario.ExecuteAsync(
             new GetDocumentTypesScenarioContext());
-        result.Where(p => p.Id == res.Id).ToList().Count.Should().Be(0);
+        result.IfSome(r => { r.Where(p => p.Id == res.Id).ToList().Count.Should().Be(0); });
+        result.IfNone(() => { true.Should().BeFalse(); });
     }
 }

@@ -26,11 +26,13 @@ public class UpdateDocumentTypeScenarioShould : ScenarioBaseTest
     {
         DocumentTypeInput init = new DocumentTypeInput { Name = "init name", Description = "init desc" };
         DocumentTypeResult initResult = await AddDocumentTypeScenario.ExecuteAsync(
-            new AddDocumentTypeScenarioContext { Payload = init });
+                new AddDocumentTypeScenarioContext { Payload = init })
+            .IfNoneAsync(new DocumentTypeResult());
 
         input.Id = initResult.Id;
         DocumentTypeResult result = await UpdateDocumentTypeScenario.ExecuteAsync(
-            new UpdateDocumentTypeScenarioContext { Payload = input });
+                new UpdateDocumentTypeScenarioContext { Payload = input })
+            .IfNoneAsync(new DocumentTypeResult());
 
         result.Id.Should().BeGreaterThanOrEqualTo(1);
         result.Name.Should().Be(input.Name);

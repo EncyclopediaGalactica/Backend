@@ -3,13 +3,14 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 public class GetDocumentByIdSaga(
     IGetDocumentByIdCommand getDocumentByIdCommand,
     ILogger<GetDocumentsSaga> logger) : IHaveInputAndResultSaga<DocumentResult, GetDocumentByIdContext>
 {
-    public async Task<DocumentResult> ExecuteAsync(GetDocumentByIdContext context,
+    public async Task<Option<DocumentResult>> ExecuteAsync(GetDocumentByIdContext context,
         CancellationToken cancellationToken = default)
     {
         try

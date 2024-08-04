@@ -3,6 +3,7 @@ namespace EncyclopediaGalactica.Tools;
 using BusinessLogic.Contracts;
 using Common.Sagas;
 using DocumentDomain.Operations.Scenarios;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 public class DocumentDataSeeder(
@@ -28,7 +29,7 @@ public class DocumentDataSeeder(
         }
     }
 
-    public async Task<DocumentResult> SeedDocument()
+    public async Task SeedDocument()
     {
         AddDocumentSagaContext ctx = new AddDocumentSagaContext
         {
@@ -38,10 +39,10 @@ public class DocumentDataSeeder(
                 Description = CreateDocumentDescription()
             }
         };
-        DocumentResult result = await addDocumentSaga.ExecuteAsync(ctx).ConfigureAwait(false);
+        Option<DocumentResult> resultOption = await addDocumentSaga.ExecuteAsync(ctx).ConfigureAwait(false);
 
-        logger.LogInformation("=== Document has been created: Id: {Id}", result.Id);
-        return result;
+        resultOption.IfNone(() => { logger.LogInformation("=== failed creation ==="); });
+        resultOption.IfSome(result => { logger.LogInformation("=== DocumentResult: id {}", result.Id); });
     }
 
     private string CreateDocumentName()

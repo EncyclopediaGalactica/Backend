@@ -30,8 +30,11 @@ public class ScenarioBaseTest : IDisposable
     private SqliteConnection _connection;
     private DbContextOptions<DocumentDomainDbContext> _dbContextOptions;
     private IDeleteDocumentTypeCommand _deleteDocumentTypeCommand;
+    private IDocumentTypeMapper _documentTypeMapper;
     private IGetDocumentByIdCommand _getDocumentByIdCommand;
+    private GetDocumentTypeByIdCommand _getDocumentTypeByIdCommand;
     private IUpdateDocumentTypeCommand _updateDocumentTypeCommand;
+    protected GetDocumentTypeByIdScenario GetDocumentTypeByIdScenario;
     protected GetDocumentTypesScenario GetDocumentTypesScenario;
 
     protected ScenarioBaseTest()
@@ -65,9 +68,20 @@ public class ScenarioBaseTest : IDisposable
         DeleteDocumentTypeScenario = new DeleteDocumentTypeScenario(_deleteDocumentTypeCommand!);
 
         InitalizeGetDocumentTypesScenario();
+        InitializeGetDocumentTypeByIdScenario();
     }
 
     public void Dispose() => _connection.Dispose();
+
+    private void InitializeGetDocumentTypeByIdScenario()
+    {
+        _documentTypeMapper = new DocumentTypeMapper();
+        _getDocumentTypeByIdCommand = new GetDocumentTypeByIdCommand(
+            _documentTypeMapper,
+            _dbContextOptions
+        );
+        GetDocumentTypeByIdScenario = new GetDocumentTypeByIdScenario(_getDocumentTypeByIdCommand);
+    }
 
     private void InitalizeGetDocumentTypesScenario()
     {

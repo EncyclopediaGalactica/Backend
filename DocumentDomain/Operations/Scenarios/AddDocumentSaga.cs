@@ -3,6 +3,7 @@ namespace DocumentDomain.Operations.Scenarios;
 using Commands;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 /// <inheritdoc />
@@ -20,7 +21,7 @@ public class AddDocumentSaga(
     /// <returns>
     ///     <see cref="TReturnType" />
     /// </returns>
-    public async Task<DocumentResult> ExecuteAsync(AddDocumentSagaContext context,
+    public async Task<Option<DocumentResult>> ExecuteAsync(AddDocumentSagaContext context,
         CancellationToken cancellationToken = default)
     {
         try

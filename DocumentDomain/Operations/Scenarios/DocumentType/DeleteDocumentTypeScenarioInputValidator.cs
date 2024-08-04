@@ -3,6 +3,9 @@ namespace DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;
 
+/// <summary>
+///     Input data validator of the <see cref="DeleteDocumentTypeScenario" />.
+/// </summary>
 public class DeleteDocumentTypeScenarioInputValidator : AbstractValidator<DocumentTypeInput>
 {
     public DeleteDocumentTypeScenarioInputValidator()
