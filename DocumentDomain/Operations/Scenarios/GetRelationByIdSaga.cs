@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 
 public class GetRelationByIdSaga(
     IGetRelationByIdCommand getRelationByIdCommand,
-    ILogger<GetRelationByIdSaga> logger) : IHaveInputAndResultSaga<RelationResult, GetRelationByIdSagaContext>
+    ILogger<GetRelationByIdSaga> logger) : IHaveInputAndResultSaga<RelationResult, GetRelationByIdScenarioContext>
 {
-    public async Task<Option<RelationResult>> ExecuteAsync(GetRelationByIdSagaContext context,
+    public async Task<Option<RelationResult>> ExecuteAsync(GetRelationByIdScenarioContext context,
         CancellationToken cancellationToken = default)
     {
         try

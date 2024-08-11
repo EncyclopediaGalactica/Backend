@@ -3,6 +3,7 @@ namespace DocumentDomain.Spec.Operations.Scenario;
 using DocumentDomain.Operations.Commands;
 using DocumentDomain.Operations.Commands.DocumentType;
 using DocumentDomain.Operations.Scenarios;
+using DocumentDomain.Operations.Scenarios.Application;
 using DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;
@@ -24,9 +25,11 @@ public class ScenarioBaseTest : IDisposable
     protected readonly AddDocumentTypeScenario AddDocumentTypeScenario;
     protected readonly DeleteDocumentTypeScenario DeleteDocumentTypeScenario;
     protected readonly UpdateDocumentTypeScenario UpdateDocumentTypeScenario;
+    private IAddApplicationCommand _addApplicationCommand;
     private IAddDocumentCommand _addDocumentCommand;
     private AddDocumentTypeCommand _addDocumentTypeCommand;
     private IAddStructureNodeTreeCommand _addStructureNodeTreeCommand;
+    private ApplicationMapper _applicationMapper;
     private SqliteConnection _connection;
     private DbContextOptions<DocumentDomainDbContext> _dbContextOptions;
     private IDeleteDocumentTypeCommand _deleteDocumentTypeCommand;
@@ -34,6 +37,7 @@ public class ScenarioBaseTest : IDisposable
     private IGetDocumentByIdCommand _getDocumentByIdCommand;
     private GetDocumentTypeByIdCommand _getDocumentTypeByIdCommand;
     private IUpdateDocumentTypeCommand _updateDocumentTypeCommand;
+    protected AddApplicationScenario AddApplicationScenario;
     protected GetDocumentTypeByIdScenario GetDocumentTypeByIdScenario;
     protected GetDocumentTypesScenario GetDocumentTypesScenario;
 
@@ -69,9 +73,22 @@ public class ScenarioBaseTest : IDisposable
 
         InitalizeGetDocumentTypesScenario();
         InitializeGetDocumentTypeByIdScenario();
+        InitializeAddApplicationScenario();
     }
 
     public void Dispose() => _connection.Dispose();
+
+    private void InitializeAddApplicationScenario()
+    {
+        _applicationMapper = new ApplicationMapper();
+        _addApplicationCommand = new AddApplicationCommand(
+            _applicationMapper,
+            new AddApplicationScenarioInputValidator(),
+            _dbContextOptions,
+            InitializeLogging<AddApplicationCommand>()
+        );
+        AddApplicationScenario = new AddApplicationScenario(_addApplicationCommand);
+    }
 
     private void InitializeGetDocumentTypeByIdScenario()
     {

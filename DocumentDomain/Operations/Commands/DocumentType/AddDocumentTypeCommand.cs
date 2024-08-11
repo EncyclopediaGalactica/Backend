@@ -27,12 +27,12 @@ public class AddDocumentTypeCommand(
 {
     /// <inheritdoc />
     public async Task<Option<DocumentTypeResult>> ExecuteAsync(
-        DocumentTypeInput? input,
+        DocumentTypeInput? ctx,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            return await ExecuteOperationAsync(input, cancellationToken).ConfigureAwait(false);
+            return await ExecuteOperationAsync(ctx, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception e)
         {

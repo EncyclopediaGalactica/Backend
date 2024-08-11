@@ -20,12 +20,12 @@ public class GetDocumentTypeByIdCommand(
     IDocumentTypeMapper documentTypeMapper,
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IGetDocumentTypeByIdCommand
 {
-    public async Task<Option<DocumentTypeResult>> ExecuteAsync(long input,
+    public async Task<Option<DocumentTypeResult>> ExecuteAsync(long ctx,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            return await ExecuteOperationAsync(input, cancellationToken).ConfigureAwait(false);
+            return await ExecuteOperationAsync(ctx, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception e)
         {
