@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands.DocumentType;
 
 using Common.Commands;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
@@ -20,12 +20,12 @@ public class GetDocumentTypeByIdCommand(
     IDocumentTypeMapper documentTypeMapper,
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IGetDocumentTypeByIdCommand
 {
-    public async Task<Option<DocumentTypeResult>> ExecuteAsync(long input,
+    public async Task<Option<DocumentTypeResult>> ExecuteAsync(long ctx,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            return await ExecuteOperationAsync(input, cancellationToken).ConfigureAwait(false);
+            return await ExecuteOperationAsync(ctx, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception e)
         {

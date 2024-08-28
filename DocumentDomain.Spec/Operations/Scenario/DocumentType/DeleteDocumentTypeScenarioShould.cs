@@ -15,7 +15,7 @@ public class DeleteDocumentTypeScenarioShould : ScenarioBaseTest
         Func<Task> f = async () =>
         {
             await DeleteDocumentTypeScenario.ExecuteAsync(
-                new DeleteDocumentTypeScenarioContext { Payload = input });
+                new DeleteDocumentTypeHavePayloadScenarioContext { Payload = input });
         };
         await f.Should().ThrowAsync<Exception>();
     }
@@ -30,7 +30,7 @@ public class DeleteDocumentTypeScenarioShould : ScenarioBaseTest
 
         DocumentTypeInput delete = new DocumentTypeInput { Id = res.Id };
         await DeleteDocumentTypeScenario.ExecuteAsync(
-            new DeleteDocumentTypeScenarioContext { Payload = delete });
+            new DeleteDocumentTypeHavePayloadScenarioContext { Payload = delete });
 
         Option<List<DocumentTypeResult>> result = await GetDocumentTypesScenario.ExecuteAsync(
             new GetDocumentTypesScenarioContext());

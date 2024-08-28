@@ -19,7 +19,8 @@ using Microsoft.Extensions.Logging;
 public class UpdateDocumentSaga(
     IUpdateDocumentCommand updateDocumentCommand,
     IGetDocumentByIdCommand getDocumentByIdCommand,
-    ILogger<UpdateDocumentSaga> logger) : IHaveInputAndResultSaga<DocumentResult, UpdateDocumentSagaContext>
+    ILogger<UpdateDocumentSaga> logger)
+    : IHaveInputAndResultSaga<DocumentResult, UpdateDocumentHavePayloadScenarioContext>
 {
     /// <summary>
     ///     Executes the saga.
@@ -27,7 +28,7 @@ public class UpdateDocumentSaga(
     /// <param name="context">The provided input.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken" />.</param>
     /// <returns>Result of the saga.</returns>
-    public async Task<Option<DocumentResult>> ExecuteAsync(UpdateDocumentSagaContext context,
+    public async Task<Option<DocumentResult>> ExecuteAsync(UpdateDocumentHavePayloadScenarioContext context,
         CancellationToken cancellationToken = default)
     {
         try

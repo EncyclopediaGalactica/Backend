@@ -7,7 +7,7 @@ public class ApplicationMapper : IApplicationMapper
 {
     public List<ApplicationResult> ToApplicationResults(List<Application> applications)
     {
-        var result = new List<ApplicationResult>();
+        List<ApplicationResult> result = new List<ApplicationResult>();
 
         if (applications.Any()) result.AddRange(applications.Select(ToApplicationResult));
 
@@ -23,4 +23,22 @@ public class ApplicationMapper : IApplicationMapper
             Description = application.Description
         };
     }
+
+    public Application FromApplicationInput(ApplicationInput applicationInput)
+    {
+        return new Application
+        {
+            Id = applicationInput.Id,
+            Name = applicationInput.Name,
+            Description = applicationInput.Description
+        };
+    }
+}
+
+public interface IApplicationMapper
+{
+    List<ApplicationResult> ToApplicationResults(List<Application> applications);
+
+    ApplicationResult ToApplicationResult(Application application);
+    Application FromApplicationInput(ApplicationInput applicationInput);
 }

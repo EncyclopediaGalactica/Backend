@@ -11,9 +11,10 @@ using Microsoft.Extensions.Logging;
 
 public class DeleteRelationSaga(
     IDeleteRelationCommand deleteRelationCommand,
-    ILogger<DeleteRelationSaga> logger) : IHaveInputSaga<DeleteRelationSagaContext>
+    ILogger<DeleteRelationSaga> logger) : IHaveInputSaga<DeleteRelationHavePayloadScenarioContext>
 {
-    public async Task ExecuteAsync(DeleteRelationSagaContext context, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(DeleteRelationHavePayloadScenarioContext context,
+        CancellationToken cancellationToken = default)
     {
         try
         {

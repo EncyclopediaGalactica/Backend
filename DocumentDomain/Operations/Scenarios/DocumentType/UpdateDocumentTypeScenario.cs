@@ -1,7 +1,6 @@
 namespace DocumentDomain.Operations.Scenarios.DocumentType;
 
-using Commands;
-using Common.Sagas;
+using Commands.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using LanguageExt;
 
@@ -12,9 +11,7 @@ using LanguageExt;
 ///     The scenario provides a single method Api to execute the update operation safely.
 /// </remarks>
 /// <param name="updateDocumentTypeCommand"><see cref="IUpdateDocumentTypeCommand" /> implementation.</param>
-public class UpdateDocumentTypeScenario(
-    IUpdateDocumentTypeCommand updateDocumentTypeCommand
-) : IHaveInputAndResultSaga<DocumentTypeResult, UpdateDocumentTypeScenarioContext>
+public class UpdateDocumentTypeScenario(IUpdateDocumentTypeCommand updateDocumentTypeCommand)
 {
     public async Task<Option<DocumentTypeResult>> ExecuteAsync(
         UpdateDocumentTypeScenarioContext context,

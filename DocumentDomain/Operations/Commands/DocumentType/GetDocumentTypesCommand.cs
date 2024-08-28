@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands.DocumentType;
 
 using Common.Commands;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 /// <param name="documentTypeMapper"><see cref="IDocumentTypeMapper" /> implementation.</param>
 /// <param name="dbContextOptions"><see cref="DbContextOptions{TContext}" />.</param>
 public class GetDocumentTypesCommand(
-    IDocumentTypeMapper documentTypeMapper,
+    DocumentTypeMapper documentTypeMapper,
     DbContextOptions<DocumentDomainDbContext> dbContextOptions) : IGetDocumentTypesCommand
 {
     public async Task<Option<List<DocumentTypeResult>>> ExecuteAsync(CancellationToken cancellationToken = default)

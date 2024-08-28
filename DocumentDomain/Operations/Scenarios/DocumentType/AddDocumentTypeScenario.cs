@@ -1,7 +1,6 @@
 namespace DocumentDomain.Operations.Scenarios.DocumentType;
 
-using Commands;
-using Common.Sagas;
+using Commands.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using LanguageExt;
 
@@ -15,9 +14,7 @@ using LanguageExt;
 /// <param name="addDocumentTypeCommand">
 ///     <see cref="IAddDocumentTypeCommand" /> implementation.
 /// </param>
-public class AddDocumentTypeScenario(
-    IAddDocumentTypeCommand addDocumentTypeCommand
-) : IHaveInputAndResultSaga<DocumentTypeResult, AddDocumentTypeScenarioContext>
+public class AddDocumentTypeScenario(IAddDocumentTypeCommand addDocumentTypeCommand)
 {
     public async Task<Option<DocumentTypeResult>> ExecuteAsync(
         AddDocumentTypeScenarioContext context,

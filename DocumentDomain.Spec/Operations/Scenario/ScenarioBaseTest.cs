@@ -1,14 +1,18 @@
 namespace DocumentDomain.Spec.Operations.Scenario;
 
 using DocumentDomain.Operations.Commands;
+using DocumentDomain.Operations.Commands.Application;
 using DocumentDomain.Operations.Commands.DocumentType;
 using DocumentDomain.Operations.Scenarios;
+using DocumentDomain.Operations.Scenarios.Application;
 using DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;
 using Infrastructure.Database;
 using Infrastructure.Mappers;
 using Infrastructure.Validators;
+using Infrastructure.Validators.Application;
+using LanguageExt;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,9 +28,11 @@ public class ScenarioBaseTest : IDisposable
     protected readonly AddDocumentTypeScenario AddDocumentTypeScenario;
     protected readonly DeleteDocumentTypeScenario DeleteDocumentTypeScenario;
     protected readonly UpdateDocumentTypeScenario UpdateDocumentTypeScenario;
+    private IAddApplicationCommand _addApplicationCommand;
     private IAddDocumentCommand _addDocumentCommand;
     private AddDocumentTypeCommand _addDocumentTypeCommand;
     private IAddStructureNodeTreeCommand _addStructureNodeTreeCommand;
+    private ApplicationMapper _applicationMapper;
     private SqliteConnection _connection;
     private DbContextOptions<DocumentDomainDbContext> _dbContextOptions;
     private IDeleteDocumentTypeCommand _deleteDocumentTypeCommand;
@@ -34,8 +40,12 @@ public class ScenarioBaseTest : IDisposable
     private IGetDocumentByIdCommand _getDocumentByIdCommand;
     private GetDocumentTypeByIdCommand _getDocumentTypeByIdCommand;
     private IUpdateDocumentTypeCommand _updateDocumentTypeCommand;
+    protected AddApplicationScenario AddApplicationScenario;
+    protected DeleteApplicationScenario DeleteApplicationScenario;
+    protected GetApplicationsScenario GetApplicationsScenario;
     protected GetDocumentTypeByIdScenario GetDocumentTypeByIdScenario;
     protected GetDocumentTypesScenario GetDocumentTypesScenario;
+    protected UpdateApplicationScenario UpdateApplicationScenario;
 
     protected ScenarioBaseTest()
     {
@@ -69,9 +79,50 @@ public class ScenarioBaseTest : IDisposable
 
         InitalizeGetDocumentTypesScenario();
         InitializeGetDocumentTypeByIdScenario();
+
+        InitializeAddApplicationScenario();
+        InitializeDeleteApplicationScenario();
+        InitializeUpgradeApplicationScenario();
+        InitializeGetApplicationsScenario();
     }
 
+
     public void Dispose() => _connection.Dispose();
+
+    private void InitializeGetApplicationsScenario()
+    {
+        GetApplicationsCommand getApplicationsCommand = new GetApplicationsCommand(_applicationMapper, _dbContextOptions);
+        GetApplicationsScenario = new GetApplicationsScenario(getApplicationsCommand);
+    }
+
+    private void InitializeUpgradeApplicationScenario()
+    {
+        UpdateApplicationScenarioInputValidator validator = new UpdateApplicationScenarioInputValidator();
+        UpdateApplicationCommand updateApplicationCommand = new UpdateApplicationCommand(
+            _applicationMapper,
+            validator,
+            _dbContextOptions);
+        UpdateApplicationScenario = new UpdateApplicationScenario(updateApplicationCommand);
+    }
+
+    private void InitializeDeleteApplicationScenario()
+    {
+        DeleteApplicationCommand deleteApplicationCommand = new DeleteApplicationCommand(
+            new DeleteApplicationScenarioInputValidator(), _dbContextOptions);
+        DeleteApplicationScenario = new DeleteApplicationScenario(deleteApplicationCommand);
+    }
+
+    private void InitializeAddApplicationScenario()
+    {
+        _applicationMapper = new ApplicationMapper();
+        _addApplicationCommand = new AddApplicationCommand(
+            _applicationMapper,
+            new AddApplicationScenarioInputValidator(),
+            _dbContextOptions,
+            InitializeLogging<AddApplicationCommand>()
+        );
+        AddApplicationScenario = new AddApplicationScenario(_addApplicationCommand);
+    }
 
     private void InitializeGetDocumentTypeByIdScenario()
     {
@@ -162,5 +213,43 @@ public class ScenarioBaseTest : IDisposable
 
         using DocumentDomainDbContext context = new DocumentDomainDbContext(_dbContextOptions);
         context.Database.EnsureCreated();
+    }
+
+    protected async Task SeedAndForgetApplications(int v)
+    {
+        for (int i = 0; i < v; i++)
+        {
+            await AddApplicationScenario.ExecuteAsync(new AddApplicationScenarioContext
+            {
+                CorrelationId = Guid.NewGuid(),
+                Payload = new ApplicationInput
+                {
+                    Id = 0,
+                    Name = $"seeded name {i}",
+                    Description = $"seeded description {i}"
+                }
+            });
+        }
+    }
+
+    protected async Task<Dictionary<long, ApplicationResult>> SeedApplications(int v)
+    {
+        Dictionary<long, ApplicationResult> result = new();
+        for (int i = 0; i < v; i++)
+        {
+            Option<ApplicationResult> r = await AddApplicationScenario.ExecuteAsync(new AddApplicationScenarioContext
+            {
+                CorrelationId = Guid.NewGuid(),
+                Payload = new ApplicationInput
+                {
+                    Id = 0,
+                    Name = $"seeded name {i}",
+                    Description = $"seeded description {i}"
+                }
+            });
+            r.IfSome(item => { result.Add(item.Id, item); });
+        }
+
+        return result;
     }
 }

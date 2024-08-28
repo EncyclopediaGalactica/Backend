@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging;
 public class DeleteDocumentSaga(
     IDeleteDocumentCommand deleteDocumentCommand,
     IDeleteStructureNodesCommand deleteStructureNodesCommand,
-    ILogger<DeleteDocumentSaga> logger) : IHaveInputSaga<DeleteDocumentSagaContext>
+    ILogger<DeleteDocumentSaga> logger) : IHaveInputSaga<DeleteDocumentHavePayloadScenarioContext>
 {
-    public async Task ExecuteAsync(DeleteDocumentSagaContext context,
+    public async Task ExecuteAsync(DeleteDocumentHavePayloadScenarioContext context,
         CancellationToken cancellationToken = default)
     {
         try

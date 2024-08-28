@@ -7,16 +7,16 @@
   &amp;lt;inspection_tool class="WrongPropertyKeyValueDelimiter" enabled="false" level="WEAK WARNING" enabled_by_default="false" /&amp;gt;
 &amp;lt;/profile&amp;gt;&lt;/IDEA_SETTINGS&gt;&lt;RIDER_SETTINGS&gt;&amp;lt;profile&amp;gt;
   &amp;lt;Language id="CSS"&amp;gt;
-    &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
     &amp;lt;Rearrange&amp;gt;true&amp;lt;/Rearrange&amp;gt;
+    &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
   &amp;lt;/Language&amp;gt;
   &amp;lt;Language id="EditorConfig"&amp;gt;
     &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
   &amp;lt;/Language&amp;gt;
   &amp;lt;Language id="HTML"&amp;gt;
     &amp;lt;OptimizeImports&amp;gt;true&amp;lt;/OptimizeImports&amp;gt;
-    &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
     &amp;lt;Rearrange&amp;gt;true&amp;lt;/Rearrange&amp;gt;
+    &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
   &amp;lt;/Language&amp;gt;
   &amp;lt;Language id="Handlebars"&amp;gt;
     &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
@@ -44,10 +44,7 @@
   &amp;lt;/Language&amp;gt;
   &amp;lt;Language id="XML"&amp;gt;
     &amp;lt;OptimizeImports&amp;gt;true&amp;lt;/OptimizeImports&amp;gt;
-    &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
     &amp;lt;Rearrange&amp;gt;true&amp;lt;/Rearrange&amp;gt;
-  &amp;lt;/Language&amp;gt;
-  &amp;lt;Language id="liquid"&amp;gt;
     &amp;lt;Reformat&amp;gt;true&amp;lt;/Reformat&amp;gt;
   &amp;lt;/Language&amp;gt;
   &amp;lt;Language id="yaml"&amp;gt;
@@ -61,6 +58,8 @@
 	<s:String x:Key="/Default/CodeStyle/CSharpVarKeywordUsage/ForBuiltInTypes/@EntryValue">UseExplicitType</s:String>
 	<s:String x:Key="/Default/CodeStyle/CSharpVarKeywordUsage/ForOtherTypes/@EntryValue">UseExplicitType</s:String>
 	<s:String x:Key="/Default/CodeStyle/CSharpVarKeywordUsage/ForSimpleTypes/@EntryValue">UseExplicitType</s:String>
+	<s:Boolean x:Key="/Default/Environment/ContinuousTesting/TriggerOnBuild/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/ContinuousTesting/TriggerOnSave/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/Hierarchy/NuGetOptions/ConfigRestoreAuto/@EntryValue">Enable</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/NuGetOptions/ConfigRestoreEnabled/@EntryValue">Enable</s:String>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
