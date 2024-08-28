@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands.DocumentType;
 
 using Common.Commands.Exceptions;
 using EncyclopediaGalactica.BusinessLogic.Contracts;

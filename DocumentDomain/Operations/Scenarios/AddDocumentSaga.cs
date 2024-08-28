@@ -11,7 +11,7 @@ public class AddDocumentSaga(
     IAddDocumentCommand addDocumentCommand,
     IAddStructureNodeTreeCommand addStructureNodeTreeCommand,
     IGetDocumentByIdCommand getDocumentByIdCommand,
-    ILogger<AddDocumentSaga> logger) : IHaveInputAndResultSaga<DocumentResult, AddDocumentScenarioContext>
+    ILogger<AddDocumentSaga> logger) : IHaveInputAndResultSaga<DocumentResult, AddDocumentHavePayloadScenarioContext>
 {
     /// <summary>
     ///     Executes the saga
@@ -21,7 +21,7 @@ public class AddDocumentSaga(
     /// <returns>
     ///     <see cref="TReturnType" />
     /// </returns>
-    public async Task<Option<DocumentResult>> ExecuteAsync(AddDocumentScenarioContext context,
+    public async Task<Option<DocumentResult>> ExecuteAsync(AddDocumentHavePayloadScenarioContext context,
         CancellationToken cancellationToken = default)
     {
         try

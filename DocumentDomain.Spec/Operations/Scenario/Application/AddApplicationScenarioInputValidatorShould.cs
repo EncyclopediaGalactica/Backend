@@ -4,7 +4,7 @@ using Data;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentAssertions;
 using FluentValidation;
-using Infrastructure.Validators;
+using Infrastructure.Validators.Application;
 
 public class AddApplicationScenarioInputValidatorShould
 {

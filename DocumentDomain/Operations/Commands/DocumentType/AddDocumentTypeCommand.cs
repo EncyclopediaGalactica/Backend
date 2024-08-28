@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands.DocumentType;
 
 using Common.Commands;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
@@ -47,13 +47,13 @@ public class AddDocumentTypeCommand(
             cancellationToken)
     {
         ValidateInput(input);
-        Entity.DocumentType toBeRecorded = documentTypeMapper.FromDocumentTypeInput(input);
-        Entity.DocumentType result =
+        DocumentType toBeRecorded = documentTypeMapper.FromDocumentTypeInput(input);
+        DocumentType result =
             await ExecuteDatabaseOperation(toBeRecorded, cancellationToken).ConfigureAwait(false);
         return documentTypeMapper.ToDocumentTypeResult(result);
     }
 
-    private async Task<Entity.DocumentType> ExecuteDatabaseOperation(Entity.DocumentType toBeRecorded,
+    private async Task<DocumentType> ExecuteDatabaseOperation(DocumentType toBeRecorded,
         CancellationToken cancellationToken)
     {
         await using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);

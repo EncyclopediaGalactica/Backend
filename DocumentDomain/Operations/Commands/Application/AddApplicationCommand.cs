@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands;
+namespace DocumentDomain.Operations.Commands.Application;
 
 using Common.Commands;
 using Common.Sagas;
@@ -7,7 +7,7 @@ using Entity;
 using FluentValidation;
 using Infrastructure.Database;
 using Infrastructure.Mappers;
-using Infrastructure.Validators;
+using Infrastructure.Validators.Application;
 using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -19,7 +19,7 @@ public class AddApplicationCommand(
     ILogger<AddApplicationCommand> logger) : IAddApplicationCommand
 {
     public async Task<Option<ApplicationResult>> ExecuteAsync(
-        IScenarioContextWithPayload<ApplicationInput> ctx,
+        IHavePayloadScenarioContext<ApplicationInput> ctx,
         CancellationToken cancellationToken = default)
     {
         try
@@ -69,6 +69,6 @@ public class AddApplicationCommand(
 
 /// Add Application Command Interface
 public interface IAddApplicationCommand :
-    IHaveInputAndResultCommand<IScenarioContextWithPayload<ApplicationInput>, ApplicationResult>
+    IHaveInputAndResultCommand<IHavePayloadScenarioContext<ApplicationInput>, ApplicationResult>
 {
 }

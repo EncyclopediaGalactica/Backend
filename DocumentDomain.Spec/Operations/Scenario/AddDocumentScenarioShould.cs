@@ -15,7 +15,7 @@ public class AddDocumentScenarioShould : ScenarioBaseTest
             Name = "name",
             Description = "description"
         };
-        AddDocumentScenarioContext ctx = new AddDocumentScenarioContext
+        AddDocumentHavePayloadScenarioContext ctx = new AddDocumentHavePayloadScenarioContext
         {
             Payload = input
         };
@@ -31,7 +31,7 @@ public class AddDocumentScenarioShould : ScenarioBaseTest
     [ClassData(typeof(AddDocumentSagaInputInvalidData))]
     public async Task ThrowWhenInputIsInvalid(DocumentInput documentInput)
     {
-        AddDocumentScenarioContext ctx = new AddDocumentScenarioContext
+        AddDocumentHavePayloadScenarioContext ctx = new AddDocumentHavePayloadScenarioContext
         {
             Payload = documentInput
         };

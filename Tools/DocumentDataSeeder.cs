@@ -7,7 +7,7 @@ using LanguageExt;
 using Microsoft.Extensions.Logging;
 
 public class DocumentDataSeeder(
-    IHaveInputAndResultSaga<DocumentResult, AddDocumentScenarioContext> addDocumentSaga,
+    IHaveInputAndResultSaga<DocumentResult, AddDocumentHavePayloadScenarioContext> addDocumentSaga,
     ILogger<DocumentDataSeeder> logger)
     : IDocumentDataSeeder
 {
@@ -31,7 +31,7 @@ public class DocumentDataSeeder(
 
     public async Task SeedDocument()
     {
-        AddDocumentScenarioContext ctx = new AddDocumentScenarioContext
+        AddDocumentHavePayloadScenarioContext ctx = new AddDocumentHavePayloadScenarioContext
         {
             Payload = new DocumentInput
             {

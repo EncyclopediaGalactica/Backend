@@ -1,49 +1,64 @@
-using Host;
+using DocumentDomain.Infrastructure.Database;
+using DocumentDomain.Infrastructure.GraphQL.Resolvers;
+using DocumentDomain.Infrastructure.GraphQL.Schema;
+using DocumentDomain.Infrastructure.GraphQL.Schema.DocumentType;
+using DocumentDomain.Infrastructure.GraphQL.Types;
+using DocumentDomain.Infrastructure.Mappers;
+using DocumentDomain.Operations.Commands.DocumentType;
+using DocumentDomain.Operations.Scenarios.DocumentType;
+using Host.Seeders;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+SqliteConnection connection = new SqliteConnection("Filename=:memory:");
+connection.Open();
+DbContextOptions<DocumentDomainDbContext> dbContextOptions = new DbContextOptionsBuilder<DocumentDomainDbContext>()
+    .UseSqlite(connection)
+    .EnableSensitiveDataLogging()
+    .EnableDetailedErrors()
+    .Options;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
-var app = builder.Build();
+builder.Services
+    .AddDbContext<DocumentDomainDbContext>(o =>
+    {
+        o.UseSqlite(connection);
+        using DocumentDomainDbContext ctx = new DocumentDomainDbContext(dbContextOptions);
+        ctx.Database.EnsureDeleted();
+        ctx.Database.EnsureCreated();
+        DocumentTypeSeeder.SeedN(10, ctx);
+    })
+    .AddScoped<GetDocumentTypesScenario>()
+    .AddScoped<GetDocumentTypesCommand>()
+    .AddScoped<DocumentTypeMapper>();
 
+// graphql
+builder.Services
+    .AddGraphQLServer()
+    // Query types
+    .AddQueryType<QueryType>()
+    .AddTypeExtension<DocumentTypeQueries>()
+    // mutation types
+    .AddMutationType<Mutation>()
+    .AddTypeExtension<DocumentTypeMutation>()
+    // Types
+    .AddType<DocumentTypeResultGqlType>()
+    .AddType<DocumentTypeQueries>()
+    // Resolvers
+    .AddResolver<DocumentTypeResolver>()
+    .RegisterService<GetDocumentTypesScenario>()
+    .RegisterService<GetDocumentTypesCommand>()
+    .RegisterService<DocumentTypeMapper>();
+
+WebApplication app = builder.Build();
+// register graphql things
+app.MapGraphQL();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
 
 app.Run();
-
-namespace Host
-{
-    record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-    {
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-}

@@ -3,8 +3,8 @@ namespace DocumentDomain.Operations.Scenarios;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 
-public class AddDocumentScenarioContext : IScenarioContextWithPayload<DocumentInput>
+public class NewRelationHavePayloadScenarioContext : IHavePayloadScenarioContext<RelationInput>
 {
-    public DocumentInput Payload { get; set; } = new DocumentInput();
+    public RelationInput Payload { get; set; }
     public Guid CorrelationId { get; set; }
 }

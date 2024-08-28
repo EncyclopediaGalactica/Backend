@@ -1,6 +1,6 @@
 namespace DocumentDomain.Operations.Scenarios.DocumentType;
 
-using Commands;
+using Commands.DocumentType;
 using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using LanguageExt;
@@ -14,7 +14,7 @@ using LanguageExt;
 /// </summary>
 /// <param name="getDocumentTypesCommand"><see cref="IGetDocumentTypesCommand" /> implelemtation.</param>
 public class GetDocumentTypesScenario(
-    IGetDocumentTypesCommand getDocumentTypesCommand) : IHaveResultSaga<List<DocumentTypeResult>>
+    GetDocumentTypesCommand getDocumentTypesCommand)
 {
     public async Task<Option<List<DocumentTypeResult>>> ExecuteAsync(
         ISagaContext context,
