@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.4.0...0.5.0) (2024-08-28)
+
+
+### Features
+
+* long list of changes [#6](https://github.com/EncyclopediaGalactica/Backend/issues/6) ([43cee3f](https://github.com/EncyclopediaGalactica/Backend/commit/43cee3fe48bca45f060761f8a4c6b1944be8ff79))
+
 # [0.4.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.3.1...0.4.0) (2024-08-04)
 
 
