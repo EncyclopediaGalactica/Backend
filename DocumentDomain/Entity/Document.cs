@@ -1,4 +1,4 @@
-namespace DocumentDomain.Entity;
+namespace EncyclopediaGalactica.DocumentDomain.Entity;
 
 /// <summary>
 ///     The Document entity

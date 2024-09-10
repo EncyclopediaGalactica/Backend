@@ -1,9 +1,9 @@
 namespace DocumentDomain.Spec.Operations.Scenario;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Validators;
 using FluentAssertions;
 using FluentValidation.Results;
-using Infrastructure.Validators;
 
 public class AddDocumentScenarioInputValidatorShould
 {

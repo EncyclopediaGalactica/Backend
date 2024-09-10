@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Scenarios.Application;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
 
 using Commands.Application;
 using EncyclopediaGalactica.BusinessLogic.Contracts;

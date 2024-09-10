@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.Controllers;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.Controllers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using LanguageExt;

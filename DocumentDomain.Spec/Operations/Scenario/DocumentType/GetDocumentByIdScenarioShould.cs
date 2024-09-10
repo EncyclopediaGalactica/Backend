@@ -1,7 +1,7 @@
 namespace DocumentDomain.Spec.Operations.Scenario.DocumentType;
 
-using DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.DocumentType;
 using FluentAssertions;
 
 public class GetDocumentByIdScenarioShould : ScenarioBaseTest

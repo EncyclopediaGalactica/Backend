@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Scenarios.DocumentType;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.DocumentType;
 
 using Commands.DocumentType;
 

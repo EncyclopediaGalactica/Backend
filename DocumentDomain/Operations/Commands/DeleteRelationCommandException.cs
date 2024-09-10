@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Commands;
 
 using System.Runtime.Serialization;
 

@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.Validators.Application;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.Validators.Application;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using FluentValidation;

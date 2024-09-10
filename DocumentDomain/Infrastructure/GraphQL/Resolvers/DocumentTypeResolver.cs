@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.GraphQL.Resolvers;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.GraphQL.Resolvers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using HotChocolate.Resolvers;

@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Scenarios.Application;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
 
 public class GetApplicationsScenarioContext
 {

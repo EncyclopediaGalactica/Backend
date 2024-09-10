@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Commands.Application;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Commands.Application;
 
 using Common.Commands;
 using Common.Sagas;

@@ -1,4 +1,4 @@
-namespace DocumentDomain.Operations.Scenarios;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 
 using Common.Sagas;
 

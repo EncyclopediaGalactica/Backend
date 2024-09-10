@@ -1,4 +1,4 @@
-namespace DocumentDomain.Entity;
+namespace EncyclopediaGalactica.DocumentDomain.Entity;
 
 public class DocumentType
 {

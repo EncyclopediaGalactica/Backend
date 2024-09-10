@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{623AECC5-1E96-42D7-A7B1-A499C5DAF1EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentDomain", "DocumentDomain\DocumentDomain.csproj", "{0103CDC3-D90F-4C78-9051-C396BAA698BF}"

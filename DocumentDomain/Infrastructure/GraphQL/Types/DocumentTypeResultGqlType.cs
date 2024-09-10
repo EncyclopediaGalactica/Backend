@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.GraphQL.Types;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.GraphQL.Types;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 

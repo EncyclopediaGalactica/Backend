@@ -1,7 +1,6 @@
-namespace DocumentDomain.Operations.Scenarios.Application;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
 
 using Commands.Application;
-using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using LanguageExt;
 

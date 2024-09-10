@@ -1,8 +1,8 @@
 namespace DocumentDomain.Spec.Operations.Scenario;
 
 using Common.Sagas;
-using DocumentDomain.Operations.Scenarios;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 using FluentAssertions;
 
 public class AddDocumentScenarioShould : ScenarioBaseTest
