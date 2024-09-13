@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.5.0...0.6.0) (2024-09-13)
+
+
+### Features
+
+* Relation related CRUD operations ([#7](https://github.com/EncyclopediaGalactica/Backend/issues/7)) ([1e54d72](https://github.com/EncyclopediaGalactica/Backend/commit/1e54d72014616c6a4f4dc51e7cfc433e820ca380))
+
 # [0.5.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.4.0...0.5.0) (2024-08-28)
 
 
