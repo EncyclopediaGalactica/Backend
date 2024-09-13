@@ -1,6 +1,7 @@
 namespace DocumentDomain.Spec.Operations.Scenario.Filetype;
 
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using EncyclopediaGalactica.DocumentDomain.Entity;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Filetype;
@@ -21,6 +22,7 @@ public class EditFiletypeScenarioInputValidatorShould
         result.Errors.Should().NotBeEmpty();
     }
 
+    [Fact]
     public void ShowsValidResult_WhenInputIsValid()
     {
         ValidationResult result = _validator.Validate(new FiletypeInput
@@ -35,6 +37,7 @@ public class EditFiletypeScenarioInputValidatorShould
     }
 }
 
+[ExcludeFromCodeCoverage]
 public class ShowsInvalidResult_WhenInputIsInvalidData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()

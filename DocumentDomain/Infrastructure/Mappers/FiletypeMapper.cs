@@ -26,4 +26,22 @@ public static class FiletypeMapper
             FileExtension = filetype.FileExtension
         };
     }
+
+    public static List<FiletypeResult> MapToFiletypeResultList(this List<Filetype> filetypes)
+    {
+        List<FiletypeResult> result = new();
+        if (!filetypes.Any())
+        {
+            return result;
+        }
+
+        filetypes.ForEach(item => result.Add(new FiletypeResult
+        {
+            Id = item.Id,
+            Name = item.Name,
+            Description = item.Description,
+            FileExtension = item.FileExtension
+        }));
+        return result;
+    }
 }
