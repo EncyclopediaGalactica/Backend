@@ -14,7 +14,7 @@ public class GetRelationsScenario(
     private Guid _correlationId;
 
     public async Task<Either<ErrorResult, List<RelationResult>>> ExecuteAsync(
-        GetRelationsScenariosContext context,
+        GetRelationsScenarioContext context,
         CancellationToken cancellationToken = default)
     {
         _correlationId = context.correlationId;
@@ -47,4 +47,4 @@ public class GetRelationsScenario(
     }
 }
 
-public record GetRelationsScenariosContext(Guid correlationId);
+public record GetRelationsScenarioContext(Guid correlationId);

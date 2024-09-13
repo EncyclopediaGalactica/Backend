@@ -50,6 +50,7 @@ public class ScenarioBaseTest : IDisposable
     protected AddRelationScenario AddRelationScenario;
     protected GetRelationsScenario GetRelationsScenario;
     protected GetRelationByIdScenario GetRelationByIdScenario;
+    protected DeleteRelationScenario DeleteRelationScenario;
     private RelationMapper _relationMapper;
 
     protected ScenarioBaseTest()
@@ -94,6 +95,13 @@ public class ScenarioBaseTest : IDisposable
         InitializeAddRelationScenario();
         InitializeGetRelationsScenario();
         InitializeGetRelationByIdScenario();
+        InitializeDeleteRelationScenario();
+    }
+
+    private void InitializeDeleteRelationScenario()
+    {
+        DeleteRelationScenario = new DeleteRelationScenario(
+            new DeleteRelationScenarioInputValidator(), _dbContextOptions);
     }
 
     private void InitializeGetRelationByIdScenario()
@@ -294,5 +302,24 @@ public class ScenarioBaseTest : IDisposable
                 RightEndId = i
             }));
         }
+    }
+
+    protected async Task<Dictionary<long, RelationResult>> SeedRelations(int v)
+    {
+        Dictionary<long, RelationResult> result = new();
+        if (v == 0)
+        {
+            return result;
+        }
+
+        for (int i = 0; i <= v; i++)
+        {
+            Either<ErrorResult, RelationResult> r = await AddRelationScenario.ExecuteAsync(new AddRelationScenarioContext(
+                Guid.NewGuid(),
+                new RelationInput { Id = 0, LeftEndId = i, RightEndId = i }));
+            r.IfRight(r => result.Add(r.Id, r));
+        }
+
+        return result;
     }
 }

@@ -16,7 +16,7 @@ public class GetRelationsScenarioShould : ScenarioBaseTest
         int volume = 10;
         await SeedAndForgetRelations(volume);
         Either<ErrorResult, List<RelationResult>> result = await GetRelationsScenario.ExecuteAsync(
-            new GetRelationsScenariosContext(Guid.NewGuid()));
+            new GetRelationsScenarioContext(Guid.NewGuid()));
 
         result.IsRight.Should().BeTrue();
         result.IsLeft.Should().BeFalse();
@@ -27,7 +27,7 @@ public class GetRelationsScenarioShould : ScenarioBaseTest
     public async Task ReturnEmptyList_WhenThereAreNoItemsInTheDatabase()
     {
         Either<ErrorResult, List<RelationResult>> result = await GetRelationsScenario.ExecuteAsync(
-            new GetRelationsScenariosContext(Guid.NewGuid()));
+            new GetRelationsScenarioContext(Guid.NewGuid()));
 
         result.IsRight.Should().BeTrue();
         result.IsLeft.Should().BeFalse();
