@@ -17,6 +17,7 @@ public class DocumentDomainDbContext : DbContext
     public DbSet<DocumentStructureNode> DocumentStructureNodes => Set<DocumentStructureNode>();
     public DbSet<Relation> Relations => Set<Relation>();
     public DbSet<Application> Applications => Set<Application>();
+    public DbSet<Filetype> Filetypes => Set<Filetype>();
 
     public DbSet<DocumentType> DocumentTypes => Set<DocumentType>();
 
@@ -27,5 +28,6 @@ public class DocumentDomainDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RelationConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentTypeConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(FiletypeConfiguration).Assembly);
     }
 }
