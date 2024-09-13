@@ -2,7 +2,7 @@
 
 #endregion
 
-namespace DocumentDomain.Operations.Commands;
+namespace EncyclopediaGalactica.DocumentDomain.Operations.Commands;
 
 using Common.Commands;
 using Common.Commands.Exceptions;

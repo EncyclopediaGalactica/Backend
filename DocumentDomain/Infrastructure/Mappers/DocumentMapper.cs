@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.Mappers;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.Mappers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;

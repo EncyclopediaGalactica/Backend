@@ -1,7 +1,7 @@
 namespace Host.Seeders;
 
-using DocumentDomain.Entity;
-using DocumentDomain.Infrastructure.Database;
+using EncyclopediaGalactica.DocumentDomain.Entity;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Database;
 
 public class DocumentTypeSeeder
 {

@@ -1,17 +1,18 @@
 namespace DocumentDomain.Spec.Operations.Scenario;
 
-using DocumentDomain.Operations.Commands;
-using DocumentDomain.Operations.Commands.Application;
-using DocumentDomain.Operations.Commands.DocumentType;
-using DocumentDomain.Operations.Scenarios;
-using DocumentDomain.Operations.Scenarios.Application;
-using DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Database;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Mappers;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Validators;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Validators.Application;
+using EncyclopediaGalactica.DocumentDomain.Operations.Commands;
+using EncyclopediaGalactica.DocumentDomain.Operations.Commands.Application;
+using EncyclopediaGalactica.DocumentDomain.Operations.Commands.DocumentType;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.DocumentType;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Relation;
 using FluentValidation;
-using Infrastructure.Database;
-using Infrastructure.Mappers;
-using Infrastructure.Validators;
-using Infrastructure.Validators.Application;
 using LanguageExt;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -46,10 +47,16 @@ public class ScenarioBaseTest : IDisposable
     protected GetDocumentTypeByIdScenario GetDocumentTypeByIdScenario;
     protected GetDocumentTypesScenario GetDocumentTypesScenario;
     protected UpdateApplicationScenario UpdateApplicationScenario;
+    protected AddRelationScenario AddRelationScenario;
+    protected GetRelationsScenario GetRelationsScenario;
+    protected GetRelationByIdScenario GetRelationByIdScenario;
+    protected DeleteRelationScenario DeleteRelationScenario;
+    private RelationMapper _relationMapper;
 
     protected ScenarioBaseTest()
     {
         InitializeDbContext();
+        InitializeMappers();
         _documentMapper = new DocumentMapper();
         _documentInputMapper = new DocumentInputMapper();
         _addDocumentSagaInputValidator = new AddDocumentScenarioInputValidator();
@@ -84,6 +91,37 @@ public class ScenarioBaseTest : IDisposable
         InitializeDeleteApplicationScenario();
         InitializeUpgradeApplicationScenario();
         InitializeGetApplicationsScenario();
+
+        InitializeAddRelationScenario();
+        InitializeGetRelationsScenario();
+        InitializeGetRelationByIdScenario();
+        InitializeDeleteRelationScenario();
+    }
+
+    private void InitializeDeleteRelationScenario()
+    {
+        DeleteRelationScenario = new DeleteRelationScenario(
+            new DeleteRelationScenarioInputValidator(), _dbContextOptions);
+    }
+
+    private void InitializeGetRelationByIdScenario()
+    {
+        GetRelationByIdScenario = new GetRelationByIdScenario(_relationMapper, _dbContextOptions);
+    }
+
+    private void InitializeGetRelationsScenario()
+    {
+        GetRelationsScenario = new GetRelationsScenario(_dbContextOptions, _relationMapper);
+    }
+
+    private void InitializeMappers()
+    {
+        _relationMapper = new RelationMapper();
+    }
+
+    private void InitializeAddRelationScenario()
+    {
+        AddRelationScenario = new AddRelationScenario(new AddRelationScenarioInputValidator(), _relationMapper, _dbContextOptions);
     }
 
 
@@ -248,6 +286,38 @@ public class ScenarioBaseTest : IDisposable
                 }
             });
             r.IfSome(item => { result.Add(item.Id, item); });
+        }
+
+        return result;
+    }
+
+    protected async Task SeedAndForgetRelations(int volume)
+    {
+        for (int i = 0; i <= volume; i++)
+        {
+            await AddRelationScenario.ExecuteAsync(new AddRelationScenarioContext(Guid.NewGuid(), new RelationInput
+            {
+                Id = 0,
+                LeftEndId = i,
+                RightEndId = i
+            }));
+        }
+    }
+
+    protected async Task<Dictionary<long, RelationResult>> SeedRelations(int v)
+    {
+        Dictionary<long, RelationResult> result = new();
+        if (v == 0)
+        {
+            return result;
+        }
+
+        for (int i = 0; i <= v; i++)
+        {
+            Either<ErrorResult, RelationResult> r = await AddRelationScenario.ExecuteAsync(new AddRelationScenarioContext(
+                Guid.NewGuid(),
+                new RelationInput { Id = 0, LeftEndId = i, RightEndId = i }));
+            r.IfRight(r => result.Add(r.Id, r));
         }
 
         return result;

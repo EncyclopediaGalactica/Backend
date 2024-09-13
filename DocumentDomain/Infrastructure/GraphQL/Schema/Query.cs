@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.GraphQL.Schema;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.GraphQL.Schema;
 
 public class Query
 {

@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.Database;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.Database;
 
 using Entity;
 using Microsoft.EntityFrameworkCore;

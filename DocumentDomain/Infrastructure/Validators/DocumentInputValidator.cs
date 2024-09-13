@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.Validators;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.Validators;
 
 using Common.Validators;
 using EncyclopediaGalactica.BusinessLogic.Contracts;

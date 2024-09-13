@@ -1,4 +1,4 @@
-namespace DocumentDomain.Infrastructure.Mappers;
+namespace EncyclopediaGalactica.DocumentDomain.Infrastructure.Mappers;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
@@ -20,6 +20,8 @@ public class RelationMapper : IRelationMapper
         return new RelationResult
         {
             Id = result.Id,
+            LeftDocumentId = result.LeftId,
+            RightDocumentId = result.RightId
             // LeftDocument = result.,
             // RightDocument = result.RightEndStructureNodeId
         };
@@ -28,11 +30,7 @@ public class RelationMapper : IRelationMapper
     public List<RelationResult> MapRelationsToRelationResults(List<Relation> r)
     {
         List<RelationResult> result = new List<RelationResult>();
-        if (result.Any())
-        {
-            r.ForEach(item => result.Add(MapRelationToRelationResult(item)));
-        }
-
+        r.ForEach(item => result.Add(MapRelationToRelationResult(item)));
         return result;
     }
 }

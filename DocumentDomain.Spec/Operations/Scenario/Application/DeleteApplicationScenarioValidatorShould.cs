@@ -1,9 +1,9 @@
 namespace DocumentDomain.Spec.Operations.Scenario.Application;
 
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using EncyclopediaGalactica.DocumentDomain.Infrastructure.Validators.Application;
 using FluentAssertions;
 using FluentValidation;
-using Infrastructure.Validators.Application;
 
 public class DeleteApplicationScenarioValidatorShould
 {
