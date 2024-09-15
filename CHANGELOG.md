@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.6.0...0.7.0) (2024-09-15)
+
+
+### Features
+
+* CRUD operations for Filetype ([#8](https://github.com/EncyclopediaGalactica/Backend/issues/8)) ([1a7d5ea](https://github.com/EncyclopediaGalactica/Backend/commit/1a7d5ea44e4839f463a2cfc377cf1cfc5868d0da))
+
 # [0.6.0](https://github.com/EncyclopediaGalactica/Backend/compare/0.5.0...0.6.0) (2024-09-13)
 
 
