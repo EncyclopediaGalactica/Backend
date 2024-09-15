@@ -3,9 +3,9 @@ namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Filetype;
 using BusinessLogic.Contracts;
 using FluentValidation;
 
-public class GetFiletypeByIdInputScenarioValidator : AbstractValidator<FiletypeInput>
+public class GetFiletypeByIdScenarioInputValidator : AbstractValidator<FiletypeInput>
 {
-    public GetFiletypeByIdInputScenarioValidator()
+    public GetFiletypeByIdScenarioInputValidator()
     {
         RuleFor(r => r.Id)
             .GreaterThanOrEqualTo(1)

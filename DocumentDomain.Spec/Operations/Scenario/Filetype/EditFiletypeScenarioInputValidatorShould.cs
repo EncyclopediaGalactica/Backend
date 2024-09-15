@@ -14,7 +14,7 @@ public class EditFiletypeScenarioInputValidatorShould
 
 
     [Theory]
-    [ClassData(typeof(ShowsInvalidResult_WhenInputIsInvalidData))]
+    [ClassData(typeof(EditFiletypeScenarioInputValidatorInvalidInputData))]
     public void ShowsInvalidResult_WhenInputIsInvalid(FiletypeInput filetypeInput)
     {
         ValidationResult result = _validator.Validate(filetypeInput);
@@ -38,7 +38,7 @@ public class EditFiletypeScenarioInputValidatorShould
 }
 
 [ExcludeFromCodeCoverage]
-public class ShowsInvalidResult_WhenInputIsInvalidData : IEnumerable<object[]>
+public class EditFiletypeScenarioInputValidatorInvalidInputData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {

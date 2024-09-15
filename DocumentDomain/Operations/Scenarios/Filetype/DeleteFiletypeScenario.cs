@@ -5,43 +5,37 @@ using BusinessLogic.Contracts;
 using Entity;
 using FluentValidation.Results;
 using Infrastructure.Database;
-using Infrastructure.Mappers;
 using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 
-public class GetFiletypeByIdScenario(
-    GetFiletypeByIdScenarioInputValidator validator,
-    DbContextOptions<DocumentDomainDbContext> dbContextOptions
-)
+public class DeleteFiletypeScenario(
+    DeleteFiletypeScenarioInputValidator validator,
+    DbContextOptions<DocumentDomainDbContext> dbContextOptions)
 {
     public async Task<Either<ErrorResult, FiletypeResult>> ExecuteAsync(
-        GetFiletypeByIdScenarioContext context,
+        DeleteFiletypeScenarioContext context,
         CancellationToken cancellationToken = default)
     {
         Either<ErrorResult, FiletypeResult> result =
             from validatedInput in ValidateInput(context.Payload, context.CorrelationId)
-            from foundEntity in FindInDatabase(validatedInput, context.CorrelationId)
-            from mappedResult in MapToFiletypeResult(foundEntity, context.CorrelationId)
-            select mappedResult;
+            from _ in DeleteFromDatabase(validatedInput, context.CorrelationId, cancellationToken)
+            select new FiletypeResult();
         return result;
     }
 
-    private Either<ErrorResult, FiletypeResult> MapToFiletypeResult(Filetype filetype, Guid correlationId)
-    {
-        return filetype.MapToFiletypeResult();
-    }
-
-    private Either<ErrorResult, Filetype> FindInDatabase(FiletypeInput input, Guid correlationId)
+    private Either<ErrorResult, FiletypeResult> DeleteFromDatabase(FiletypeInput input, Guid correlationId, CancellationToken cancellationToken)
     {
         using DocumentDomainDbContext ctx = new(dbContextOptions);
         try
         {
             Filetype target = ctx.Filetypes.First(w => w.Id == input.Id);
-            return Either<ErrorResult, Filetype>.Right(target);
+            ctx.Entry(target).State = EntityState.Deleted;
+            ctx.SaveChanges();
+            return Either<ErrorResult, FiletypeResult>.Right(new FiletypeResult());
         }
         catch (Exception e)
         {
-            return Either<ErrorResult, Filetype>.Left(new ErrorResult(correlationId, e.Message));
+            return Either<ErrorResult, FiletypeResult>.Left(new ErrorResult(correlationId, e.Message));
         }
     }
 
@@ -54,15 +48,15 @@ public class GetFiletypeByIdScenario(
         }
 
         StringBuilder builder = new();
-        validationResult.Errors.ForEach(err => builder.Append("Property name")
+        validationResult.Errors.ForEach(e => builder.Append("Property name:")
             .Append(' ')
-            .Append(err.PropertyName)
+            .Append(e.PropertyName)
             .Append(' ')
-            .Append("message:")
+            .Append("Error message:")
             .Append(' ')
-            .Append(err.ErrorMessage));
+            .Append(e.ErrorMessage));
         return Either<ErrorResult, FiletypeInput>.Left(new ErrorResult(correlationId, builder.ToString()));
     }
 }
 
-public record GetFiletypeByIdScenarioContext(Guid CorrelationId, FiletypeInput Payload);
+public record DeleteFiletypeScenarioContext(Guid CorrelationId, FiletypeInput Payload);
