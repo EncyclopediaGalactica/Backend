@@ -11,12 +11,14 @@ using EncyclopediaGalactica.DocumentDomain.Operations.Commands.DocumentType;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.DocumentType;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Filetype;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Relation;
 using FluentValidation;
 using LanguageExt;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Xunit.Abstractions;
 
 public class ScenarioBaseTest : IDisposable
 {
@@ -51,7 +53,13 @@ public class ScenarioBaseTest : IDisposable
     protected GetRelationsScenario GetRelationsScenario;
     protected GetRelationByIdScenario GetRelationByIdScenario;
     protected DeleteRelationScenario DeleteRelationScenario;
+    protected EditFiletypeScenario EditFiletypeScenario;
+    protected AddFiletypeScenario AddFiletypeScenario;
+    protected DeleteFiletypeScenario DeleteFiletypeScenario;
+    protected GetFiletypeByIdScenario GetFiletypeByIdScenario;
+    protected GetFiletypesScenario GetFiletypesScenario;
     private RelationMapper _relationMapper;
+
 
     protected ScenarioBaseTest()
     {
@@ -96,6 +104,44 @@ public class ScenarioBaseTest : IDisposable
         InitializeGetRelationsScenario();
         InitializeGetRelationByIdScenario();
         InitializeDeleteRelationScenario();
+
+        InitializeEditfiletypeScenario();
+        InitializeAddFiletypeScenario();
+        InitializeDeleteFiletypeScenario();
+        InitializeGetFiletypeByIdScenario();
+        InitialzeGetFiletypesScenario();
+    }
+
+    private void InitialzeGetFiletypesScenario()
+    {
+        GetFiletypesScenario = new GetFiletypesScenario(_dbContextOptions);
+    }
+
+    private void InitializeGetFiletypeByIdScenario()
+    {
+        GetFiletypeByIdScenario = new GetFiletypeByIdScenario(
+            new GetFiletypeByIdScenarioInputValidator(), _dbContextOptions);
+    }
+
+    private void InitializeDeleteFiletypeScenario()
+    {
+        DeleteFiletypeScenario = new DeleteFiletypeScenario(
+            new DeleteFiletypeScenarioInputValidator(), _dbContextOptions);
+    }
+
+    private void InitializeAddFiletypeScenario()
+    {
+        AddFiletypeScenario = new AddFiletypeScenario(
+            new AddFiletypeScenarioInputValidator(),
+            _dbContextOptions);
+    }
+
+
+    private void InitializeEditfiletypeScenario()
+    {
+        EditFiletypeScenario = new EditFiletypeScenario(
+            new EditFiletypeScenarioInputValidator(),
+            _dbContextOptions);
     }
 
     private void InitializeDeleteRelationScenario()
@@ -317,6 +363,43 @@ public class ScenarioBaseTest : IDisposable
             Either<ErrorResult, RelationResult> r = await AddRelationScenario.ExecuteAsync(new AddRelationScenarioContext(
                 Guid.NewGuid(),
                 new RelationInput { Id = 0, LeftEndId = i, RightEndId = i }));
+            r.IfRight(r => result.Add(r.Id, r));
+        }
+
+        return result;
+    }
+
+    protected async Task SeedAndForgetFiletypes(int v, ITestOutputHelper testOutputHelper)
+    {
+        for (int i = 0; i < v; i++)
+        {
+            Either<ErrorResult, FiletypeResult> r = await AddFiletypeScenario.ExecuteAsync(
+                new AddFiletypeScenarioContext(Guid.NewGuid(), new FiletypeInput
+                {
+                    Id = 0, Name = $"name{i}", Description = $"desc{i}",
+                    FileExtension = $"fileextension{i}"
+                }));
+            r.IfLeft(e => testOutputHelper.WriteLine(e.ErrorMessage));
+        }
+    }
+
+    protected async Task<Dictionary<long, FiletypeResult>> SeedFiletypes(int v)
+    {
+        Dictionary<long, FiletypeResult> result = new();
+        if (v == 0)
+        {
+            return result;
+        }
+
+        for (int i = 0; i <= v; i++)
+        {
+            Either<ErrorResult, FiletypeResult> r = await AddFiletypeScenario.ExecuteAsync(
+                new AddFiletypeScenarioContext(Guid.NewGuid(), new FiletypeInput
+                {
+                    Id = 0, Name = $"name{i}", Description = $"desc{i}",
+                    FileExtension = $"fileextension{i}"
+                }));
+            r.IfLeft(e => Console.WriteLine(e.ErrorMessage));
             r.IfRight(r => result.Add(r.Id, r));
         }
 
