@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="EncyclopediaGalactica.BusinessLogic.Contracts" Version="2.6.0"/>
+        <PackageReference Include="EncyclopediaGalactica.BusinessLogic.Contracts" Version="2.7.0"/>
     </ItemGroup>
 
 </Project>
