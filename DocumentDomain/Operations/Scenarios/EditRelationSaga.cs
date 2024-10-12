@@ -1,7 +1,7 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 
 using Commands;
-using Common.Sagas;
+using Common.Scenario;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using LanguageExt;
 using Microsoft.Extensions.Logging;

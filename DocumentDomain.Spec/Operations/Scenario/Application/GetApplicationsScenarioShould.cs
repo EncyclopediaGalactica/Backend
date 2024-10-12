@@ -17,7 +17,7 @@ public class GetApplicationsScenarioShould : ScenarioBaseTest
             CorrelationId = Guid.NewGuid()
         });
         result.IsSome.Should().BeTrue();
-        result.IfSome(result => { result.Count.Should().Be(expectedVolume); });
+        result.IfSome(result => { result.Count.Should().Be(3); });
     }
 
     [Fact]

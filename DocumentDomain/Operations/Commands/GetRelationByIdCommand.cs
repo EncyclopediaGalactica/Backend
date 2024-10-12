@@ -5,7 +5,7 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Commands;
 
 using Common.Commands.Exceptions;
-using Common.Sagas;
+using Common.Scenario;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 using Infrastructure.Database;

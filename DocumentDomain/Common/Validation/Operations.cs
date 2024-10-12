@@ -1,4 +1,4 @@
-namespace Common.Validators;
+namespace EncyclopediaGalactica.DocumentDomain.Common.Validation;
 
 public class Operations
 {

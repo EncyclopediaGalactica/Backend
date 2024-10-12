@@ -1,7 +1,7 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.RelationType;
 
-using System.Text;
 using BusinessLogic.Contracts;
+using Common.Validation;
 using Entity;
 using FluentValidation.Results;
 using Infrastructure.Database;
@@ -9,22 +9,33 @@ using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-public class AddRelationTypeScenario(AddRelationTypeScenarioInputValidator validator, DbContextOptions<DocumentDomainDbContext> dbContextOptions)
+public class AddRelationTypeScenario(
+    AddRelationTypeScenarioInputValidator validator,
+    DbContextOptions<DocumentDomainDbContext> dbContextOptions
+)
 {
     public async Task<Either<ErrorResult, RelationTypeResult>> ExecuteAsync(
         AddRelationTypeScenarioContext context,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         Either<ErrorResult, RelationTypeResult> result =
             from validatedInput in ValidateInput(context)
             from mappedInput in MapToRelationType(context)
-            from savedResult in SaveToDatabase(mappedInput, context.CorrelationId, cancellationToken)
+            from savedResult in SaveToDatabase(
+                mappedInput,
+                context.CorrelationId,
+                cancellationToken
+            )
             from mappedSavedResult in MapToRelationTypeResult(savedResult, context.CorrelationId)
             select mappedSavedResult;
         return result;
     }
 
-    private Either<ErrorResult, RelationTypeResult> MapToRelationTypeResult(RelationType savedResult, Guid correlationId)
+    private Either<ErrorResult, RelationTypeResult> MapToRelationTypeResult(
+        RelationType savedResult,
+        Guid correlationId
+    )
     {
         return Either<ErrorResult, RelationTypeResult>.Right(savedResult.MapToRelationTypeResult());
     }
@@ -32,7 +43,8 @@ public class AddRelationTypeScenario(AddRelationTypeScenarioInputValidator valid
     private Either<ErrorResult, RelationType> SaveToDatabase(
         RelationType relationType,
         Guid correlationId,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         using DocumentDomainDbContext ctx = new(dbContextOptions);
         try
@@ -43,16 +55,22 @@ public class AddRelationTypeScenario(AddRelationTypeScenarioInputValidator valid
         }
         catch (Exception e)
         {
-            return Either<ErrorResult, RelationType>.Left(new ErrorResult(correlationId, e.Message));
+            return Either<ErrorResult, RelationType>.Left(
+                new ErrorResult(correlationId, e.Message)
+            );
         }
     }
 
-    private Either<ErrorResult, RelationType> MapToRelationType(AddRelationTypeScenarioContext context)
+    private Either<ErrorResult, RelationType> MapToRelationType(
+        AddRelationTypeScenarioContext context
+    )
     {
         return Either<ErrorResult, RelationType>.Right(context.Payload.MapToRelationType());
     }
 
-    private Either<ErrorResult, RelationTypeInput> ValidateInput(AddRelationTypeScenarioContext context)
+    private Either<ErrorResult, RelationTypeInput> ValidateInput(
+        AddRelationTypeScenarioContext context
+    )
     {
         ValidationResult validationResult = validator.Validate(context.Payload);
         if (validationResult.IsValid)
@@ -60,18 +78,11 @@ public class AddRelationTypeScenario(AddRelationTypeScenarioInputValidator valid
             return Either<ErrorResult, RelationTypeInput>.Right(context.Payload);
         }
 
-        StringBuilder builder = new();
-        validationResult.Errors.ForEach(e => builder.Append("Error:")
-            .Append(' ')
-            .Append("Property name:")
-            .Append(' ')
-            .Append($"{e.PropertyName}")
-            .Append(' ')
-            .Append($"error message")
-            .Append(' ')
-            .Append($"{e.ErrorMessage}"));
-        return Either<ErrorResult, RelationTypeInput>.Left(new ErrorResult(context.CorrelationId, builder.ToString()));
+        return Either<ErrorResult, RelationTypeInput>.Left(
+            new ErrorResult(context.CorrelationId, validationResult.Errors.ToSummarize())
+        );
     }
 }
 
 public record AddRelationTypeScenarioContext(Guid CorrelationId, RelationTypeInput Payload);
+

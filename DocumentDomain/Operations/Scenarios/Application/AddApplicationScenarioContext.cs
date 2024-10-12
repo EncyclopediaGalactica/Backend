@@ -1,6 +1,6 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
 
-using Common.Sagas;
+using Common.Scenario;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 
 public class AddApplicationScenarioContext : IHavePayloadScenarioContext<ApplicationInput>

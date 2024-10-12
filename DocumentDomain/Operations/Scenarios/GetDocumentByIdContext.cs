@@ -1,6 +1,6 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 
-using Common.Sagas;
+using Common.Scenario;
 
 public class GetDocumentByIdContext : IHavePayloadScenarioContext<long>
 {

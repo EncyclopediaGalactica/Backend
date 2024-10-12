@@ -2,7 +2,7 @@
 
 #endregion
 
-namespace Common.Commands.Exceptions;
+namespace EncyclopediaGalactica.DocumentDomain.Common.Commands.Exceptions;
 
 using System.Runtime.Serialization;
 

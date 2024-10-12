@@ -1,6 +1,6 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.DocumentType;
 
-using Common.Sagas;
+using Common.Scenario;
 
 public class GetDocumentTypesScenarioContext : ISagaContext
 {

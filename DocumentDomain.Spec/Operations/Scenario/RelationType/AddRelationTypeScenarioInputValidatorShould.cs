@@ -4,13 +4,12 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.RelationType;
-using Filetype;
 using FluentAssertions;
 using FluentValidation.Results;
 
 public class AddRelationTypeScenarioInputValidatorShould
 {
-    private AddRelationTypeScenarioInputValidator validator = new();
+    private readonly AddRelationTypeScenarioInputValidator validator = new();
 
     [Theory]
     [ClassData(typeof(AddRelationTypeScenarioInputValidationInvalidInputData))]
@@ -25,7 +24,7 @@ public class AddRelationTypeScenarioInputValidatorShould
     public void ShowValidState_WhenInputIsValid()
     {
         ValidationResult validationResult = validator.Validate(
-            new RelationTypeInput { Id = 0, Name = "asd", Description = "asd" });
+            new RelationTypeInput { Id = 0, Name = "asd", Description = "asd", });
         validationResult.IsValid.Should().BeTrue();
         validationResult.Errors.Should().BeEmpty();
     }
@@ -36,25 +35,20 @@ public class AddRelationTypeScenarioInputValidationInvalidInputData : IEnumerabl
 {
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return new object[] { new RelationTypeInput { Id = 1, Name = "asd", Description = "asd" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = null, Description = "asd" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = string.Empty, Description = "asd" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "   ", Description = "asd" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "as", Description = "asd" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = " as ", Description = "asd" } };
+        yield return new object[] { new RelationTypeInput { Id = 1, Name = "asd", Description = "asd", }, };
 
-        yield return new object[] { new RelationTypeInput { Id = 1, Name = "asd", Description = null } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = string.Empty } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "   " } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "as" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "  as  " } };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = null, Description = "asd", }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = string.Empty, Description = "asd", }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = "   ", Description = "asd", }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = "as", Description = "asd", }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = " as ", Description = "asd", }, };
 
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "asd" } };
-        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "asd" } };
+        yield return new object[] { new RelationTypeInput { Id = 1, Name = "asd", Description = null, }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = string.Empty, }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "   ", }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "as", }, };
+        yield return new object[] { new RelationTypeInput { Id = 0, Name = "asd", Description = "  as  ", }, };
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

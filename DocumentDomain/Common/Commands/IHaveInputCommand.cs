@@ -1,4 +1,4 @@
-namespace Common.Commands;
+namespace EncyclopediaGalactica.DocumentDomain.Common.Commands;
 
 public interface IHaveInputCommand<TInput>
 {

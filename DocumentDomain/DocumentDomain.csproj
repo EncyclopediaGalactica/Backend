@@ -1,13 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <AssemblyName>EncyclopediaGalactica.DocumentDomain</AssemblyName>
-        <RootNamespace>EncyclopediaGalactica.DocumentDomain</RootNamespace>
-    </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="EncyclopediaGalactica.BusinessLogic.Contracts" Version="2.7.0"/>
         <PackageReference Include="FluentValidation" Version="11.10.0"/>
@@ -22,10 +14,12 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Common.Commands\Common.Commands.csproj"/>
-        <ProjectReference Include="..\Common.Scenario\Common.Scenario.csproj"/>
-        <ProjectReference Include="..\Common.Validators\Common.Validators.csproj"/>
-    </ItemGroup>
+    <PropertyGroup>
+        <AssemblyName>EncyclopediaGalactica.DocumentDomain</AssemblyName>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>EncyclopediaGalactica.DocumentDomain</RootNamespace>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
 
 </Project>

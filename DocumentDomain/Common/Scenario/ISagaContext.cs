@@ -1,4 +1,4 @@
-namespace Common.Sagas;
+namespace EncyclopediaGalactica.DocumentDomain.Common.Scenario;
 
 public interface ISagaContext
 {
