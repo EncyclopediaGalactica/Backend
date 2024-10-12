@@ -13,11 +13,15 @@ public class EditRelationScenarioInputValidator : AbstractValidator<RelationInpu
 
         RuleFor(r => r.LeftEndId)
             .GreaterThanOrEqualTo(1)
-            .WithMessage($"The left end of a {nameof(RelationInput)} entity must be greater or equal to 0.");
-
+            .WithMessage(
+                $"The left end of a {nameof(RelationInput)} entity must be greater or equal to 0."
+            );
 
         RuleFor(r => r.RightEndId)
             .GreaterThanOrEqualTo(1)
-            .WithMessage($"The right end of a {nameof(RelationInput)} entity must be greater or equal to 0.");
+            .WithMessage(
+                $"The right end of a {nameof(RelationInput)} entity must be greater or equal to 0."
+            );
     }
 }
+

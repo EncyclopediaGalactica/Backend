@@ -1,7 +1,7 @@
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Commands;
 
-using Common.Commands;
 using Common.Commands.Exceptions;
+using Common.Commands;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
 using Entity;
 using FluentValidation;

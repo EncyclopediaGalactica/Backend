@@ -18,7 +18,8 @@ public class EditRelationScenario(
 
     public async Task<Either<ErrorResult, RelationResult>> ExecuteAsync(
         EditRelationScenarioContext context,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         _correlationId = context.CorrelationId;
         Either<ErrorResult, RelationResult> result =
@@ -64,11 +65,14 @@ public class EditRelationScenario(
         if (result.IsValid)
         {
             StringBuilder builder = new();
-            result.Errors.ForEach(item => builder.Append("Property name: ")
-                .Append(item.PropertyName)
-                .Append(' ')
-                .Append("error message: ")
-                .Append(item.ErrorMessage));
+            result.Errors.ForEach(item =>
+                builder
+                    .Append("Property name: ")
+                    .Append(item.PropertyName)
+                    .Append(' ')
+                    .Append("error message: ")
+                    .Append(item.ErrorMessage)
+            );
             return new ErrorResult(_correlationId, builder.ToString());
         }
 
@@ -77,3 +81,4 @@ public class EditRelationScenario(
 }
 
 public record EditRelationScenarioContext(Guid CorrelationId, RelationInput Payload);
+

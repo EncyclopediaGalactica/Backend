@@ -8,87 +8,87 @@ using LanguageExt;
 
 public class UpdateApplicationScenarioShould : ScenarioBaseTest
 {
-    [Theory]
-    [ClassData(typeof(UpdateApplicationScenarioInvalidInputData))]
-    public async Task Return_NoneWhenInputIsInvalid(ApplicationInput input)
-    {
-        Option<ApplicationResult> result = await UpdateApplicationScenario.ExecuteAsync(
-            new UpdateApplicationScenarioContext
-            {
-                Payload = input,
-                CorrelationId = Guid.NewGuid()
-            });
-        result.IsNone.Should().BeTrue();
-    }
+  [Theory]
+  [ClassData(typeof(UpdateApplicationScenarioInvalidInputData))]
+  public async Task Return_NoneWhenInputIsInvalid(ApplicationInput input)
+  {
+    Option<ApplicationResult> result = await UpdateApplicationScenario.ExecuteAsync(
+        new UpdateApplicationScenarioContext
+        {
+          Payload = input,
+          CorrelationId = Guid.NewGuid()
+        });
+    result.IsNone.Should().BeTrue();
+  }
 
-    [Fact]
-    public async Task Return_SomeWhenInputIsValid()
+  [Fact]
+  public async Task Return_SomeWhenInputIsValid()
+  {
+    ApplicationInput input = new ApplicationInput
     {
-        ApplicationInput input = new ApplicationInput
+      Id = 0,
+      Name = "initial name",
+      Description = "initial desc"
+    };
+    Option<ApplicationResult> initialResult = await AddApplicationScenario.ExecuteAsync(
+        new AddApplicationScenarioContext
         {
-            Id = 0,
-            Name = "initial name",
-            Description = "initial desc"
-        };
-        Option<ApplicationResult> initialResult = await AddApplicationScenario.ExecuteAsync(
-            new AddApplicationScenarioContext
-            {
-                Payload = input,
-                CorrelationId = Guid.NewGuid()
-            });
-        initialResult.IsSome.Should().BeTrue();
-        ApplicationInput updateItem = new();
-        initialResult.IfSome(e =>
-        {
-            updateItem.Id = e.Id;
-            updateItem.Name = $"updated {e.Name}";
-            updateItem.Description = $"updated {e.Description}";
+          Payload = input,
+          CorrelationId = Guid.NewGuid()
         });
-        Option<ApplicationResult> updateResult = await UpdateApplicationScenario.ExecuteAsync(
-            new UpdateApplicationScenarioContext
-            {
-                CorrelationId = Guid.NewGuid(),
-                Payload = updateItem
-            });
-        updateResult.IsSome.Should().BeTrue();
-        updateResult.IfSome(result =>
+    initialResult.IsSome.Should().BeTrue();
+    ApplicationInput updateItem = new();
+    initialResult.IfSome(e =>
+    {
+      updateItem.Id = e.Id;
+      updateItem.Name = $"updated {e.Name}";
+      updateItem.Description = $"updated {e.Description}";
+    });
+    Option<ApplicationResult> updateResult = await UpdateApplicationScenario.ExecuteAsync(
+        new UpdateApplicationScenarioContext
         {
-            result.Id.Should().Be(updateItem.Id);
-            result.Name.Should().Be(updateItem.Name);
-            result.Description.Should().Be(updateItem.Description);
+          CorrelationId = Guid.NewGuid(),
+          Payload = updateItem
         });
-    }
+    updateResult.IsSome.Should().BeTrue();
+    updateResult.IfSome(result =>
+    {
+      result.Id.Should().Be(updateItem.Id);
+      result.Name.Should().Be(updateItem.Name);
+      result.Description.Should().Be(updateItem.Description);
+    });
+  }
 
-    [Fact]
-    public async Task Return_NoneWhenThereIsNoSuchObjec()
+  [Fact]
+  public async Task Return_NoneWhenThereIsNoSuchObjec()
+  {
+    ApplicationInput input = new ApplicationInput
     {
-        ApplicationInput input = new ApplicationInput
+      Id = 0,
+      Name = "initial name",
+      Description = "initial desc"
+    };
+    Option<ApplicationResult> initialResult = await AddApplicationScenario.ExecuteAsync(
+        new AddApplicationScenarioContext
         {
-            Id = 0,
-            Name = "initial name",
-            Description = "initial desc"
-        };
-        Option<ApplicationResult> initialResult = await AddApplicationScenario.ExecuteAsync(
-            new AddApplicationScenarioContext
-            {
-                Payload = input,
-                CorrelationId = Guid.NewGuid()
-            });
-        initialResult.IsSome.Should().BeTrue();
-        ApplicationInput updateItem = new();
-        initialResult.IfSome(e =>
-        {
-            updateItem.Id = e.Id + 10;
-            updateItem.Name = $"updated {e.Name}";
-            updateItem.Description = $"updated {e.Description}";
+          Payload = input,
+          CorrelationId = Guid.NewGuid()
         });
-        Option<ApplicationResult> updateResult = await UpdateApplicationScenario.ExecuteAsync(
-            new UpdateApplicationScenarioContext
-            {
-                CorrelationId = Guid.NewGuid(),
-                Payload = updateItem
-            });
-        updateResult.IsSome.Should().BeFalse();
-        updateResult.IsNone.Should().BeTrue();
-    }
+    initialResult.IsSome.Should().BeTrue();
+    ApplicationInput updateItem = new();
+    initialResult.IfSome(e =>
+    {
+      updateItem.Id = e.Id + 10;
+      updateItem.Name = $"updated {e.Name}";
+      updateItem.Description = $"updated {e.Description}";
+    });
+    Option<ApplicationResult> updateResult = await UpdateApplicationScenario.ExecuteAsync(
+        new UpdateApplicationScenarioContext
+        {
+          CorrelationId = Guid.NewGuid(),
+          Payload = updateItem
+        });
+    updateResult.IsSome.Should().BeFalse();
+    updateResult.IsNone.Should().BeTrue();
+  }
 }

@@ -1,7 +1,7 @@
 namespace DocumentDomain.Spec.Operations.Scenario;
 
-using Common.Sagas;
 using EncyclopediaGalactica.BusinessLogic.Contracts;
+using EncyclopediaGalactica.DocumentDomain.Common.Scenario;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 using FluentAssertions;
 

@@ -6,7 +6,7 @@ namespace EncyclopediaGalactica.DocumentDomain.Operations.Scenarios;
 
 using Commands;
 using Common.Commands.Exceptions;
-using Common.Sagas;
+using Common.Scenario;
 using Microsoft.Extensions.Logging;
 
 public class DeleteRelationSaga(

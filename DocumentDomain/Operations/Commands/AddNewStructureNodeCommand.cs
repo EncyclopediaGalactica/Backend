@@ -1,13 +1,9 @@
-#region
-
-#endregion
-
 namespace EncyclopediaGalactica.DocumentDomain.Operations.Commands;
 
+using BusinessLogic.Contracts;
 using Common.Commands;
 using Common.Commands.Exceptions;
-using Common.Validators;
-using EncyclopediaGalactica.BusinessLogic.Contracts;
+using Common.Validation;
 using Entity;
 using FluentValidation;
 using Infrastructure.Database;

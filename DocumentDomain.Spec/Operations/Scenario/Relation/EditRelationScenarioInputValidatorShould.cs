@@ -34,9 +34,33 @@ public class EditRelationScenarioInputValidatorInvalidData : IEnumerable<object[
 {
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return new object[] { new RelationInput { Id = 0, LeftEndId = 1, RightEndId = 1 } };
-        yield return new object[] { new RelationInput { Id = 1, LeftEndId = 0, RightEndId = 1 } };
-        yield return new object[] { new RelationInput { Id = 1, LeftEndId = 1, RightEndId = 0 } };
+        yield return new object[]
+        {
+            new RelationInput
+            {
+                Id = 0,
+                LeftEndId = 1,
+                RightEndId = 1,
+            },
+        };
+        yield return new object[]
+        {
+            new RelationInput
+            {
+                Id = 1,
+                LeftEndId = 0,
+                RightEndId = 1,
+            },
+        };
+        yield return new object[]
+        {
+            new RelationInput
+            {
+                Id = 1,
+                LeftEndId = 1,
+                RightEndId = 0,
+            },
+        };
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -50,7 +74,15 @@ public class EditRelationScenarioInputValidatorValidData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return new object[] { new RelationInput { Id = 1, LeftEndId = 1, RightEndId = 1 } };
+        yield return new object[]
+        {
+            new RelationInput
+            {
+                Id = 1,
+                LeftEndId = 1,
+                RightEndId = 1,
+            },
+        };
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -58,3 +90,4 @@ public class EditRelationScenarioInputValidatorValidData : IEnumerable<object[]>
         return GetEnumerator();
     }
 }
+

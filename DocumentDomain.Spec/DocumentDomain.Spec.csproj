@@ -31,7 +31,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="EncyclopediaGalactica.BusinessLogic.Contracts" Version="2.6.0"/>
+        <PackageReference Include="EncyclopediaGalactica.BusinessLogic.Contracts" Version="2.7.0"/>
     </ItemGroup>
 
     <ItemGroup>

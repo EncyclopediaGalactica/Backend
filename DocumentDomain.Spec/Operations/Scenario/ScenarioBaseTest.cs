@@ -13,6 +13,7 @@ using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Application;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.DocumentType;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Filetype;
 using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.Relation;
+using EncyclopediaGalactica.DocumentDomain.Operations.Scenarios.RelationType;
 using FluentValidation;
 using LanguageExt;
 using Microsoft.Data.Sqlite;
@@ -42,23 +43,28 @@ public class ScenarioBaseTest : IDisposable
     private IDocumentTypeMapper _documentTypeMapper;
     private IGetDocumentByIdCommand _getDocumentByIdCommand;
     private GetDocumentTypeByIdCommand _getDocumentTypeByIdCommand;
+    private RelationMapper _relationMapper;
     private IUpdateDocumentTypeCommand _updateDocumentTypeCommand;
     protected AddApplicationScenario AddApplicationScenario;
+    protected AddFiletypeScenario AddFiletypeScenario;
+    protected AddRelationScenario AddRelationScenario;
+    protected AddRelationTypeScenario AddRelationTypeScenario;
     protected DeleteApplicationScenario DeleteApplicationScenario;
+    protected DeleteFiletypeScenario DeleteFiletypeScenario;
+    protected DeleteRelationScenario DeleteRelationScenario;
+    protected DeleteRelationTypeScenario DeleteRelationTypeScenario;
+    protected EditFiletypeScenario EditFiletypeScenario;
+    protected EditRelationTypeScenario EditRelationTypeScenario;
     protected GetApplicationsScenario GetApplicationsScenario;
     protected GetDocumentTypeByIdScenario GetDocumentTypeByIdScenario;
     protected GetDocumentTypesScenario GetDocumentTypesScenario;
-    protected UpdateApplicationScenario UpdateApplicationScenario;
-    protected AddRelationScenario AddRelationScenario;
-    protected GetRelationsScenario GetRelationsScenario;
-    protected GetRelationByIdScenario GetRelationByIdScenario;
-    protected DeleteRelationScenario DeleteRelationScenario;
-    protected EditFiletypeScenario EditFiletypeScenario;
-    protected AddFiletypeScenario AddFiletypeScenario;
-    protected DeleteFiletypeScenario DeleteFiletypeScenario;
     protected GetFiletypeByIdScenario GetFiletypeByIdScenario;
     protected GetFiletypesScenario GetFiletypesScenario;
-    private RelationMapper _relationMapper;
+    protected GetRelationByIdScenario GetRelationByIdScenario;
+    protected GetRelationsScenario GetRelationsScenario;
+    protected GetRelationTypeByIdScenario GetRelationTypeByIdScenario;
+    protected GetRelationTypesScenario GetRelationTypesScenario;
+    protected UpdateApplicationScenario UpdateApplicationScenario;
 
 
     protected ScenarioBaseTest()
@@ -110,6 +116,48 @@ public class ScenarioBaseTest : IDisposable
         InitializeDeleteFiletypeScenario();
         InitializeGetFiletypeByIdScenario();
         InitialzeGetFiletypesScenario();
+
+        InitializeAddRelationTypeScenario();
+        InitializeEditRelationTypeScenario();
+        InitializeDeleteRelationTypeScenario();
+        InitializeGetRelationTypeByIdScenario();
+        InitializeGetRelationTypesScenario();
+    }
+
+
+    public void Dispose() => _connection.Dispose();
+
+    private void InitializeGetRelationTypesScenario()
+    {
+        GetRelationTypesScenario = new GetRelationTypesScenario(_dbContextOptions);
+    }
+
+    private void InitializeGetRelationTypeByIdScenario()
+    {
+        GetRelationTypeByIdScenario = new GetRelationTypeByIdScenario(
+            new GetRelationTypeByIdScenarioInputValidator(),
+            _dbContextOptions);
+    }
+
+    private void InitializeDeleteRelationTypeScenario()
+    {
+        DeleteRelationTypeScenario = new DeleteRelationTypeScenario(
+            new DeleteRelationTypeScenarioInputValidator(),
+            _dbContextOptions);
+    }
+
+    private void InitializeEditRelationTypeScenario()
+    {
+        EditRelationTypeScenario = new EditRelationTypeScenario(
+            new EditRelationTypeScenarioInputValidator(),
+            _dbContextOptions);
+    }
+
+    private void InitializeAddRelationTypeScenario()
+    {
+        AddRelationTypeScenario = new AddRelationTypeScenario(
+            new AddRelationTypeScenarioInputValidator(),
+            _dbContextOptions);
     }
 
     private void InitialzeGetFiletypesScenario()
@@ -170,19 +218,16 @@ public class ScenarioBaseTest : IDisposable
         AddRelationScenario = new AddRelationScenario(new AddRelationScenarioInputValidator(), _relationMapper, _dbContextOptions);
     }
 
-
-    public void Dispose() => _connection.Dispose();
-
     private void InitializeGetApplicationsScenario()
     {
-        GetApplicationsCommand getApplicationsCommand = new GetApplicationsCommand(_applicationMapper, _dbContextOptions);
+        GetApplicationsCommand getApplicationsCommand = new(_applicationMapper, _dbContextOptions);
         GetApplicationsScenario = new GetApplicationsScenario(getApplicationsCommand);
     }
 
     private void InitializeUpgradeApplicationScenario()
     {
-        UpdateApplicationScenarioInputValidator validator = new UpdateApplicationScenarioInputValidator();
-        UpdateApplicationCommand updateApplicationCommand = new UpdateApplicationCommand(
+        UpdateApplicationScenarioInputValidator validator = new();
+        UpdateApplicationCommand updateApplicationCommand = new(
             _applicationMapper,
             validator,
             _dbContextOptions);
@@ -191,7 +236,7 @@ public class ScenarioBaseTest : IDisposable
 
     private void InitializeDeleteApplicationScenario()
     {
-        DeleteApplicationCommand deleteApplicationCommand = new DeleteApplicationCommand(
+        DeleteApplicationCommand deleteApplicationCommand = new(
             new DeleteApplicationScenarioInputValidator(), _dbContextOptions);
         DeleteApplicationScenario = new DeleteApplicationScenario(deleteApplicationCommand);
     }
@@ -220,7 +265,7 @@ public class ScenarioBaseTest : IDisposable
 
     private void InitalizeGetDocumentTypesScenario()
     {
-        GetDocumentTypesCommand getDocumentTypesCommand = new GetDocumentTypesCommand(
+        GetDocumentTypesCommand getDocumentTypesCommand = new(
             new DocumentTypeMapper(),
             _dbContextOptions);
         GetDocumentTypesScenario = new GetDocumentTypesScenario(getDocumentTypesCommand);
@@ -295,7 +340,7 @@ public class ScenarioBaseTest : IDisposable
             .EnableSensitiveDataLogging()
             .Options;
 
-        using DocumentDomainDbContext context = new DocumentDomainDbContext(_dbContextOptions);
+        using DocumentDomainDbContext context = new(_dbContextOptions);
         context.Database.EnsureCreated();
     }
 
@@ -310,8 +355,8 @@ public class ScenarioBaseTest : IDisposable
                 {
                     Id = 0,
                     Name = $"seeded name {i}",
-                    Description = $"seeded description {i}"
-                }
+                    Description = $"seeded description {i}",
+                },
             });
         }
     }
@@ -328,8 +373,8 @@ public class ScenarioBaseTest : IDisposable
                 {
                     Id = 0,
                     Name = $"seeded name {i}",
-                    Description = $"seeded description {i}"
-                }
+                    Description = $"seeded description {i}",
+                },
             });
             r.IfSome(item => { result.Add(item.Id, item); });
         }
@@ -345,7 +390,7 @@ public class ScenarioBaseTest : IDisposable
             {
                 Id = 0,
                 LeftEndId = i,
-                RightEndId = i
+                RightEndId = i,
             }));
         }
     }
@@ -362,7 +407,7 @@ public class ScenarioBaseTest : IDisposable
         {
             Either<ErrorResult, RelationResult> r = await AddRelationScenario.ExecuteAsync(new AddRelationScenarioContext(
                 Guid.NewGuid(),
-                new RelationInput { Id = 0, LeftEndId = i, RightEndId = i }));
+                new RelationInput { Id = 0, LeftEndId = i, RightEndId = i, }));
             r.IfRight(r => result.Add(r.Id, r));
         }
 
@@ -377,7 +422,7 @@ public class ScenarioBaseTest : IDisposable
                 new AddFiletypeScenarioContext(Guid.NewGuid(), new FiletypeInput
                 {
                     Id = 0, Name = $"name{i}", Description = $"desc{i}",
-                    FileExtension = $"fileextension{i}"
+                    FileExtension = $"fileextension{i}",
                 }));
             r.IfLeft(e => testOutputHelper.WriteLine(e.ErrorMessage));
         }
@@ -397,12 +442,27 @@ public class ScenarioBaseTest : IDisposable
                 new AddFiletypeScenarioContext(Guid.NewGuid(), new FiletypeInput
                 {
                     Id = 0, Name = $"name{i}", Description = $"desc{i}",
-                    FileExtension = $"fileextension{i}"
+                    FileExtension = $"fileextension{i}",
                 }));
             r.IfLeft(e => Console.WriteLine(e.ErrorMessage));
             r.IfRight(r => result.Add(r.Id, r));
         }
 
         return result;
+    }
+
+    protected async Task SeedAndForgetRelationTypes(int v, ITestOutputHelper testOutputHelper)
+    {
+        for (int i = 0; i < v; i++)
+        {
+            Either<ErrorResult, RelationTypeResult> result = await AddRelationTypeScenario.ExecuteAsync(
+                new AddRelationTypeScenarioContext(Guid.NewGuid(),
+                    new RelationTypeInput
+                    {
+                        Name = $"generated{i}",
+                        Description = $"generated{i}",
+                    }));
+            result.IfLeft(e => testOutputHelper.WriteLine(e.ErrorMessage));
+        }
     }
 }

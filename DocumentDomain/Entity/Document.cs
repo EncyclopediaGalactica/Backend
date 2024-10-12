@@ -36,3 +36,4 @@ public class Document
     /// </summary>
     public Uri? Uri { get; set; }
 }
+

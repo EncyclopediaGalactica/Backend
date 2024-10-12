@@ -8,8 +8,11 @@ public class AddApplicationScenario(IAddApplicationCommand addApplicationCommand
 {
     public async Task<Option<ApplicationResult>> ExecuteAsync(
         AddApplicationScenarioContext context,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return await addApplicationCommand.ExecuteAsync(context, cancellationToken).ConfigureAwait(false);
+        return await addApplicationCommand
+            .ExecuteAsync(context, cancellationToken)
+            .ConfigureAwait(false);
     }
 }
