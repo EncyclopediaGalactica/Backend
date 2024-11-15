@@ -1,7 +1,7 @@
 namespace Host.Seeders;
 
-using EncyclopediaGalactica.DocumentDomain.Entity;
-using EncyclopediaGalactica.DocumentDomain.Infrastructure.Database;
+using EncyclopediaGalactica.Core.Entity;
+using EncyclopediaGalactica.Core.Infrastructure.Database;
 
 public class DocumentTypeSeeder
 {
@@ -12,8 +12,8 @@ public class DocumentTypeSeeder
             ctx.DocumentTypes.Add(
                 new DocumentType
                 {
-                    Name = $"seeded name {i}",
-                    Description = $"seeded description {i}"
+                    Name        = $"seeded name {i}",
+                    Description = $"seeded description {i}",
                 });
             ctx.SaveChanges();
         }
