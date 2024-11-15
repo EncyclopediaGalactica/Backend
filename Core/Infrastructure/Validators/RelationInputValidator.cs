@@ -1,7 +1,9 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Validators;
 
 using BusinessLogic.Contracts;
+
 using Common.Validation;
+
 using FluentValidation;
 
 public class RelationInputValidator : AbstractValidator<RelationInput>

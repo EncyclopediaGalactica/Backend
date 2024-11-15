@@ -2,8 +2,11 @@ namespace EncyclopediaGalactica.Core.Operations.Commands;
 
 using Common.Commands;
 using Common.Commands.Exceptions;
+
 using Entity;
+
 using Infrastructure.Database;
+
 using Microsoft.EntityFrameworkCore;
 
 public class DeleteDocumentCommand(

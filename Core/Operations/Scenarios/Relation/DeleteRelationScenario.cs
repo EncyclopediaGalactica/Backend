@@ -1,11 +1,17 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.Relation;
 
 using System.Text;
+
 using BusinessLogic.Contracts;
+
 using FluentValidation.Results;
+
 using Infrastructure.Database;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
+
 using Relation = Entity.Relation;
 
 public class DeleteRelationScenario(

@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Mappers;
 
 using Application;
+
 using ApplicationInput = BusinessLogic.Contracts.ApplicationInput;
 using ApplicationResult = BusinessLogic.Contracts.ApplicationResult;
 

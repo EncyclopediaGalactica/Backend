@@ -1,11 +1,17 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.Filetype;
 
 using System.Text;
+
 using BusinessLogic.Contracts;
+
 using Entity;
+
 using FluentValidation.Results;
+
 using Infrastructure.Database;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
 
 public class DeleteFiletypeScenario(

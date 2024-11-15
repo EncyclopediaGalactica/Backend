@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.DocumentType;
 
 using BusinessLogic.Contracts;
+
 using Common.Scenario;
 
 public class UpdateDocumentTypeScenarioContext : IHavePayloadScenarioContext<DocumentTypeInput>

@@ -1,10 +1,15 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.RelationType;
 
 using System.Collections.Immutable;
+
 using BusinessLogic.Contracts;
+
 using Entity;
+
 using Infrastructure.Database;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
 
 public class GetRelationTypesScenario(

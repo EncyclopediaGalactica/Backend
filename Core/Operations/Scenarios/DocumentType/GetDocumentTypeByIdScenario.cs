@@ -1,7 +1,9 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.DocumentType;
 
 using BusinessLogic.Contracts;
+
 using Commands.DocumentType;
+
 using LanguageExt;
 
 /// <summary>

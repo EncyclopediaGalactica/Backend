@@ -1,10 +1,14 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios;
 
 using BusinessLogic.Contracts;
+
 using Commands;
+
 using Common.Commands.Exceptions;
 using Common.Scenario;
+
 using LanguageExt;
+
 using Microsoft.Extensions.Logging;
 
 public class GetRelationByIdSaga(

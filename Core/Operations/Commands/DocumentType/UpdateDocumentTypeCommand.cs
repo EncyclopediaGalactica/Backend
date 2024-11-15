@@ -1,12 +1,17 @@
 namespace EncyclopediaGalactica.Core.Operations.Commands.DocumentType;
 
 using BusinessLogic.Contracts;
+
 using Common.Commands.Exceptions;
+
 using FluentValidation;
+
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+
 using Scenarios.DocumentType;
 
 /// <summary>

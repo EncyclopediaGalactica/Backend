@@ -1,10 +1,14 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.Filetype;
 
 using BusinessLogic.Contracts;
+
 using Entity;
+
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
 
 public class GetFiletypesScenario(DbContextOptions<DocumentDomainDbContext> dbContextOptions)

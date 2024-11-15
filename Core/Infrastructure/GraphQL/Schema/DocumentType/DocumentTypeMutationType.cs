@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.GraphQL.Schema.DocumentType;
 
 using Resolvers;
+
 using Types;
 
 public class DocumentTypeMutation : ObjectTypeExtension<Mutation>

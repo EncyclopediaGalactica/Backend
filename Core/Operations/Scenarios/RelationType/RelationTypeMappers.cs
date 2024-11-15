@@ -1,7 +1,9 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.RelationType;
 
 using System.Collections.Immutable;
+
 using BusinessLogic.Contracts;
+
 using Entity;
 
 public static class RelationTypeMappers

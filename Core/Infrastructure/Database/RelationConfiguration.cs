@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Database;
 
 using Entity;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

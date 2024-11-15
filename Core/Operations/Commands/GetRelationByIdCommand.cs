@@ -1,11 +1,15 @@
 namespace EncyclopediaGalactica.Core.Operations.Commands;
 
 using BusinessLogic.Contracts;
+
 using Common.Commands.Exceptions;
 using Common.Scenario;
+
 using Entity;
+
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

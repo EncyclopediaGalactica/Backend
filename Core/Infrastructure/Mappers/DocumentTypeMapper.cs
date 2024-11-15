@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Mappers;
 
 using BusinessLogic.Contracts;
+
 using Entity;
 
 public class DocumentTypeMapper : IDocumentTypeMapper

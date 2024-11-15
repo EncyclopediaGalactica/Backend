@@ -1,13 +1,19 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.Relation;
 
 using System.Text;
+
 using BusinessLogic.Contracts;
+
 using FluentValidation.Results;
+
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+
 using Relation = Entity.Relation;
 
 public class AddRelationScenario(

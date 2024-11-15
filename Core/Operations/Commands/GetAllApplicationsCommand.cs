@@ -1,9 +1,12 @@
 namespace EncyclopediaGalactica.Core.Operations.Commands;
 
 using Application;
+
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+
 using Microsoft.EntityFrameworkCore;
+
 using ApplicationResult = BusinessLogic.Contracts.ApplicationResult;
 
 public class GetAllApplicationsCommand(

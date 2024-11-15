@@ -1,8 +1,10 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios;
 
 using Commands;
+
 using Common.Commands.Exceptions;
 using Common.Scenario;
+
 using Microsoft.Extensions.Logging;
 
 public class DeleteRelationSaga(

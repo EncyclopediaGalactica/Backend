@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Validators;
 
 using BusinessLogic.Contracts;
+
 using FluentValidation;
 
 public class AddDocumentScenarioInputValidator : AbstractValidator<DocumentInput>

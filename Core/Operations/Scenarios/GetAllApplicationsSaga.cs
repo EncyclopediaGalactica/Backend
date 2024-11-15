@@ -1,9 +1,13 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios;
 
 using BusinessLogic.Contracts;
+
 using Commands;
+
 using Common.Scenario;
+
 using LanguageExt;
+
 using Microsoft.Extensions.Logging;
 
 public class GetAllApplicationsSaga(

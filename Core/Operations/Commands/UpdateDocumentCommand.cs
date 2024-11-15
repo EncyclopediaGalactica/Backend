@@ -1,13 +1,18 @@
 namespace EncyclopediaGalactica.Core.Operations.Commands;
 
 using BusinessLogic.Contracts;
+
 using Common.Commands;
 using Common.Commands.Exceptions;
 using Common.Validation;
+
 using Entity;
+
 using FluentValidation;
+
 using Infrastructure.Database;
 using Infrastructure.Mappers;
+
 using Microsoft.EntityFrameworkCore;
 
 public class UpdateDocumentCommand(

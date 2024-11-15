@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Common.Validation;
 
 using System.Text;
+
 using FluentValidation.Results;
 
 public static class ValidationErrorsToStringExtension

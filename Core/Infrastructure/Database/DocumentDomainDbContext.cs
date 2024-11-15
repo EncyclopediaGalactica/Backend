@@ -1,7 +1,9 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Database;
 
 using Application;
+
 using Entity;
+
 using Microsoft.EntityFrameworkCore;
 
 public class DocumentDomainDbContext : DbContext

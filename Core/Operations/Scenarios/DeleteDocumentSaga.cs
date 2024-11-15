@@ -1,7 +1,9 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios;
 
 using Commands;
+
 using Common.Scenario;
+
 using Microsoft.Extensions.Logging;
 
 public class DeleteDocumentSaga(

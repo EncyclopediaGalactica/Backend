@@ -1,7 +1,9 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.Filetype;
 
 using BusinessLogic.Contracts;
+
 using Entity;
+
 using FluentValidation;
 
 public class AddFiletypeScenarioInputValidator : AbstractValidator<FiletypeInput>

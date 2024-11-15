@@ -1,9 +1,13 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.GraphQL.Resolvers;
 
 using BusinessLogic.Contracts;
+
 using HotChocolate.Resolvers;
+
 using LanguageExt;
+
 using Microsoft.Extensions.Logging;
+
 using Operations.Scenarios.DocumentType;
 
 public class DocumentTypeResolver(

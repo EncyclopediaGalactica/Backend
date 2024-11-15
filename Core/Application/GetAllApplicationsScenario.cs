@@ -1,6 +1,8 @@
 using EncyclopediaGalactica.Core.Infrastructure.Database;
 using EncyclopediaGalactica.Core.Operations.Scenarios;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace EncyclopediaGalactica.Core.Application;
@@ -11,7 +13,7 @@ public class GetAllApplicationsScenario(
 {
 
   public Either<ErrorResult, List<ApplicationResult>> Execute(
-      GetAllApplicationsSagaContext context
+      GetAllApplicationsScenarioContext context
       )
   {
     Either<ErrorResult, List<ApplicationResult>> result =
@@ -26,7 +28,7 @@ public class GetAllApplicationsScenario(
     Either<ErrorResult, List<ApplicationResult>>.Right(resultFromStorage.ToApplicationResults());
 
   private Either<ErrorResult, List<Application>> GetEntitiesFromStorage(
-      GetAllApplicationsSagaContext context
+      GetAllApplicationsScenarioContext context
       )
   {
     using DocumentDomainDbContext ctx = new(dbContextOptions);
@@ -44,4 +46,4 @@ public class GetAllApplicationsScenario(
   }
 }
 
-public record GetAllApplicationsSagaContext(Guid CorrelationId);
+public record GetAllApplicationsScenarioContext(Guid CorrelationId);

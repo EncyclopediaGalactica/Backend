@@ -1,8 +1,11 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Controllers;
 
 using BusinessLogic.Contracts;
+
 using LanguageExt;
+
 using Microsoft.AspNetCore.Mvc;
+
 using Operations.Scenarios.DocumentType;
 
 [ApiController]

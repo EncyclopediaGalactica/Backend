@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Infrastructure.Validators.Application;
 
 using BusinessLogic.Contracts;
+
 using FluentValidation;
 
 public class UpdateApplicationScenarioInputValidator : AbstractValidator<ApplicationInput>

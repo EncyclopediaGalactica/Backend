@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Operations.Commands;
 
 using Common.Commands.Exceptions;
+
 using Entity;
 
 public interface IDeleteDocumentCommand

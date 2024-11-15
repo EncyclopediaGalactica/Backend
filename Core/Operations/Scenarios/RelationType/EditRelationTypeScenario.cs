@@ -1,11 +1,17 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.RelationType;
 
 using BusinessLogic.Contracts;
+
 using Common.Validation;
+
 using Entity;
+
 using FluentValidation.Results;
+
 using Infrastructure.Database;
+
 using LanguageExt;
+
 using Microsoft.EntityFrameworkCore;
 
 public class EditRelationTypeScenario(

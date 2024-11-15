@@ -1,6 +1,7 @@
 namespace EncyclopediaGalactica.Core.Operations.Scenarios.Relation;
 
 using BusinessLogic.Contracts;
+
 using FluentValidation;
 
 public class AddRelationScenarioInputValidator : AbstractValidator<RelationInput>
