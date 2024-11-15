@@ -1,6 +1,6 @@
-using EncyclopediaGalactica.Core.Common;
-using EncyclopediaGalactica.Core.Common.Validation;
-using EncyclopediaGalactica.Core.Infrastructure.Database;
+namespace EncyclopediaGalactica.Core.Application;
+
+using Common;
 
 using FluentValidation;
 using FluentValidation.Results;
@@ -9,14 +9,11 @@ using LanguageExt;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace EncyclopediaGalactica.Core.Application;
-
 public class GetApplicationByIdScenario(
-        GetApplicationByIdScenarioInputValidator validator,
-        DbContextOptions<DocumentDomainDbContext> dbContextOptions
-        )
+    GetApplicationByIdScenarioInputValidator  validator,
+    DbContextOptions<DocumentDomainDbContext> dbContextOptions
+)
 {
-
     public Either<ErrorResult, ApplicationResult> Execute(GetApplicationByIdScenarioContext context)
     {
         Either<ErrorResult, ApplicationResult> operationResult =
@@ -27,14 +24,12 @@ public class GetApplicationByIdScenario(
         return operationResult;
     }
 
-    private static Either<ErrorResult, ApplicationResult> MapEntityToResult(Application application)
-    {
-        return Either<ErrorResult, ApplicationResult>.Right(application.ToApplicationResult());
-    }
+    private static Either<ErrorResult, ApplicationResult> MapEntityToResult(Application application) =>
+        Either<ErrorResult, ApplicationResult>.Right(application.ToApplicationResult());
 
     private Either<ErrorResult, Application> GetEntityFromStrorage(
-            ApplicationInput input,
-            GetApplicationByIdScenarioContext context)
+        ApplicationInput                  input,
+        GetApplicationByIdScenarioContext context)
     {
         using DocumentDomainDbContext ctx = new(dbContextOptions);
         try
@@ -45,9 +40,9 @@ public class GetApplicationByIdScenario(
         catch (Exception e)
         {
             return Either<ErrorResult, Application>.Left(new ErrorResult(
-                        context.CorrelationId,
-                        e.Message
-                        ));
+                                                             context.CorrelationId,
+                                                             e.Message
+                                                         ));
         }
     }
 
@@ -56,9 +51,9 @@ public class GetApplicationByIdScenario(
         if (context.Payload is null)
         {
             return Either<ErrorResult, ApplicationInput>.Left(new ErrorResult(
-                        context.CorrelationId,
-                        "Validation error"
-                        ));
+                                                                  context.CorrelationId,
+                                                                  "Validation error"
+                                                              ));
         }
 
         ValidationResult validationResult = validator.Validate(context.Payload);
@@ -68,12 +63,11 @@ public class GetApplicationByIdScenario(
         }
 
         return Either<ErrorResult, ApplicationInput>.Left(new ErrorResult(
-                    context.CorrelationId,
-                    validationResult.Errors.ToSummarize()
-                    ));
+                                                              context.CorrelationId,
+                                                              validationResult.Errors.ToSummarize()
+                                                          ));
     }
 }
-
 
 public class GetApplicationByIdScenarioInputValidator : AbstractValidator<ApplicationInput>
 {
@@ -82,7 +76,6 @@ public class GetApplicationByIdScenarioInputValidator : AbstractValidator<Applic
         RuleFor(i => i.Id)
             .GreaterThanOrEqualTo(1)
             .WithMessage("Id must be greater than or equal to 1.");
-
     }
 }
 

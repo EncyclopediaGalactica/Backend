@@ -1,6 +1,6 @@
-using EncyclopediaGalactica.Core.Common;
-using EncyclopediaGalactica.Core.Common.Validation;
-using EncyclopediaGalactica.Core.Infrastructure.Database;
+namespace EncyclopediaGalactica.Core.Application;
+
+using Common;
 
 using FluentValidation;
 using FluentValidation.Results;
@@ -9,14 +9,11 @@ using LanguageExt;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace EncyclopediaGalactica.Core.Application;
-
 public class UpdateApplicationScenario(
-        UpdateApplicationScenarioInputValidator validator,
-        DbContextOptions<DocumentDomainDbContext> dbContextOptions
-        )
+    UpdateApplicationScenarioInputValidator   validator,
+    DbContextOptions<DocumentDomainDbContext> dbContextOptions
+)
 {
-
     public Either<ErrorResult, ApplicationResult> Execute(UpdateApplicationScenarioContext context)
     {
         Either<ErrorResult, ApplicationResult> operationResult =
@@ -26,25 +23,22 @@ public class UpdateApplicationScenario(
             from mapUpdatedEntity in MapUpdatedEntityToResult(updatedEntity)
             select mapUpdatedEntity;
         return operationResult;
-
     }
 
-    private static Either<ErrorResult, ApplicationResult> MapUpdatedEntityToResult(Application application)
-    {
-        return Either<ErrorResult, ApplicationResult>.Right(application.ToApplicationResult());
-    }
+    private static Either<ErrorResult, ApplicationResult> MapUpdatedEntityToResult(Application application) =>
+        Either<ErrorResult, ApplicationResult>.Right(application.ToApplicationResult());
 
     private Either<ErrorResult, Application> UpdateEntityInStorage(
-            Application input,
-            UpdateApplicationScenarioContext context
-            )
+        Application                      input,
+        UpdateApplicationScenarioContext context
+    )
     {
         using DocumentDomainDbContext ctx = new(dbContextOptions);
         try
         {
             Application target = ctx.Applications.First(w => w.Id == input.Id);
-            target.Name = input.Name;
-            target.Description = input.Description;
+            target.Name             = input.Name;
+            target.Description      = input.Description;
             ctx.Entry(target).State = EntityState.Modified;
             ctx.SaveChanges();
             return Either<ErrorResult, Application>.Right(target);
@@ -52,25 +46,23 @@ public class UpdateApplicationScenario(
         catch (Exception e)
         {
             return Either<ErrorResult, Application>.Left(
-                    new ErrorResult(context.CorrelationId, e.Message)
-                    );
+                new ErrorResult(context.CorrelationId, e.Message)
+            );
         }
     }
 
-    private static Either<ErrorResult, Application> MapInputToEntity(ApplicationInput input)
-    {
-        return Either<ErrorResult, Application>.Right(input.ToApplication());
-    }
+    private static Either<ErrorResult, Application> MapInputToEntity(ApplicationInput input) =>
+        Either<ErrorResult, Application>.Right(input.ToApplication());
 
 
     private Either<ErrorResult, ApplicationInput> ValidateInput(
-            UpdateApplicationScenarioContext context
-            )
+        UpdateApplicationScenarioContext context
+    )
     {
         if (context.Payload is null)
         {
             return Either<ErrorResult, ApplicationInput>.Left(
-                    new ErrorResult(context.CorrelationId, "Validation error"));
+                new ErrorResult(context.CorrelationId, "Validation error"));
         }
 
         ValidationResult validationResult = validator.Validate(context.Payload);
@@ -81,7 +73,7 @@ public class UpdateApplicationScenario(
         }
 
         return Either<ErrorResult, ApplicationInput>.Left(
-                new ErrorResult(context.CorrelationId, validationResult.Errors.ToSummarize()));
+            new ErrorResult(context.CorrelationId, validationResult.Errors.ToSummarize()));
     }
 }
 
@@ -89,7 +81,6 @@ public class UpdateApplicationScenarioInputValidator : AbstractValidator<Applica
 {
     public UpdateApplicationScenarioInputValidator()
     {
-
         RuleFor(i => i.Id)
             .GreaterThanOrEqualTo(1)
             .WithMessage("Id must be zero greater than or equal to 1.");
@@ -111,7 +102,6 @@ public class UpdateApplicationScenarioInputValidator : AbstractValidator<Applica
             .LessThanOrEqualTo(255)
             .WithMessage("Trimmed name length must be between 3 and 255 characters");
     }
-
 }
 
 public record UpdateApplicationScenarioContext(Guid CorrelationId, ApplicationInput? Payload);

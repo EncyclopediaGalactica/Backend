@@ -1,5 +1,5 @@
+using EncyclopediaGalactica.Core;
 using EncyclopediaGalactica.Core.Application;
-using EncyclopediaGalactica.Core.Infrastructure.Database;
 
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;

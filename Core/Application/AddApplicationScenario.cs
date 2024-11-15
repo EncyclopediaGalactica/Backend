@@ -1,25 +1,21 @@
 namespace EncyclopediaGalactica.Core.Application;
 
-using Common.Validation;
+using Common;
 
 using FluentValidation;
 using FluentValidation.Results;
-
-using Infrastructure.Database;
 
 using LanguageExt;
 
 using Microsoft.EntityFrameworkCore;
 
-using Operations.Scenarios;
-
 public class AddApplicationScenario(
     DbContextOptions<DocumentDomainDbContext> dbContextOptions,
-    AddApplicationScenarioInputValidator validator)
+    AddApplicationScenarioInputValidator      validator)
 {
     public Either<ErrorResult, ApplicationResult> Execute(
         AddApplicationScenarioContext context,
-        CancellationToken cancellationToken = default
+        CancellationToken             cancellationToken = default
     )
     {
         Either<ErrorResult, ApplicationResult> result =
@@ -33,14 +29,14 @@ public class AddApplicationScenario(
     }
 
     private Either<ErrorResult, ApplicationResult> MapResultToContract(
-        Application createdEntity,
+        Application                   createdEntity,
         AddApplicationScenarioContext context) =>
         createdEntity.ToApplicationResult();
 
     private Either<ErrorResult, Application> CreateNewEntityInStorage(
-        Application mappedInput,
+        Application                   mappedInput,
         AddApplicationScenarioContext context,
-        CancellationToken cancellationToken)
+        CancellationToken             cancellationToken)
     {
         using DocumentDomainDbContext ctx = new(dbContextOptions);
         try
